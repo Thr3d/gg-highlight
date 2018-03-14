@@ -1,2 +1,5 @@
+* Wed Mar 14 2018  Jesse Chandler <jesse.chandler@suse.com> 1.0.1
+- Seperated and sorted search string for better readability
+
 * Wed Mar 14 2018  Jesse Chandler <jesse.chandler@suse.com> 1.0.0
 - Initial Build
