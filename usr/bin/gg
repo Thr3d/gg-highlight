@@ -1,6 +1,6 @@
 #!/bin/bash
 # jesse.chandler@suse.com
-# Version: 1.0.1
+# Version: 1.0.0
 # Supportconfig/hb_report log filter & highlighter
 # Usage: gg [file]
 # GREP_COLOR="$COLOR" $search '^.*.*$|$' |\
