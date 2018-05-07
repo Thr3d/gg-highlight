@@ -1,3 +1,6 @@
+* Mon May 05 2018  Jesse Chandler <jesse.chandler@suse.com> 1.1.0
+- Changed to a (poor) layout with functions. Added flags 
+
 * Wed Mar 14 2018  Jesse Chandler <jesse.chandler@suse.com> 1.0.1
 - Seperated and sorted search string for better readability
 
