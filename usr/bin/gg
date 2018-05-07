@@ -1,54 +1,118 @@
 #!/bin/bash
+# Filename: gg
+# Description: Log filtering and highlighting
 # jesse.chandler@suse.com
-# Version: 1.0.0
+# Version: 1.1.0
 # Supportconfig/hb_report log filter & highlighter
 # Usage: gg [file]
 # GREP_COLOR="$COLOR" $search '^.*.*$|$' |\
 
-##TODO remove binary chars on the fly
+##TODO remove binary chars on the fly (Nasty bits added when syslog starts some times).
+#This is the manual way to clean those up.
 #cat messages|tr -cd '\11\12\15\40-\176' > messages.new && mv -f messages.new messages
+##TODO add bash completion
+##TODO add option to enable/disable specific product filtering/highlighting
+##TODO testing section for filtering and flag to enable test filtering
+##TODO change filter/ignore options/fuctions to be the same word
 
+VERSION=1.1.0
+
+# Coloring
 RED='1;37;41'
 YELLOW='01;33'
 GREEN='01;32'
 search='egrep --text --color=always --line-buffered'
 
-cat $1 |\
-# IGNORE
+##TODO
+#Silly way to decide what functions to run. I don't like this and it should be changed.
+GENERAL_RED=true
+GENERAL_YELLOW=true
+GENERAL_GREEN=true
+HA_RED=true
+HA_YELLOW=false
+HA_GREEN=false
+CAAS_RED=true
+CAAS_YELLOW=false
+CAAS_GREEN=false
+SUPPORTCONFIG=true
+
+
+#do
+#		case "$1" in
+#			-i --no-ignore) no_ignore=true ;;
+#			*) usage ;;
+#		esac
+#		shift
+#done
+
+function usage()
+{
+	echo "Usage: gg [OPTION]... [FILE]"
+	echo "-i, --ignore 			Enable filtering"
+	echo "--version 			Display version"
+	echo "-h, --help 			Show this list"
+}
+
+function display_version()
+{
+	echo "gg-highlight version $VERSION"
+}
+
+if [ "$1" != "" ]; then
+	case $1 in
+		-h)
+			usage
+			exit 1
+			;;
+		--version)
+			display_version
+			exit 1
+			;;
+		-i)
+			FILTER_GENERAL=true
+			FILTER_HA=true
+			FILTER_SAP=true
+			FILTER_CAAS=true
+			;;
+#	*)
+#	usage
+#	exit 1
+   esac
+fi
+
+# Check if last argument is file
+file_arg=$(echo "${@: -1}")
+if [[ ! -e $file_arg ]]; then
+	echo "$file_arg is not a file. Aborting."
+	exit 1
+fi
+
+## GENERAL IGNORE ##
+function filter-general()
+{
 grep --text -Ev -- "\
 -- MARK --|\
 /usr/sbin/cron\[|\
 adcert.* WARN|\
 adclient.* INFO|\
+attrd: \[.*\]: debug:|\
 attrd_updater\[.*notice: crm_log_args: Invoked: attrd_updater|\
 audit\(.*|\
 audit_printk_skb: .* callbacks suppressed|\
 auditd\[.*Audit daemon rotating log files|\
 automount\[|\
 blk_update_request: I/O error, dev fd0, sector 0|\
+cib: \[.*\]: debug:|\
 cimserver\[|\
 collectd\[.*\]: Filter subsystem:|\
 collectd\[|\
-corosync.*\[CPG|\
-corosync.*\[IPC|\
-corosync.*\[pcmk|\
-crm_attribute\[.*notice: crm_log_args: Invoked:|\
-crmd.* notice: Processing graph|\
-crmd.* notice: Transition.*Complete$|\
-crmd.*:   notice: Result of notify operation for rsc_|\
-crmd.*:|\
-crmd.*notice: State transition S_IDLE -> S_POLICY_ENGINE|\
-crmd.*notice: State transition S_TRANSITION_ENGINE -> S_IDLE|\
-crmd\[.* notice: do_state_transition: State transition S_IDLE -> S_POLICY_ENGINE|\
-crmd\[.* notice: do_state_transition: State transition S_TRANSITION_ENGINE -> S_IDLE|\
-crmd\[.* notice: do_te_invoke: Processing graph|\
-crmd\[.* notice: run_graph: Transition|\
 CRON.* \(root\) CMD \(\[ -x /usr/lib64/sa/sa1 \] && exec /usr/lib64/sa/sa1 -S ALL 1 1\)|\
 CRON.* pam_unix\(crond:session\): session closed for user|\
 cron.* pam_unix\(crond:session\): session closed for user|\
 CRON.* pam_unix\(crond:session\): session opened for user|\
 cron.* pam_unix\(crond:session\): session opened for user|\
 cron.*: \(root\) CMD \(\[ -x /usr/lib64/sa/sa1 \] \&\& exec /usr/lib64/sa/sa1 -S ALL 1 1\)|\
+cron\[.*\]: \(root\) CMD \(/usr/bin/salt-daemon-watcher --with-init\)|\
 CRON\[.*\]:|\
 cron\[.*No such file or directory|\
 crontab\[.*\]:|\
@@ -62,6 +126,7 @@ dd.dogstatsd\[|\
 dd.forwarder\[|\
 dhcpcd\[|\
 end_request: I/O error, dev fd0, sector 0|\
+exportfs\(.*\)\[.*\]: INFO: Directory|\
 floppy: error -5 while reading block 0|\
 fsaua\[|\
 fscachesize: |\
@@ -81,29 +146,26 @@ kernel: .* usb .*: New USB device found|\
 kernel: .* usb .*: New USB device strings|\
 kernel: .* usb .*: Product:|\
 kernel: .* usb .*: USB disconnect|\
-kernel: \[    ......... |\
 logger: INFO|\
 lrmd.*:   notice: executing - rsc:rsc_|\
 lrmd.*:   notice: finished - rsc:rsc_|\
+lrmd: \[.*\]: debug: .*|\
+lrmd: \[.*\]: info: operation monitor.* exited with return code 0|\
+lvm|\
 no IPv6 routers present|\
+omiserver\[.*\]: pam_vas: Authentication <succeeded>|\
 PackageKit: daemon|\
 PackageKit:|\
 packagekitd|\
-pengine\[.* notice: unpack_config: On loss of CCM Quorum: Ignore|\
-pengine\[.*:   notice: Calculated Transition.*.bz2$|\
-pengine\[.*:   notice: On loss of CCM Quorum: Ignore|\
-pengine\[.*:   notice: Relying on watchdog integration for fencing|\
-pengine\[.*notice: process_pe_message: Calculated Transition|\
 puma\[|\
 puppet-agent\[.*\]: Applied catalog in|\
 puppet-agent\[.*|\
 rhnsd.* running program /usr/sbin/rhn_check|\
+rpc.idmapd\[|\
+rpc.mountd\[|\
 rsyslogd-3000:|\
 rtkit-daemon\[|\
 SAPFPA_00|\
-SAPHana\(|\
-SAPHanaTopology\(|\
-SAPRP1_00|\
 sftp-server\[|\
 smartd.*failed to read Temperature|\
 snowagent:|\
@@ -139,7 +201,6 @@ sshd\[.* Starting session|\
 sshd\[.* Transfered:|\
 sshd\[.* User child is on|\
 sshd\[.*: error: PAM: User not known to the underlying authentication module for|\
-stonith-ng\[.*notice: unpack_config: On loss of CCM Quorum: Ignore|\
 su: \(to|\
 su: FAILED SU|\
 su: pam_unix.* session closed for user|\
@@ -150,6 +211,7 @@ sudo: |\
 SuSEfirewall2: SuSEfirewall2 not active|\
 syslog-ng.*Log statistics|\
 syslog-ng\[.*\]: Connection failed\; error=.Connection refused.|\
+syslog-ng\[.*\]: I/O error occurred while writing; fd='16', error='Connection refused \(111\)|syslog-ng\[.*\]: Connection broken; time_reopen='60'|\
 SYSTEMCHECK: |\
 systemd-logind.* New session .* of user|\
 systemd-logind.*: Removed session|\
@@ -178,17 +240,120 @@ systemd: pam_unix\(systemd-user:session\): session closed for user .*|\
 systemd: pam_unix\(systemd-user:session\): session opened for user .*|\
 systemd\[1\]: Started Session|\
 systemd\[1\]: Starting Session|\
-Undeclared promise body|\
 useradd\[|\
 userdel\[|\
 vsftpd:|\
-xinetd\
-"|\
+xinetd|\
+### Test operations ###
+dlm_controld.pcmk\[|\
+kjournald starting.|\
+EXT3-fs .*: warning: maximal mount|\
+EXT3-fs .*: using internal journal|\
+mounted filesystem with ordered data mode|\
+SESSION = .* CMD =$|\
+EXT3-fs .*: recovery complete|\
+SAPHanaSR-mon\[.* Monitor startup|\
+SAPHanaSR-mon\[.* All checks passed -|\
+sbd: .* WARN: Servant for pcmk|\
+sbd: .* info: Legacy plug-in detected, AIS quorum check enabled|\
+FAT-fs .*: FAT read failed|\
+GFS2: fsid=hacluster|\
+kernel: \[    .........|\
+kernel: \[   .........|\
+SAPHanaTopology\(.*\)\[.*\]: INFO: DEC: site=.*, mode=syncmem, MAPPING=.*, hanaRemoteHost=|\
+zzzzz-last_line-zzzzz" $tmp_file > $changed
+cp -f $changed $tmp_file
+}
 
-# RED'
-# $RED $search '^.*.*$|$' |\
+### END ## GENERAL IGNORE ###
 
-# General
+## CaaS Ignore ##
+function filter-caas()
+{
+grep --text -Ev -- "\
+hyperkube\[.*\]: I.* container_manager_linux.go:398\] \[ContainerManager\]: Discovered runtime cgroups name: /system.slice/docker.service|\
+hyperkube\[.*\]: I.* kubelet_node_status.go:247\] Setting node annotation to enable volume controller attach/detach|\
+hyperkube\[.*\]: I.* kubelet_node_status.go:247\] Setting node annotation to enable volume controller attach/detach|\
+hyperkube\[.*\]: I.* kubelet_node_status.go:410\] Recording NodeHasNoDiskPressure event message for node 127.0.0.1|\
+hyperkube\[.*\]: I.* kubelet_node_status.go:410\] Recording NodeHasSufficientDisk event message for node 127.0.0.1|\
+hyperkube\[.*\]: I.* kubelet_node_status.go:410\] Recording NodeHasSufficientMemory event message for node 127.0.0.1|\
+hyperkube\[.*\]: I.* qos_container_manager_linux.go:286\] \[ContainerManager\]: Updated QoS cgroup configuration|\
+salt-minion\[.*\]: \[WARNING \] Unable to find IPv6 record for ".*" causing a 10 second timeout when rendering grains. Set the dns or /etc/hosts for IPv6 to clear this.|\
+systemd\[.*\]: Received SIGRTMIN\+24 from PID .* \(kill\)|\
+zzzzz-last_line-zzzzz" $tmp_file > $changed
+cp -f $changed $tmp_file
+}
+### END CaaS Ignore ###
+
+## HA Ignore ##
+function filter-ha()
+{
+grep --text -Ev -- "\
+stonith-ng: \[.*\]: debug:|\
+stonith-ng\[.*notice: unpack_config: On loss of CCM Quorum: Ignore|\
+sbd: \[.*\]: info: Monitoring Pacemaker health|\
+pengine: \[.*\]: debug:|\
+pengine\[.* notice: unpack_config: On loss of CCM Quorum: Ignore|\
+pengine\[.*:   notice: Calculated Transition.*.bz2$|\
+pengine\[.*:   notice: On loss of CCM Quorum: Ignore|\
+pengine\[.*:   notice: Relying on watchdog integration for fencing|\
+pengine\[.*notice: process_pe_message: Calculated Transition|\
+corosync\[.*\]:   \[CONFDB\] exit_fn for conn=|\
+corosync\[.*\]:   \[CONFDB\] lib_init_fn: conn=|\
+corosync\[.*\]:   \[CPG   \] cpg finalize for conn=|\
+corosync\[.*\]:   \[CPG   \] exit_fn for conn=|\
+corosync\[.*\]:   \[CPG   \] lib_init_fn: conn=.*, cpd=|\
+corosync\[.*\]:   \[IPC   \] IPC credentials for client pid .*: uid 0. gid 0|\
+corosync\[.*\]:   \[pcmk  \] debug: process_ais_message: Msg\[1\] \(dest=local:ais, from=.*:.*, remote=true, size=.*\)|\
+corosync\[.*\]:   \[QUORUM\] got quorate request on |\
+corosync\[.*\]:   \[QUORUM\] got trackstart request on |\
+corosync\[.*\]:   \[QUORUM\] lib_exit_fn: conn=|\
+corosync\[.*\]:   \[QUORUM\] lib_init_fn: conn=|\
+corosync\[.*\]:   \[QUORUM\] sending initial status to |\
+corosync\[.*\]:   \[QUORUM\] sending quorum notification to .*, length = .*|\
+crm_attribute\[.*notice: crm_log_args: Invoked:|\
+crmd.* notice: Processing graph|\
+crmd.* notice: Transition.*Complete$|\
+crmd.*:   notice: Result of notify operation for rsc_|\
+crmd.*notice: State transition S_IDLE -> S_POLICY_ENGINE|\
+crmd.*notice: State transition S_TRANSITION_ENGINE -> S_IDLE|\
+crmd: \[.*\]: debug:|\
+crmd\[.* notice: do_state_transition: State transition S_IDLE -> S_POLICY_ENGINE|\
+crmd\[.* notice: do_state_transition: State transition S_TRANSITION_ENGINE -> S_IDLE|\
+crmd\[.* notice: do_te_invoke: Processing graph|\
+crmd\[.* notice: run_graph: Transition|\
+zzzzz-last_line-zzzzz" $tmp_file > $changed
+cp -f $changed $tmp_file
+}
+### END HA Ignore ###
+
+## SAP Ignore ##
+function filter-sap()
+{
+grep --text -Ev -- "\
+SAPHana\(.*\)\[.*\]: DEBUG:|\
+SAPHana\(.*\)\[.*\]: INFO: ACT site=.*, seting SOK for secondary \(1\)|\
+SAPHana\(.*\)\[.*\]: INFO: DEC analyze_hana_sync_statusSRS systemReplicationStatus.py \(to site '.*'\)-> 15|\
+SAPHana\(.*\)\[.*\]: INFO: DEC: secondary with sync status SOK ==> possible takeover node|\
+SAPHana\(.*\)\[.*\]: INFO: RA ==== begin action monitor_clone \(.*\) ====|\
+SAPHana\(.*\)\[.*\]: INFO: RA ==== end action monitor_clone with rc=0 \(.*\) \(.*s\)====|\
+SAPHana\(.*\)\[.*\]: INFO: RA ==== end action monitor_clone with rc=8 \(.*\) \(.*s\)====|\
+SAPHanaTopology\(.*\)\[.*\]: DEBUG:|\
+SAPHanaTopology\(.*\)\[.*\]: INFO: DEC: site=.*, mode=primary, MAPPING=.*, hanaRemoteHost=.*|\
+SAPHanaTopology\(.*\)\[.*\]: INFO: DEC: site=.*, mode=sync, MAPPING=.*, hanaRemoteHost=.*|\
+SAPHanaTopology\(.*\)\[.*\]: INFO: RA ==== begin action monitor_clone \(.*\) ====|\
+SAPHanaTopology\(.*\)\[.*\]: INFO: RA ==== end action monitor_clone with rc=0 \(.*\) \(.*s\)====|\
+SAPRP1_00|\
+sapuxuserchk\[.*\]: pam_vas: Authentication .succeeded. for .Active Directory.|\
+#zzzzz-last_line-zzzzz" $tmp_file > $changed
+cp -f $changed $tmp_file
+}
+### END SAP Ignore ###
+
+## General ##
+#RED
+function general-red() 
+{
 GREP_COLOR="$RED" $search "(\
 ^.*A processor.*$|$|\
 ^.*Aborting journal.*$|$|\
@@ -198,6 +363,13 @@ GREP_COLOR="$RED" $search "(\
 ^.*Cancelling IO request due to timeout.*$|$|\
 ^.*CLM CONFIGURATION CHANGE.*$|$|\
 ^.*crit:.*$|$|\
+^.*crmd\[.*\]:.*I_ERROR.*$|$|\
+^.*crmd\[.*\]:.*I_TERMINATE.*$|$|\
+^.*crmd\[.*\]:    error: crmd_fast_exit: Could not recover from internal error.*$|$|\
+^.*crmd\[.*\]:.*Cant retrieve the CIB.*$|$|\
+^.*crmd\[.*\]:.*notice: throttle_mode: High CIB load detected:.*$|$|\
+^.*crmd\[.*\]:.*notice: throttle_handle_load:  High CPU load detected:.*$|$|\
+^.*crmd\[.*\]:.*warning: do_recover: Fast-tracking shutdown in response to errors.*$|$|\
 ^.*Detected aborted journal.*$|$|\
 ^.*Detected IO errors while flushing file data on.*$|$|\
 ^.*device-mapper: multipath: Failing path.*$|$|\
@@ -222,7 +394,6 @@ GREP_COLOR="$RED" $search "(\
 ^.*NT_STATUS_ACCESS_DENIED.*$|$|\
 ^.*oom-killer.*$|$|\
 ^.*Oops:.*$|$|\
-^.*Our peer on the DC .* is dead.*$|$|\
 ^.*out of memory.*$|$|\
 ^.*OutOfMemoryError.*$|$|\
 ^.*pengine.*:    error:.*$|$|\
@@ -234,6 +405,7 @@ GREP_COLOR="$RED" $search "(\
 ^.*sbd.* ERROR:.*$|$|\
 ^.*sbd.* WARN:.*$|$|\
 ^.*Scheduling Node .* for shutdown$|$|\
+^.*Scheduling Node .* for STONITH.*$|$|\
 ^.*segfault.*$|$|\
 ^.*shutdown.*: shutting down for system reboot.*$|$|\
 ^.*stonith-ng.* wants to fence.*$|$|\
@@ -249,21 +421,41 @@ GREP_COLOR="$RED" $search "(\
 ^.*Writing reset to node.*$|$|\
 ^.*x-info="http://www.rsyslog.com"\] exiting on signal 15..*$|$|\
 ^.*x-info="http://www.rsyslog.com"\] start.*$|$|\
-^.*XFS.*: Log I/O Error Detected.  Shutting down filesystem.*$|$\
-)"|\
-# SAP
-GREP_COLOR="$RED" $search "(\
-^.*PreferSiteTakeover selected so decrease promotion score here.*$|$|\
-^.*Promote .* to be primary.*$|$\
-)" |\
+^.*XFS.*: Log I/O Error Detected.  Shutting down filesystem.*$|$|\
+^.*cluster-dlm\[.*\]: fence_node_time:.*$|$|\
+^.*crmd\[.*\]:.*Our peer on the DC \(.*\) is dead.*$|$|\
+^.*crmd\[.*\]:  warning: reap_dead_nodes: Our DC node \(.*\) left the cluster.*$|$|\
+^.*attrd\[.*\]:    error:.*$|$|\
+^.*kernel: \[.*\] Out of memory: Kill process .* \(.*\) score .* or sacrifice child.*$|$|\
+^.*kernel: \[.*\] Killed process .* \(.*\) total-vm:.*$|$|\
+^.*kernel: \[.*\] Call Trace:.*$|$|\
+### test ###|\
+^.*crmd\[.*\]:  warning: Another DC detected:.*$|$|\
+^.*systemd-logind\[.*\]: Power key pressed..*$|$|\
+^.*systemd-logind\[.*\]: System is powering down.*$|$|\
+^.*cib\[.*\]:   notice: Disconnecting from Corosync.*$|$|\
+^.*rsyslogd: \[origin software=\"rsyslogd\" swVersion=\".*\" x-pid=\".*\" x-info=\"http://www.rsyslog.com\"\] exiting on signal 15.*$|$|\
+^.*rsyslogd: \[origin software=\"rsyslogd\" swVersion=\".*\" x-pid=\".*\" x-info=\"http://www.rsyslog.com\"\] start.*$|$|\
+^.*corosync\[.*\]:   \[TOTEM \] Failed to receive the leave message. failed:.*$|$|\
+^.*SFAIL.*$|$|\
+^.*corosync\[.*\]:  \[SERV  \] Unloading all Corosync service engines.*$|$|\
+^.*corosync\[.*\]:  \[pcmk  \] notice: pcmk_shutdown: Shuting down Pacemaker.*$|$|\
+^.*crmd\[.*\]:    error:.*$|$|\
+^.*timed out after.*$|$|\
+^zzzzz-last_line-zzzzz$|$)" $tmp_file > $changed
+cp -f $changed $tmp_file
+}
 
-# YELLOW
-# $YELLOW $search '^.*.*$|$' |\
+#YELLOW
+function general-yellow() 
+{
 GREP_COLOR="$YELLOW" $search "(\
 ^.*Bad protocol version.*$|$|\
+^.*crmd\[.*\]:   notice: do_state_transition: State transition S_ELECTION -> S_INTEGRATION \[ input=I_ELECTION_DC cause=C_TIMER_POPPED origin=election_timeout_popped \].*$|$|\
 ^.*blocked FC remote port time out.*$|$|\
 ^.*BTRFS warning.*$|$|\
 ^.*corosync.*Incrementing problem counter.*$|$|\
+^.*corosync\[.*\]:  \[TOTEM \] Retransmit List.*$|$|\
 ^.*Couldn.t find device with.*$|$|\
 ^.*Delaying fencing operations until there are resources to manage.*$|$|\
 ^.*device-mapper: .*error.*$|$|\
@@ -288,12 +480,20 @@ GREP_COLOR="$YELLOW" $search "(\
 ^.*unhandled error.*$|$|\
 ^.*warning:.*$|$|\
 ^.*WARNING:.*$|$|\
-^.*xfs_log_force: error.*$|$\
-)" |\
+^.*xfs_log_force: error.*$|$|\
+^.*crmd\[.*\]:   notice: terminate_cs_connection: Disconnecting from Corosync.*$|$|\
+^.*SAPHana\(.*\)\[.*\]: INFO: ACT: Demoted.*$|$|\
+^zzzzz-last_line-zzzzz$|$)" $tmp_file > $changed
+cp -f $changed $tmp_file
+}
 
 # GREEN
+function general-green() 
+{
 GREP_COLOR="$GREEN" $search "(\
 ^.*A new membership .* was formed..*$|$|\
+^.*crmd\[.*\]:   notice: crm_update_quorum: Updating quorum status to true.*$|$|\
+^.*sbd: \[.*\]: info: CIB reconnect successful.*$|$|\
 ^.*Completed service synchronization, ready to provide service.*$|$|\
 ^.*corosync.*Decrementing problem counter.*$|$|\
 ^.*info: Node state: online.*$|$|\
@@ -306,8 +506,115 @@ GREP_COLOR="$GREEN" $search "(\
 ^.*state is now member.*$|$|\
 ^.*SuSEfirewall2 not active.*$|$|\
 ^.*tur checker reports path is up.*$|$\
-)" |\
+^zzzzz-last_line-zzzzz$|$)" $tmp_file > $changed
+cp -f $changed $tmp_file
+}
 
-# Supportconfig Junk
-GREP_COLOR="$YELLOW" $search "^.*===========================.*$|$" |\
-less
+### END GENERAL ###
+
+## HA ##
+#RED
+function ha-red() 
+{
+GREP_COLOR="$RED" $search "(\
+^.*crmd\[.*\]:   notice: abort_transition_graph: Transition aborted: Stonith failed.*$|$|\
+^.*crmd\[.*\]:   notice: tengine_stonith_callback: Stonith operation .* for .* failed (No route to host): aborting transition..*$|$|\
+^.*crmd\[.*\]:   notice: tengine_stonith_callback: Stonith operation .*: No route to host.*$|$|\
+^.*external/vcenter\(.*\)\[.*\]: \[.*\]: ERROR:.*$|$|\
+^.*pengine\[.*\]:  warning: determine_online_status: Node .* is unclean.*$|$|\
+^.*pengine\[.*\]:  warning: pe_fence_node: Node .* will be fenced because the node is no longer part of the cluster.*$|$|\
+^.*Scheduling Node .* for STONITH.*$|$|\
+^.*stonith-ng\[.*\]:    error: remote_op_done: Operation reboot of .* by .* for .*: No route to host.*$|$|\
+^.*stonith-ng\[.*\]:   notice: stonith_choose_peer: Couldn't find anyone to fence.*$|$|\
+^.*stonith-ng\[.*\]:  warning: log_action: fence_legacy\[.*\] stderr:.*$|$|\
+^.*stonith: external_reset_req: 'vcenter reset' for host .* failed with rc.*$|$|\
+^zzzzz-last_line-zzzzz$|$)" $tmp_file > $changed
+cp -f $changed $tmp_file
+}
+
+### END HA ###
+
+## SAP ##
+#RED
+function sap-red() 
+{
+GREP_COLOR="$RED" $search "(\
+^.*PreferSiteTakeover selected so decrease promotion score here.*$|$|\
+^.*Promote .* to be primary.*$|$|\
+^zzzzz-last_line-zzzzz$|$)" $tmp_file > $changed
+cp -f $changed $tmp_file
+}
+
+### END SAP ###
+
+## CaaS ##
+#RED
+function caas-red() {
+GREP_COLOR="$RED" $search "(\
+^.*hyperkube\[.*\]: I.* kubelet.go:1820] skipping pod synchronization - \[.* is not healthy:.*$|$|\
+^zzzzz-last_line-zzzzz$|$)" $tmp_file > $changed
+cp -f $changed $tmp_file
+}
+
+### END CaaS ###
+
+## Supportconfig Junk ##
+function supportconfig() 
+{
+GREP_COLOR="$YELLOW" $search "(\
+^===========================.*$|$ |\
+^#==\[ .* \].*=====================#$|$|\
+^zzzzz-last_line-zzzzz$|$)" $tmp_file > $changed
+cp -f $changed $tmp_file
+}
+
+### END Supportconfig Junk ###
+tmp_file=/tmp/gg_highlight.tmp
+changed=/tmp/gg_highlight.tmp2
+
+cp $file_arg $tmp_file
+
+if [[ $FILTER_GENERAL = true ]]; then
+	filter-general
+fi
+if [[ $FILTER_HA = true ]]; then
+	filter-ha
+fi
+if [[ $FILTER_SAP = true ]]; then
+	filter-sap
+fi
+if [[ $FILTER_CAAS = true ]]; then
+	filter-caas
+fi
+if [[ $GENERAL_RED = true ]]; then
+	general-red
+fi
+if [[ $GENERAL_YELLOW = true ]]; then
+	general-yellow
+fi
+if [[ $GENERAL_GREEN = true ]]; then
+	general-green
+fi
+if [[ $HA_RED = true ]]; then
+	ha-red
+fi
+if [[ $HA_YELLOW = true ]]; then
+	ha-yellow
+fi
+if [[ $HA_GREEN = true ]]; then
+	ha-green
+fi
+if [[ $CAAS_RED = true ]]; then
+	caas-red
+fi
+if [[ $CAAS_YELLOW = true ]]; then
+	caas-yellow
+fi
+if [[ $CAAS_GREEN = true ]]; then
+	caas-green
+fi
+if [[ $SUPPORTCONFIG = true ]]; then
+	supportconfig
+fi
+
+less $tmp_file
