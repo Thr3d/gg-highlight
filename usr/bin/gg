@@ -342,7 +342,7 @@ fi
 
 ## TEST Ignore ##
 function filter-test() {
-	if [[ $FILTER_TEST = true ]]; true
+if [[ $FILTER_TEST = true ]]; then
 grep --text -Ev -- "\
 dlm_controld.pcmk\[|\
 EXT3-fs .*: recovery complete|\
@@ -362,6 +362,9 @@ sbd: .* info: Legacy plug-in detected, AIS quorum check enabled|\
 sbd: .* WARN: Servant for pcmk|\
 SESSION = .* CMD =$|\
 zzzzz-last_line-zzzzz"
+else 
+	cat
+fi
 }
 
 ### END TEST Ignore ###
