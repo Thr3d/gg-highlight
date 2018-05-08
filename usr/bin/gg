@@ -15,7 +15,7 @@
 ##TODO testing section for filtering and flag to enable test filtering
 ##TODO change filter/ignore options/fuctions to be the same word
 
-VERSION=1.1.0
+VERSION=1.1.1
 
 # Coloring
 RED='1;37;41'
@@ -31,19 +31,14 @@ GENERAL_GREEN=true
 HA_RED=true
 HA_YELLOW=false
 HA_GREEN=false
+SAP_RED=true
+SAP_YELLOW=false
+SAP_GREEN=false
 CAAS_RED=true
 CAAS_YELLOW=false
 CAAS_GREEN=false
 SUPPORTCONFIG=true
 
-
-#do
-#		case "$1" in
-#			-i --no-ignore) no_ignore=true ;;
-#			*) usage ;;
-#		esac
-#		shift
-#done
 
 function usage()
 {
@@ -73,11 +68,16 @@ if [ "$1" != "" ]; then
 			FILTER_HA=true
 			FILTER_SAP=true
 			FILTER_CAAS=true
+			FILTER_TEST=false #enable to use test filters
 			;;
-#	*)
-#	usage
-#	exit 1
+
    esac
+fi
+
+# Check for arguments
+if [ $# -eq 0 ]; then
+    echo "No arguments provided"
+    exit 1
 fi
 
 # Check if last argument is file
@@ -88,21 +88,19 @@ if [[ ! -e $file_arg ]]; then
 fi
 
 ## GENERAL IGNORE ##
-function filter-general()
-{
+function filter-general() {
+if [[ $FILTER_GENERAL = true ]]; then
 grep --text -Ev -- "\
 -- MARK --|\
 /usr/sbin/cron\[|\
 adcert.* WARN|\
 adclient.* INFO|\
 attrd: \[.*\]: debug:|\
-attrd_updater\[.*notice: crm_log_args: Invoked: attrd_updater|\
 audit\(.*|\
 audit_printk_skb: .* callbacks suppressed|\
 auditd\[.*Audit daemon rotating log files|\
 automount\[|\
 blk_update_request: I/O error, dev fd0, sector 0|\
-cib: \[.*\]: debug:|\
 cimserver\[|\
 collectd\[.*\]: Filter subsystem:|\
 collectd\[|\
@@ -130,8 +128,6 @@ exportfs\(.*\)\[.*\]: INFO: Directory|\
 floppy: error -5 while reading block 0|\
 fsaua\[|\
 fscachesize: |\
-HDB\[|\
-HDB_SYSTEMDB\[|\
 hpfiordo:|\
 ifdown: |\
 ifup-dhcp:|\
@@ -151,7 +147,6 @@ lrmd.*:   notice: executing - rsc:rsc_|\
 lrmd.*:   notice: finished - rsc:rsc_|\
 lrmd: \[.*\]: debug: .*|\
 lrmd: \[.*\]: info: operation monitor.* exited with return code 0|\
-lvm|\
 no IPv6 routers present|\
 omiserver\[.*\]: pam_vas: Authentication <succeeded>|\
 PackageKit: daemon|\
@@ -165,7 +160,6 @@ rpc.idmapd\[|\
 rpc.mountd\[|\
 rsyslogd-3000:|\
 rtkit-daemon\[|\
-SAPFPA_00|\
 sftp-server\[|\
 smartd.*failed to read Temperature|\
 snowagent:|\
@@ -244,32 +238,17 @@ useradd\[|\
 userdel\[|\
 vsftpd:|\
 xinetd|\
-### Test operations ###
-dlm_controld.pcmk\[|\
-kjournald starting.|\
-EXT3-fs .*: warning: maximal mount|\
-EXT3-fs .*: using internal journal|\
-mounted filesystem with ordered data mode|\
-SESSION = .* CMD =$|\
-EXT3-fs .*: recovery complete|\
-SAPHanaSR-mon\[.* Monitor startup|\
-SAPHanaSR-mon\[.* All checks passed -|\
-sbd: .* WARN: Servant for pcmk|\
-sbd: .* info: Legacy plug-in detected, AIS quorum check enabled|\
-FAT-fs .*: FAT read failed|\
-GFS2: fsid=hacluster|\
-kernel: \[    .........|\
-kernel: \[   .........|\
-SAPHanaTopology\(.*\)\[.*\]: INFO: DEC: site=.*, mode=syncmem, MAPPING=.*, hanaRemoteHost=|\
-zzzzz-last_line-zzzzz" $tmp_file > $changed
-cp -f $changed $tmp_file
+zzzzz-last_line-zzzzz"
+else 
+	cat
+fi
 }
 
 ### END ## GENERAL IGNORE ###
 
 ## CaaS Ignore ##
-function filter-caas()
-{
+function filter-caas() {
+if [[ $FILTER_CAAS = true ]]; then
 grep --text -Ev -- "\
 hyperkube\[.*\]: I.* container_manager_linux.go:398\] \[ContainerManager\]: Discovered runtime cgroups name: /system.slice/docker.service|\
 hyperkube\[.*\]: I.* kubelet_node_status.go:247\] Setting node annotation to enable volume controller attach/detach|\
@@ -280,24 +259,19 @@ hyperkube\[.*\]: I.* kubelet_node_status.go:410\] Recording NodeHasSufficientMem
 hyperkube\[.*\]: I.* qos_container_manager_linux.go:286\] \[ContainerManager\]: Updated QoS cgroup configuration|\
 salt-minion\[.*\]: \[WARNING \] Unable to find IPv6 record for ".*" causing a 10 second timeout when rendering grains. Set the dns or /etc/hosts for IPv6 to clear this.|\
 systemd\[.*\]: Received SIGRTMIN\+24 from PID .* \(kill\)|\
-zzzzz-last_line-zzzzz" $tmp_file > $changed
-cp -f $changed $tmp_file
+zzzzz-last_line-zzzzz"
+else 
+	cat
+fi
 }
 ### END CaaS Ignore ###
 
 ## HA Ignore ##
-function filter-ha()
-{
+function filter-ha() {
+if [[ $FILTER_HA = true ]]; then
 grep --text -Ev -- "\
-stonith-ng: \[.*\]: debug:|\
-stonith-ng\[.*notice: unpack_config: On loss of CCM Quorum: Ignore|\
-sbd: \[.*\]: info: Monitoring Pacemaker health|\
-pengine: \[.*\]: debug:|\
-pengine\[.* notice: unpack_config: On loss of CCM Quorum: Ignore|\
-pengine\[.*:   notice: Calculated Transition.*.bz2$|\
-pengine\[.*:   notice: On loss of CCM Quorum: Ignore|\
-pengine\[.*:   notice: Relying on watchdog integration for fencing|\
-pengine\[.*notice: process_pe_message: Calculated Transition|\
+attrd_updater\[.*notice: crm_log_args: Invoked: attrd_updater|\
+cib: \[.*\]: debug:|\
 corosync\[.*\]:   \[CONFDB\] exit_fn for conn=|\
 corosync\[.*\]:   \[CONFDB\] lib_init_fn: conn=|\
 corosync\[.*\]:   \[CPG   \] cpg finalize for conn=|\
@@ -322,15 +296,29 @@ crmd\[.* notice: do_state_transition: State transition S_IDLE -> S_POLICY_ENGINE
 crmd\[.* notice: do_state_transition: State transition S_TRANSITION_ENGINE -> S_IDLE|\
 crmd\[.* notice: do_te_invoke: Processing graph|\
 crmd\[.* notice: run_graph: Transition|\
-zzzzz-last_line-zzzzz" $tmp_file > $changed
-cp -f $changed $tmp_file
+pengine: \[.*\]: debug:|\
+pengine\[.* notice: unpack_config: On loss of CCM Quorum: Ignore|\
+pengine\[.*:   notice: Calculated Transition.*.bz2$|\
+pengine\[.*:   notice: On loss of CCM Quorum: Ignore|\
+pengine\[.*:   notice: Relying on watchdog integration for fencing|\
+pengine\[.*notice: process_pe_message: Calculated Transition|\
+sbd: \[.*\]: info: Monitoring Pacemaker health|\
+stonith-ng: \[.*\]: debug:|\
+stonith-ng\[.*notice: unpack_config: On loss of CCM Quorum: Ignore|\
+zzzzz-last_line-zzzzz"
+else 
+	cat
+fi
 }
 ### END HA Ignore ###
 
 ## SAP Ignore ##
-function filter-sap()
-{
+function filter-sap() {
+if [[ $FILTER_SAP = true ]]; then
 grep --text -Ev -- "\
+HDB\[|\
+HDB_SYSTEMDB\[|\
+SAPFPA_00|\
 SAPHana\(.*\)\[.*\]: DEBUG:|\
 SAPHana\(.*\)\[.*\]: INFO: ACT site=.*, seting SOK for secondary \(1\)|\
 SAPHana\(.*\)\[.*\]: INFO: DEC analyze_hana_sync_statusSRS systemReplicationStatus.py \(to site '.*'\)-> 15|\
@@ -345,30 +333,69 @@ SAPHanaTopology\(.*\)\[.*\]: INFO: RA ==== begin action monitor_clone \(.*\) ===
 SAPHanaTopology\(.*\)\[.*\]: INFO: RA ==== end action monitor_clone with rc=0 \(.*\) \(.*s\)====|\
 SAPRP1_00|\
 sapuxuserchk\[.*\]: pam_vas: Authentication .succeeded. for .Active Directory.|\
-#zzzzz-last_line-zzzzz" $tmp_file > $changed
-cp -f $changed $tmp_file
+zzzzz-last_line-zzzzz"
+else 
+	cat
+fi
 }
 ### END SAP Ignore ###
 
+## TEST Ignore ##
+function filter-test() {
+	if [[ $FILTER_TEST = true ]]; true
+grep --text -Ev -- "\
+dlm_controld.pcmk\[|\
+EXT3-fs .*: recovery complete|\
+EXT3-fs .*: using internal journal|\
+EXT3-fs .*: warning: maximal mount|\
+FAT-fs .*: FAT read failed|\
+GFS2: fsid=hacluster|\
+kernel: \[    .........|\
+kernel: \[   .........|\
+kjournald starting.|\
+lvm|\
+mounted filesystem with ordered data mode|\
+SAPHanaSR-mon\[.* All checks passed -|\
+SAPHanaSR-mon\[.* Monitor startup|\
+SAPHanaTopology\(.*\)\[.*\]: INFO: DEC: site=.*, mode=syncmem, MAPPING=.*, hanaRemoteHost=|\
+sbd: .* info: Legacy plug-in detected, AIS quorum check enabled|\
+sbd: .* WARN: Servant for pcmk|\
+SESSION = .* CMD =$|\
+zzzzz-last_line-zzzzz"
+}
+
+### END TEST Ignore ###
+
 ## General ##
 #RED
-function general-red() 
-{
+function general-red() {
+if [[ $GENERAL_RED = true ]]; then
 GREP_COLOR="$RED" $search "(\
+### test ###|\
 ^.*A processor.*$|$|\
 ^.*Aborting journal.*$|$|\
+^.*attrd\[.*\]:    error:.*$|$|\
 ^.*BTRFS error.*$|$|\
 ^.*BTRFS info \(device .*\): forced readonly.*$|$|\
 ^.*BUG:.*$|$|\
 ^.*Cancelling IO request due to timeout.*$|$|\
+^.*cib\[.*\]:   notice: Disconnecting from Corosync.*$|$|\
 ^.*CLM CONFIGURATION CHANGE.*$|$|\
+^.*cluster-dlm\[.*\]: fence_node_time:.*$|$|\
+^.*corosync\[.*\]:   \[TOTEM \] Failed to receive the leave message. failed:.*$|$|\
+^.*corosync\[.*\]:  \[pcmk  \] notice: pcmk_shutdown: Shuting down Pacemaker.*$|$|\
+^.*corosync\[.*\]:  \[SERV  \] Unloading all Corosync service engines.*$|$|\
 ^.*crit:.*$|$|\
+^.*crmd\[.*\]:    error: crmd_fast_exit: Could not recover from internal error.*$|$|\
+^.*crmd\[.*\]:    error:.*$|$|\
+^.*crmd\[.*\]:  warning: Another DC detected:.*$|$|\
+^.*crmd\[.*\]:  warning: reap_dead_nodes: Our DC node \(.*\) left the cluster.*$|$|\
+^.*crmd\[.*\]:.*Cant retrieve the CIB.*$|$|\
 ^.*crmd\[.*\]:.*I_ERROR.*$|$|\
 ^.*crmd\[.*\]:.*I_TERMINATE.*$|$|\
-^.*crmd\[.*\]:    error: crmd_fast_exit: Could not recover from internal error.*$|$|\
-^.*crmd\[.*\]:.*Cant retrieve the CIB.*$|$|\
-^.*crmd\[.*\]:.*notice: throttle_mode: High CIB load detected:.*$|$|\
 ^.*crmd\[.*\]:.*notice: throttle_handle_load:  High CPU load detected:.*$|$|\
+^.*crmd\[.*\]:.*notice: throttle_mode: High CIB load detected:.*$|$|\
+^.*crmd\[.*\]:.*Our peer on the DC \(.*\) is dead.*$|$|\
 ^.*crmd\[.*\]:.*warning: do_recover: Fast-tracking shutdown in response to errors.*$|$|\
 ^.*Detected aborted journal.*$|$|\
 ^.*Detected IO errors while flushing file data on.*$|$|\
@@ -384,6 +411,9 @@ GREP_COLOR="$RED" $search "(\
 ^.*kernel taint.*$|$|\
 ^.*kernel.* sd .* FAILED Result.*$|$|\
 ^.*kernel.* sd .* killing request.*$|$|\
+^.*kernel: \[.*\] Call Trace:.*$|$|\
+^.*kernel: \[.*\] Killed process .* \(.*\) total-vm:.*$|$|\
+^.*kernel: \[.*\] Out of memory: Kill process .* \(.*\) score .* or sacrifice child.*$|$|\
 ^.*klogd.*started.*$|$|\
 ^.*Link Down Event.*$|$|\
 ^.*lost page write due to IO error.*$|$|\
@@ -402,11 +432,14 @@ GREP_COLOR="$RED" $search "(\
 ^.*rejecting I/O.*$|$|\
 ^.*Requesting peer fencing.*$|$|\
 ^.*reset successfully delivered to.*$|$|\
+^.*rsyslogd: \[origin software=\"rsyslogd\" swVersion=\".*\" x-pid=\".*\" x-info=\"http://www.rsyslog.com\"\] exiting on signal 15.*$|$|\
+^.*rsyslogd: \[origin software=\"rsyslogd\" swVersion=\".*\" x-pid=\".*\" x-info=\"http://www.rsyslog.com\"\] start.*$|$|\
 ^.*sbd.* ERROR:.*$|$|\
 ^.*sbd.* WARN:.*$|$|\
 ^.*Scheduling Node .* for shutdown$|$|\
 ^.*Scheduling Node .* for STONITH.*$|$|\
 ^.*segfault.*$|$|\
+^.*SFAIL.*$|$|\
 ^.*shutdown.*: shutting down for system reboot.*$|$|\
 ^.*stonith-ng.* wants to fence.*$|$|\
 ^.*syslog-ng starting up.*$|$|\
@@ -414,49 +447,35 @@ GREP_COLOR="$RED" $search "(\
 ^.*syslog-ng.*: Termination requested via signal, terminating.*$|$|\
 ^.*syslogd.*restart.*$|$|\
 ^.*sysrq: SysRq : sysrq: Trigger a crash.*$|$|\
+^.*systemd-logind\[.*\]: Power key pressed..*$|$|\
+^.*systemd-logind\[.*\]: System is powering down.*$|$|\
 ^.*tainting kernel.*$|$|\
 ^.*taints kernel.*$|$|\
+^.*timed out after.*$|$|\
 ^.*warning: Could not verify cluster configuration file /var/lib/pacemaker/cib/cib.xml: No such file or directory.*$|$|\
 ^.*warning: update_failcount:.*$|$|\
 ^.*Writing reset to node.*$|$|\
 ^.*x-info="http://www.rsyslog.com"\] exiting on signal 15..*$|$|\
 ^.*x-info="http://www.rsyslog.com"\] start.*$|$|\
 ^.*XFS.*: Log I/O Error Detected.  Shutting down filesystem.*$|$|\
-^.*cluster-dlm\[.*\]: fence_node_time:.*$|$|\
-^.*crmd\[.*\]:.*Our peer on the DC \(.*\) is dead.*$|$|\
-^.*crmd\[.*\]:  warning: reap_dead_nodes: Our DC node \(.*\) left the cluster.*$|$|\
-^.*attrd\[.*\]:    error:.*$|$|\
-^.*kernel: \[.*\] Out of memory: Kill process .* \(.*\) score .* or sacrifice child.*$|$|\
-^.*kernel: \[.*\] Killed process .* \(.*\) total-vm:.*$|$|\
-^.*kernel: \[.*\] Call Trace:.*$|$|\
-### test ###|\
-^.*crmd\[.*\]:  warning: Another DC detected:.*$|$|\
-^.*systemd-logind\[.*\]: Power key pressed..*$|$|\
-^.*systemd-logind\[.*\]: System is powering down.*$|$|\
-^.*cib\[.*\]:   notice: Disconnecting from Corosync.*$|$|\
-^.*rsyslogd: \[origin software=\"rsyslogd\" swVersion=\".*\" x-pid=\".*\" x-info=\"http://www.rsyslog.com\"\] exiting on signal 15.*$|$|\
-^.*rsyslogd: \[origin software=\"rsyslogd\" swVersion=\".*\" x-pid=\".*\" x-info=\"http://www.rsyslog.com\"\] start.*$|$|\
-^.*corosync\[.*\]:   \[TOTEM \] Failed to receive the leave message. failed:.*$|$|\
-^.*SFAIL.*$|$|\
-^.*corosync\[.*\]:  \[SERV  \] Unloading all Corosync service engines.*$|$|\
-^.*corosync\[.*\]:  \[pcmk  \] notice: pcmk_shutdown: Shuting down Pacemaker.*$|$|\
-^.*crmd\[.*\]:    error:.*$|$|\
-^.*timed out after.*$|$|\
-^zzzzz-last_line-zzzzz$|$)" $tmp_file > $changed
-cp -f $changed $tmp_file
+^zzzzz-last_line-zzzzz$|$)"
+else 
+	cat
+fi
 }
 
 #YELLOW
-function general-yellow() 
-{
+function general-yellow() {
+if [[ $GENERAL_YELLOW = true ]]; then
 GREP_COLOR="$YELLOW" $search "(\
 ^.*Bad protocol version.*$|$|\
-^.*crmd\[.*\]:   notice: do_state_transition: State transition S_ELECTION -> S_INTEGRATION \[ input=I_ELECTION_DC cause=C_TIMER_POPPED origin=election_timeout_popped \].*$|$|\
 ^.*blocked FC remote port time out.*$|$|\
 ^.*BTRFS warning.*$|$|\
 ^.*corosync.*Incrementing problem counter.*$|$|\
 ^.*corosync\[.*\]:  \[TOTEM \] Retransmit List.*$|$|\
 ^.*Couldn.t find device with.*$|$|\
+^.*crmd\[.*\]:   notice: do_state_transition: State transition S_ELECTION -> S_INTEGRATION \[ input=I_ELECTION_DC cause=C_TIMER_POPPED origin=election_timeout_popped \].*$|$|\
+^.*crmd\[.*\]:   notice: terminate_cs_connection: Disconnecting from Corosync.*$|$|\
 ^.*Delaying fencing operations until there are resources to manage.*$|$|\
 ^.*device-mapper: .*error.*$|$|\
 ^.*Error.*$|$|\
@@ -473,6 +492,7 @@ GREP_COLOR="$YELLOW" $search "(\
 ^.*Quorum lost.*$|$|\
 ^.*recoverable transport error.*$|$|\
 ^.*S_ELECTION.*$|$|\
+^.*SAPHana\(.*\)\[.*\]: INFO: ACT: Demoted.*$|$|\
 ^.*sbd_stonith can fence.*$|$|\
 ^.*smartd.*: .* SMART Usage Attribute.*$|$|\
 ^.*state is now lost.*$|$|\
@@ -481,41 +501,43 @@ GREP_COLOR="$YELLOW" $search "(\
 ^.*warning:.*$|$|\
 ^.*WARNING:.*$|$|\
 ^.*xfs_log_force: error.*$|$|\
-^.*crmd\[.*\]:   notice: terminate_cs_connection: Disconnecting from Corosync.*$|$|\
-^.*SAPHana\(.*\)\[.*\]: INFO: ACT: Demoted.*$|$|\
-^zzzzz-last_line-zzzzz$|$)" $tmp_file > $changed
-cp -f $changed $tmp_file
+^zzzzz-last_line-zzzzz$|$)"
+else 
+	cat
+fi
 }
 
 # GREEN
-function general-green() 
-{
+function general-green() {
+if [[ $GENERAL_GREEN = true ]]; then
 GREP_COLOR="$GREEN" $search "(\
 ^.*A new membership .* was formed..*$|$|\
-^.*crmd\[.*\]:   notice: crm_update_quorum: Updating quorum status to true.*$|$|\
-^.*sbd: \[.*\]: info: CIB reconnect successful.*$|$|\
 ^.*Completed service synchronization, ready to provide service.*$|$|\
 ^.*corosync.*Decrementing problem counter.*$|$|\
+^.*crmd\[.*\]:   notice: crm_update_quorum: Updating quorum status to true.*$|$|\
 ^.*info: Node state: online.*$|$|\
 ^.*info: Pacemaker health check: OK.*$|$|\
 ^.*is now: member.*$|$|\
 ^.*multipathd.*reinstated.*$|$|\
 ^.*notice: Quorum acquired.*$|$|\
 ^.*quorum acquired.*$|$|\
+^.*sbd: \[.*\]: info: CIB reconnect successful.*$|$|\
 ^.*Servant starting for device.*$|$|\
 ^.*state is now member.*$|$|\
 ^.*SuSEfirewall2 not active.*$|$|\
 ^.*tur checker reports path is up.*$|$\
-^zzzzz-last_line-zzzzz$|$)" $tmp_file > $changed
-cp -f $changed $tmp_file
+^zzzzz-last_line-zzzzz$|$)"
+else 
+	cat
+fi
 }
 
 ### END GENERAL ###
 
 ## HA ##
 #RED
-function ha-red() 
-{
+function ha-red() {
+if [[ $HA_RED = true ]]; then
 GREP_COLOR="$RED" $search "(\
 ^.*crmd\[.*\]:   notice: abort_transition_graph: Transition aborted: Stonith failed.*$|$|\
 ^.*crmd\[.*\]:   notice: tengine_stonith_callback: Stonith operation .* for .* failed (No route to host): aborting transition..*$|$|\
@@ -528,21 +550,25 @@ GREP_COLOR="$RED" $search "(\
 ^.*stonith-ng\[.*\]:   notice: stonith_choose_peer: Couldn't find anyone to fence.*$|$|\
 ^.*stonith-ng\[.*\]:  warning: log_action: fence_legacy\[.*\] stderr:.*$|$|\
 ^.*stonith: external_reset_req: 'vcenter reset' for host .* failed with rc.*$|$|\
-^zzzzz-last_line-zzzzz$|$)" $tmp_file > $changed
-cp -f $changed $tmp_file
+^zzzzz-last_line-zzzzz$|$)"
+else 
+	cat
+fi
 }
 
 ### END HA ###
 
 ## SAP ##
 #RED
-function sap-red() 
-{
+function sap-red() {
+if [[ $SAP_RED = true ]]; then
 GREP_COLOR="$RED" $search "(\
 ^.*PreferSiteTakeover selected so decrease promotion score here.*$|$|\
 ^.*Promote .* to be primary.*$|$|\
-^zzzzz-last_line-zzzzz$|$)" $tmp_file > $changed
-cp -f $changed $tmp_file
+^zzzzz-last_line-zzzzz$|$)"
+else 
+	cat
+fi
 }
 
 ### END SAP ###
@@ -550,71 +576,43 @@ cp -f $changed $tmp_file
 ## CaaS ##
 #RED
 function caas-red() {
+if [[ $CAAS_RED = true ]]; then
 GREP_COLOR="$RED" $search "(\
 ^.*hyperkube\[.*\]: I.* kubelet.go:1820] skipping pod synchronization - \[.* is not healthy:.*$|$|\
-^zzzzz-last_line-zzzzz$|$)" $tmp_file > $changed
-cp -f $changed $tmp_file
+^zzzzz-last_line-zzzzz$|$)"
+else 
+	cat
+fi
 }
 
 ### END CaaS ###
 
 ## Supportconfig Junk ##
-function supportconfig() 
-{
+function supportconfig() {
+if [[ $SUPPORTCONFIG = true ]]; then
 GREP_COLOR="$YELLOW" $search "(\
 ^===========================.*$|$ |\
 ^#==\[ .* \].*=====================#$|$|\
-^zzzzz-last_line-zzzzz$|$)" $tmp_file > $changed
-cp -f $changed $tmp_file
+^zzzzz-last_line-zzzzz$|$)"
+else 
+	cat
+fi
 }
 
 ### END Supportconfig Junk ###
-tmp_file=/tmp/gg_highlight.tmp
-changed=/tmp/gg_highlight.tmp2
 
-cp $file_arg $tmp_file
-
-if [[ $FILTER_GENERAL = true ]]; then
-	filter-general
-fi
-if [[ $FILTER_HA = true ]]; then
-	filter-ha
-fi
-if [[ $FILTER_SAP = true ]]; then
-	filter-sap
-fi
-if [[ $FILTER_CAAS = true ]]; then
-	filter-caas
-fi
-if [[ $GENERAL_RED = true ]]; then
-	general-red
-fi
-if [[ $GENERAL_YELLOW = true ]]; then
-	general-yellow
-fi
-if [[ $GENERAL_GREEN = true ]]; then
-	general-green
-fi
-if [[ $HA_RED = true ]]; then
-	ha-red
-fi
-if [[ $HA_YELLOW = true ]]; then
-	ha-yellow
-fi
-if [[ $HA_GREEN = true ]]; then
-	ha-green
-fi
-if [[ $CAAS_RED = true ]]; then
-	caas-red
-fi
-if [[ $CAAS_YELLOW = true ]]; then
-	caas-yellow
-fi
-if [[ $CAAS_GREEN = true ]]; then
-	caas-green
-fi
-if [[ $SUPPORTCONFIG = true ]]; then
+function allyourlogsarebelongtome() {
+	filter-general |\
+	filter-caas	|\
+	filter-ha |\
+	filter-sap |\
+	general-red |\
+	general-yellow |\
+	general-green |\
+	ha-red |\
+	sap-red |\
+	caas-red |\
 	supportconfig
-fi
+}
 
-less $tmp_file
+cat $file_arg | allyourlogsarebelongtome | less

@@ -1,4 +1,7 @@
-* Mon May 05 2018  Jesse Chandler <jesse.chandler@suse.com> 1.1.0
+* Tue May 08 2018  Jesse Chandler <jesse.chandler@suse.com> 1.1.1
+- if true logic moved to functions. Changed from tmp file back to piped. Added test filtering section.
+
+* Mon May 07 2018  Jesse Chandler <jesse.chandler@suse.com> 1.1.0
 - Changed to a (poor) layout with functions. Added flags 
 
 * Wed Mar 14 2018  Jesse Chandler <jesse.chandler@suse.com> 1.0.1
