@@ -2,7 +2,6 @@
 # Filename: gg
 # Description: Log filtering and highlighting
 # jesse.chandler@suse.com
-# Version: 1.1.0
 # Supportconfig/hb_report log filter & highlighter
 # Usage: gg [file]
 # GREP_COLOR="$COLOR" $search '^.*.*$|$' |\
@@ -15,7 +14,7 @@
 ##TODO testing section for filtering and flag to enable test filtering
 ##TODO change filter/ignore options/fuctions to be the same word
 
-VERSION=1.1.1
+VERSION=1.1.4
 
 # Coloring
 RED='1;37;41'
@@ -29,10 +28,13 @@ GENERAL_RED=true
 GENERAL_YELLOW=true
 GENERAL_GREEN=true
 HA_RED=true
-HA_YELLOW=false
-HA_GREEN=false
+HA_YELLOW=true
+HA_GREEN=true
+HACIB_RED=true
+HACIB_YELLOW=true
+HACIB_GREEN=true
 SAP_RED=true
-SAP_YELLOW=false
+SAP_YELLOW=true
 SAP_GREEN=false
 CAAS_RED=true
 CAAS_YELLOW=false
@@ -171,6 +173,8 @@ sshd.* pam_winbind.* granted access|\
 sshd.* subsystem request for sftp|\
 sshd.*: Accepted password|\
 sshd.*: Accepted publickey for|\
+sshd\[.*\]: Starting session: command for .* from .* port .* id .*|\
+sshd\[.*\]: Close session: user .* from .* port .* id .*|\
 sshd.*: Connection closed by|\
 sshd.*: Connection reset by|\
 sshd.*: Did not receive identification string from|\
@@ -264,6 +268,7 @@ else
 	cat
 fi
 }
+
 ### END CaaS Ignore ###
 
 ## HA Ignore ##
@@ -272,6 +277,8 @@ if [[ $FILTER_HA = true ]]; then
 grep --text -Ev -- "\
 attrd_updater\[.*notice: crm_log_args: Invoked: attrd_updater|\
 cib: \[.*\]: debug:|\
+cib\[.*\]:   notice: cib:diff:|\
+cib\[.*\]:   notice: log_cib_diff: cib:diff:|\
 corosync\[.*\]:   \[CONFDB\] exit_fn for conn=|\
 corosync\[.*\]:   \[CONFDB\] lib_init_fn: conn=|\
 corosync\[.*\]:   \[CPG   \] cpg finalize for conn=|\
@@ -310,6 +317,7 @@ else
 	cat
 fi
 }
+
 ### END HA Ignore ###
 
 ## SAP Ignore ##
@@ -338,29 +346,19 @@ else
 	cat
 fi
 }
+
 ### END SAP Ignore ###
 
 ## TEST Ignore ##
 function filter-test() {
 if [[ $FILTER_TEST = true ]]; then
 grep --text -Ev -- "\
-dlm_controld.pcmk\[|\
-EXT3-fs .*: recovery complete|\
-EXT3-fs .*: using internal journal|\
-EXT3-fs .*: warning: maximal mount|\
-FAT-fs .*: FAT read failed|\
-GFS2: fsid=hacluster|\
-kernel: \[    .........|\
-kernel: \[   .........|\
-kjournald starting.|\
-lvm|\
-mounted filesystem with ordered data mode|\
+hpasmlited\[.*\]: KCS CHIF: Expected Cmd .*, Msg ID .*|\
+hpasmlited\[.*\]: KCS CHIF: Received Cmd .*, Msg ID .*|\
 SAPHanaSR-mon\[.* All checks passed -|\
 SAPHanaSR-mon\[.* Monitor startup|\
-SAPHanaTopology\(.*\)\[.*\]: INFO: DEC: site=.*, mode=syncmem, MAPPING=.*, hanaRemoteHost=|\
-sbd: .* info: Legacy plug-in detected, AIS quorum check enabled|\
-sbd: .* WARN: Servant for pcmk|\
 SESSION = .* CMD =$|\
+smartd\[.*\]:|\
 zzzzz-last_line-zzzzz"
 else 
 	cat
@@ -374,7 +372,6 @@ fi
 function general-red() {
 if [[ $GENERAL_RED = true ]]; then
 GREP_COLOR="$RED" $search "(\
-### test ###|\
 ^.*A processor.*$|$|\
 ^.*Aborting journal.*$|$|\
 ^.*attrd\[.*\]:    error:.*$|$|\
@@ -382,24 +379,6 @@ GREP_COLOR="$RED" $search "(\
 ^.*BTRFS info \(device .*\): forced readonly.*$|$|\
 ^.*BUG:.*$|$|\
 ^.*Cancelling IO request due to timeout.*$|$|\
-^.*cib\[.*\]:   notice: Disconnecting from Corosync.*$|$|\
-^.*CLM CONFIGURATION CHANGE.*$|$|\
-^.*cluster-dlm\[.*\]: fence_node_time:.*$|$|\
-^.*corosync\[.*\]:   \[TOTEM \] Failed to receive the leave message. failed:.*$|$|\
-^.*corosync\[.*\]:  \[pcmk  \] notice: pcmk_shutdown: Shuting down Pacemaker.*$|$|\
-^.*corosync\[.*\]:  \[SERV  \] Unloading all Corosync service engines.*$|$|\
-^.*crit:.*$|$|\
-^.*crmd\[.*\]:    error: crmd_fast_exit: Could not recover from internal error.*$|$|\
-^.*crmd\[.*\]:    error:.*$|$|\
-^.*crmd\[.*\]:  warning: Another DC detected:.*$|$|\
-^.*crmd\[.*\]:  warning: reap_dead_nodes: Our DC node \(.*\) left the cluster.*$|$|\
-^.*crmd\[.*\]:.*Cant retrieve the CIB.*$|$|\
-^.*crmd\[.*\]:.*I_ERROR.*$|$|\
-^.*crmd\[.*\]:.*I_TERMINATE.*$|$|\
-^.*crmd\[.*\]:.*notice: throttle_handle_load:  High CPU load detected:.*$|$|\
-^.*crmd\[.*\]:.*notice: throttle_mode: High CIB load detected:.*$|$|\
-^.*crmd\[.*\]:.*Our peer on the DC \(.*\) is dead.*$|$|\
-^.*crmd\[.*\]:.*warning: do_recover: Fast-tracking shutdown in response to errors.*$|$|\
 ^.*Detected aborted journal.*$|$|\
 ^.*Detected IO errors while flushing file data on.*$|$|\
 ^.*device-mapper: multipath: Failing path.*$|$|\
@@ -437,14 +416,9 @@ GREP_COLOR="$RED" $search "(\
 ^.*reset successfully delivered to.*$|$|\
 ^.*rsyslogd: \[origin software=\"rsyslogd\" swVersion=\".*\" x-pid=\".*\" x-info=\"http://www.rsyslog.com\"\] exiting on signal 15.*$|$|\
 ^.*rsyslogd: \[origin software=\"rsyslogd\" swVersion=\".*\" x-pid=\".*\" x-info=\"http://www.rsyslog.com\"\] start.*$|$|\
-^.*sbd.* ERROR:.*$|$|\
-^.*sbd.* WARN:.*$|$|\
-^.*Scheduling Node .* for shutdown$|$|\
-^.*Scheduling Node .* for STONITH.*$|$|\
 ^.*segfault.*$|$|\
 ^.*SFAIL.*$|$|\
 ^.*shutdown.*: shutting down for system reboot.*$|$|\
-^.*stonith-ng.* wants to fence.*$|$|\
 ^.*syslog-ng starting up.*$|$|\
 ^.*syslog-ng.*: syslog-ng shutting down; version=.*$|$|\
 ^.*syslog-ng.*: Termination requested via signal, terminating.*$|$|\
@@ -455,12 +429,12 @@ GREP_COLOR="$RED" $search "(\
 ^.*tainting kernel.*$|$|\
 ^.*taints kernel.*$|$|\
 ^.*timed out after.*$|$|\
-^.*warning: Could not verify cluster configuration file /var/lib/pacemaker/cib/cib.xml: No such file or directory.*$|$|\
 ^.*warning: update_failcount:.*$|$|\
 ^.*Writing reset to node.*$|$|\
 ^.*x-info="http://www.rsyslog.com"\] exiting on signal 15..*$|$|\
 ^.*x-info="http://www.rsyslog.com"\] start.*$|$|\
 ^.*XFS.*: Log I/O Error Detected.  Shutting down filesystem.*$|$|\
+^.*systemd\[1\]: systemd .* running in system mode..*$|$|\
 ^zzzzz-last_line-zzzzz$|$)"
 else 
 	cat
@@ -483,22 +457,12 @@ GREP_COLOR="$YELLOW" $search "(\
 ^.*device-mapper: .*error.*$|$|\
 ^.*Error.*$|$|\
 ^.*ERROR:.*$|$|\
-^.*Executing reboot fencing operation .* on.*$|$|\
 ^.*failed.*$|$|\
-^.*I_ELECTION_DC.*$|$|\
-^.*I_NOT_DC.*$|$|\
-^.*info: We don.t have a DC right now..*$|$|\
 ^.*kernel.* reservation conflict.*$|$|\
 ^.*mcelog:.*$|$|\
-^.*notice: Removing.*from the membership list.*$|$|\
 ^.*Protocol major versions differ.*$|$|\
-^.*Quorum lost.*$|$|\
 ^.*recoverable transport error.*$|$|\
-^.*S_ELECTION.*$|$|\
-^.*SAPHana\(.*\)\[.*\]: INFO: ACT: Demoted.*$|$|\
-^.*sbd_stonith can fence.*$|$|\
 ^.*smartd.*: .* SMART Usage Attribute.*$|$|\
-^.*state is now lost.*$|$|\
 ^.*tur checker timed out.*$|$|\
 ^.*unhandled error.*$|$|\
 ^.*warning:.*$|$|\
@@ -514,21 +478,10 @@ fi
 function general-green() {
 if [[ $GENERAL_GREEN = true ]]; then
 GREP_COLOR="$GREEN" $search "(\
-^.*A new membership .* was formed..*$|$|\
-^.*Completed service synchronization, ready to provide service.*$|$|\
-^.*corosync.*Decrementing problem counter.*$|$|\
-^.*crmd\[.*\]:   notice: crm_update_quorum: Updating quorum status to true.*$|$|\
-^.*info: Node state: online.*$|$|\
-^.*info: Pacemaker health check: OK.*$|$|\
-^.*is now: member.*$|$|\
+ Verification Status: Passed|\
 ^.*multipathd.*reinstated.*$|$|\
-^.*notice: Quorum acquired.*$|$|\
-^.*quorum acquired.*$|$|\
-^.*sbd: \[.*\]: info: CIB reconnect successful.*$|$|\
-^.*Servant starting for device.*$|$|\
-^.*state is now member.*$|$|\
 ^.*SuSEfirewall2 not active.*$|$|\
-^.*tur checker reports path is up.*$|$\
+^.*tur checker reports path is up.*$|$|\
 ^zzzzz-last_line-zzzzz$|$)"
 else 
 	cat
@@ -542,17 +495,87 @@ fi
 function ha-red() {
 if [[ $HA_RED = true ]]; then
 GREP_COLOR="$RED" $search "(\
+^.*cib\[.*\]:   notice: Disconnecting from Corosync.*$|$|\
+^.*CLM CONFIGURATION CHANGE.*$|$|\
+^.*cluster-dlm\[.*\]: fence_node_time:.*$|$|\
+^.*corosync\[.*\]:   \[TOTEM \] Failed to receive the leave message. failed:.*$|$|\
+^.*corosync\[.*\]:  \[pcmk  \] notice: pcmk_shutdown: Shuting down Pacemaker.*$|$|\
+^.*corosync\[.*\]:  \[SERV  \] Unloading all Corosync service engines.*$|$|\
+^.*crit:.*$|$|\
+^.*crmd\[.*\]:    error: crmd_fast_exit: Could not recover from internal error.*$|$|\
+^.*crmd\[.*\]:    error:.*$|$|\
 ^.*crmd\[.*\]:   notice: abort_transition_graph: Transition aborted: Stonith failed.*$|$|\
 ^.*crmd\[.*\]:   notice: tengine_stonith_callback: Stonith operation .* for .* failed (No route to host): aborting transition..*$|$|\
 ^.*crmd\[.*\]:   notice: tengine_stonith_callback: Stonith operation .*: No route to host.*$|$|\
+^.*crmd\[.*\]:  warning: Another DC detected:.*$|$|\
+^.*crmd\[.*\]:  warning: reap_dead_nodes: Our DC node \(.*\) left the cluster.*$|$|\
+^.*crmd\[.*\]:.*Cant retrieve the CIB.*$|$|\
+^.*crmd\[.*\]:.*I_ERROR.*$|$|\
+^.*crmd\[.*\]:.*I_TERMINATE.*$|$|\
+^.*crmd\[.*\]:.*notice: throttle_handle_load:  High CPU load detected:.*$|$|\
+^.*crmd\[.*\]:.*notice: throttle_mode: High CIB load detected:.*$|$|\
+^.*crmd\[.*\]:.*Our peer on the DC \(.*\) is dead.*$|$|\
+^.*crmd\[.*\]:.*warning: do_recover: Fast-tracking shutdown in response to errors.*$|$|\
 ^.*external/vcenter\(.*\)\[.*\]: \[.*\]: ERROR:.*$|$|\
 ^.*pengine\[.*\]:  warning: determine_online_status: Node .* is unclean.*$|$|\
 ^.*pengine\[.*\]:  warning: pe_fence_node: Node .* will be fenced because the node is no longer part of the cluster.*$|$|\
+^.*sbd.* ERROR:.*$|$|\
+^.*sbd.* WARN:.*$|$|\
+^.*Scheduling Node .* for shutdown$|$|\
 ^.*Scheduling Node .* for STONITH.*$|$|\
+^.*Scheduling Node .* for STONITH.*$|$|\
+^.*stonith-ng.* wants to fence.*$|$|\
 ^.*stonith-ng\[.*\]:    error: remote_op_done: Operation reboot of .* by .* for .*: No route to host.*$|$|\
 ^.*stonith-ng\[.*\]:   notice: stonith_choose_peer: Couldn't find anyone to fence.*$|$|\
 ^.*stonith-ng\[.*\]:  warning: log_action: fence_legacy\[.*\] stderr:.*$|$|\
 ^.*stonith: external_reset_req: 'vcenter reset' for host .* failed with rc.*$|$|\
+^.*warning: Could not verify cluster configuration file /var/lib/pacemaker/cib/cib.xml: No such file or directory.*$|$|\
+^zzzzz-last_line-zzzzz$|$)"
+else 
+	cat
+fi
+}
+
+#YELLOW
+function ha-yellow() {
+if [[ $HA_YELLOW = true ]]; then
+GREP_COLOR="$YELLOW" $search "(\
+^.*Executing reboot fencing operation .* on.*$|$|\
+^.*I_ELECTION_DC.*$|$|\
+^.*I_NOT_DC.*$|$|\
+^.*info: We don.t have a DC right now..*$|$|\
+^.*lrmd\[.*\]:   notice: .*:stderr \[ umount: .* target is busy \].*$|$|\
+^.*notice: Removing.*from the membership list.*$|$|\
+^.*Quorum lost.*$|$|\
+^.*S_ELECTION.*$|$|\
+^.*sbd_stonith can fence.*$|$|\
+^.*state is now lost.*$|$|\
+^zzzzz-last_line-zzzzz$|$)"
+else 
+	cat
+fi
+}
+
+#GREEN
+function ha-green() {
+if [[ $HA_GREEN = true ]]; then
+GREP_COLOR="$GREEN" $search "(\
+   Active: active|\
+^.*A new membership .* was formed..*$|$|\
+^.*Completed service synchronization, ready to provide service.*$|$|\
+^.*corosync.*Decrementing problem counter.*$|$|\
+^.*crmd\[.*\]:   notice: crm_update_quorum: Updating quorum status to true.*$|$|\
+^.*crmd\[.*\]:   notice: Result of start operation for .* on .*: 0 \(ok\).*$|$|\
+^.*crmd\[.*\]:   notice: Result of stop operation for .* on .*: 0 \(ok\).*$|$|\
+^.*Filesystem\(.*\)\[.*\]: INFO: unmounted .* successfully.*$|$|\
+^.*info: Node state: online.*$|$|\
+^.*info: Pacemaker health check: OK.*$|$|\
+^.*is now: member.*$|$|\
+^.*notice: Quorum acquired.*$|$|\
+^.*quorum acquired.*$|$|\
+^.*sbd: \[.*\]: info: CIB reconnect successful.*$|$|\
+^.*Servant starting for device.*$|$|\
+^.*state is now member.*$|$|\
 ^zzzzz-last_line-zzzzz$|$)"
 else 
 	cat
@@ -561,6 +584,72 @@ fi
 
 ### END HA ###
 
+## HA CIB ##
+#GREEN
+function hacib-green {
+if [[ $HACIB_GREEN = true ]]; then
+GREP_COLOR="$GREEN" $search "(\
+<clone |\
+<cluster_property_set |\
+<colocation |\
+<group |\
+<location |\
+<master |\
+<node |\
+<order |\
+<primitive |\
+<property |\
+<rsc_colocation |\
+<rsc_defaults>|\
+<rsc_location |\
+<rsc_order |\
+^clone |\
+^colocation |\
+^group |\
+^location |\
+^ms |\
+^node |\
+^op_defaults |\
+^order |\
+^primitive |\
+^property |\
+^rsc_defaults |\
+^zzzzz-last_line-zzzzz$|$)"
+else 
+	cat
+fi
+}
+
+#YELLOW
+function hacib-yellow {
+if [[ $HACIB_YELLOW = true ]]; then
+GREP_COLOR="$YELLOW" $search "(\
+maintenance\=on|\
+name=\"maintenance\" value=\"true\"|\
+standby\=on|\
+^zzzzz-last_line-zzzzz$|$)"
+else 
+	cat
+fi
+}
+
+#RED
+function hacib-red {
+if [[ $HACIB_RED = true ]]; then
+GREP_COLOR="$RED" $search "(\
+\*\*\* Resource management is DISABLED \*\*\*|\
+have-watchdog\=false|\
+name=\"maintenance-mode\" value=\"true\"|\
+name=\"stonith-enabled\" value=\"false\"|\
+stonith-enabled\=false|\
+^zzzzz-last_line-zzzzz$|$)"
+else 
+	cat
+fi
+}
+
+### END HA CIB ###
+
 ## SAP ##
 #RED
 function sap-red() {
@@ -568,6 +657,17 @@ if [[ $SAP_RED = true ]]; then
 GREP_COLOR="$RED" $search "(\
 ^.*PreferSiteTakeover selected so decrease promotion score here.*$|$|\
 ^.*Promote .* to be primary.*$|$|\
+^zzzzz-last_line-zzzzz$|$)"
+else 
+	cat
+fi
+}
+
+#YELLOW
+function sap-yellow() {
+if [[ $SAP_YELLOW = true ]]; then
+GREP_COLOR="$YELLOW" $search "(\
+^.*SAPHana\(.*\)\[.*\]: INFO: ACT: Demoted.*$|$|\
 ^zzzzz-last_line-zzzzz$|$)"
 else 
 	cat
@@ -609,11 +709,18 @@ function allyourlogsarebelongtome() {
 	filter-caas	|\
 	filter-ha |\
 	filter-sap |\
+	filter-test |\
 	general-red |\
 	general-yellow |\
 	general-green |\
 	ha-red |\
+	ha-yellow |\
+	ha-green |\
+	hacib-red |\
+	hacib-yellow |\
+	hacib-green |\
 	sap-red |\
+	sap-yellow |\
 	caas-red |\
 	supportconfig
 }
