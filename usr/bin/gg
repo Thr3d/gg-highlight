@@ -14,7 +14,7 @@
 ##TODO testing section for filtering and flag to enable test filtering
 ##TODO change filter/ignore options/fuctions to be the same word
 
-VERSION=1.1.4
+VERSION=1.1.5
 
 # Coloring
 RED='1;37;41'
@@ -70,6 +70,7 @@ if [ "$1" != "" ]; then
 			FILTER_HA=true
 			FILTER_SAP=true
 			FILTER_CAAS=true
+			FILTER_SOC=true
 			FILTER_TEST=false #enable to use test filters
 			;;
 
@@ -312,6 +313,17 @@ pengine\[.*notice: process_pe_message: Calculated Transition|\
 sbd: \[.*\]: info: Monitoring Pacemaker health|\
 stonith-ng: \[.*\]: debug:|\
 stonith-ng\[.*notice: unpack_config: On loss of CCM Quorum: Ignore|\
+cib:     info: crm_compress_string:|\
+pengine:     info: crm_compress_string:|\
+pengine:     info: LogActions:	Leave|\
+cib:     info: cib_process_request:	Completed cib_modify operation for section nodes: OK|\
+crmd:     info: throttle_send_command:|\
+pengine:     info: clone_print:|\
+pengine:     info: short_print:|\
+cib:     info: cib_perform_op:	++|\
+cib:     info: cib_process_request:	Forwarding cib_modify operation for section nodes to all|\
+cib:     info: cib_process_ping:	Reporting our current digest to|\
+pengine:     info: RecurringOp:	Start recurring monitor|\
 zzzzz-last_line-zzzzz"
 else 
 	cat
@@ -337,17 +349,46 @@ SAPHana\(.*\)\[.*\]: INFO: RA ==== end action monitor_clone with rc=8 \(.*\) \(.
 SAPHanaTopology\(.*\)\[.*\]: DEBUG:|\
 SAPHanaTopology\(.*\)\[.*\]: INFO: DEC: site=.*, mode=primary, MAPPING=.*, hanaRemoteHost=.*|\
 SAPHanaTopology\(.*\)\[.*\]: INFO: DEC: site=.*, mode=sync, MAPPING=.*, hanaRemoteHost=.*|\
+SAPHanaTopology\(.*\)\[.*\]: INFO: DEC: site=.*, mode=syncmem, MAPPING=.*, hanaRemoteHost=.*|\
 SAPHanaTopology\(.*\)\[.*\]: INFO: RA ==== begin action monitor_clone \(.*\) ====|\
 SAPHanaTopology\(.*\)\[.*\]: INFO: RA ==== end action monitor_clone with rc=0 \(.*\) \(.*s\)====|\
-SAPRP1_00|\
 sapuxuserchk\[.*\]: pam_vas: Authentication .succeeded. for .Active Directory.|\
+zzzzz-last_line-zzzzz"
+else
+	cat
+fi
+}
+
+### END SAP Ignore ###
+
+## SOC Ignore ##
+function filter-soc() {
+if [[ $FILTER_SOC = true ]]; then
+grep --text -Ev -- "\
+haproxy\[.*\]: |\
+chef-client\[.*\]: |\
+epmd: epmd: got partial packet only on file descriptor 4 \(0\)|\
+kernel: \[.*\] bond0: Setting MII monitoring interval to 100|\
+kernel: \[.*\] bond0: Setting xmit hash policy to layer2 \(0\)|\
+dnsmasq-dhcp\[.*\]: DHCPREQUEST\(.*\)|\
+dnsmasq-dhcp\[.*\]: DHCPACK\(.*\) .*|\
+aodh-evaluator\[.*\]: .* WARNING oslo_db.sqlalchemy.utils \[-\] Unique keys not in sort_keys. The sorting order may be unstable.|\
+aodh-evaluator\[.*\]: .* INFO aodh.evaluator \[-\] initiating evaluation cycle on 0 alarms|\
+sshd\[.*\]: error: maximum authentication attempts exceeded for .* from .* port .* ssh2 \[preauth\]|\
+sshd\[.*\]: Disconnecting: Too many authentication failures \[preauth\]|\
+ovs-vsctl: ovs|00001|db_ctl_base|ERR|no interface named|\
+su: pam_systemd\(su:session\): Cannot create session: Already running in a session|\
+dnsmasq-dhcp\[.*\]: read /var/lib/neutron/dhcp|\
+dnsmasq\[.*\]: read /var/lib/neutron/dhcp|\
+dnsmasq-dhcp\[.*\]: DHCPDISCOVER|\
+dnsmasq-dhcp\[.*\]: DHCPOFFER|\
 zzzzz-last_line-zzzzz"
 else 
 	cat
 fi
 }
 
-### END SAP Ignore ###
+### END SOC Ignore ###
 
 ## TEST Ignore ##
 function filter-test() {
@@ -359,6 +400,36 @@ SAPHanaSR-mon\[.* All checks passed -|\
 SAPHanaSR-mon\[.* Monitor startup|\
 SESSION = .* CMD =$|\
 smartd\[.*\]:|\
+kernel: \[    ........\] |\
+kernel: \[    .........\] |\
+kernel: \[   .........\] |\
+systemd\[1\]: Failed to set up mount unit: Device or resource busy|\
+adclient\[.*\]: |\
+nscd: .* monitored file .* was |\
+nscd: .* monitoring directory |\
+nscd: .* monitoring file |\
+nscd: .* monitored directory .* was |\
+su: pam_systemd\(su-l:session\): Cannot create session: Already running in a session|\
+usermod\[.*\]: add|\
+python\[.*\]: .* INFO |\
+su: message repeated .* times:|\
+cf3\[.*\]:|\
+ACPI Error:|\
+ACPI Exception:|\
+server\[.*\]: |\
+kernel: \[.*\] clearcache.sh \(.*\): drop_caches: 3|\
+DBFS_/|\
+kernel: \[.*\] qla2xxx \[.*\]-.*: Unable to read SFP data \(102/a0/0\).|\
+sshd\[.*\]: error: kex protocol error: type 30 seq 1 \[preauth\]|\
+rshd\[.*\]:|\
+sshd\[.*\]: error: key_read: uudecode .* failed|\
+avahi-daemon\[.*\]:|\
+lvm\[.*\]:|\
+kernel: \[.*\] kjournald starting.  Commit interval 15 seconds|\
+kernel: \[.*\] EXT3-fs \(.*\): warning: mounting fs with errors, running e2fsck is recommended|\
+kernel: \[.*\] EXT3-fs \(.*\): using internal journal|\
+kernel: \[.*\] EXT3-fs \(.*\): recovery complete|\
+kernel: \[.*\] EXT3-fs \(.*\): mounted filesystem with ordered data mode|\
 zzzzz-last_line-zzzzz"
 else 
 	cat
@@ -435,6 +506,17 @@ GREP_COLOR="$RED" $search "(\
 ^.*x-info="http://www.rsyslog.com"\] start.*$|$|\
 ^.*XFS.*: Log I/O Error Detected.  Shutting down filesystem.*$|$|\
 ^.*systemd\[1\]: systemd .* running in system mode..*$|$|\
+^.*sshd\[.*\]: error: fork: Cannot allocate memory.*$|$|\
+^.*FATAL:.*$|$|\
+^.*error: fork: Cannot allocate memory.*$|$|\
+^.*systemd-coredump\[.*\]: Process .* \(.*\) of user .* dumped core.*$|$|\
+^.*kernel: \[.*\] kernel BUG at.*$|$|\
+^.*kernel: \[.*\] ------------\[ cut here \]------------.*$|$|\
+^.*kernel: \[.*\] invalid opcode:.*$|$|\
+^.*xfs_do_force_shutdown.*$|$|\
+^.*kernel: \[.*\] XFS .*: Corruption of in-memory data detected.  Shutting down filesystem.*$|$|\
+^.*kernel: \[.*\] XFS .*: xfs_do_force_shutdown.*$|$|\
+^.*kernel: \[.*\] XFS .*: Please umount the filesystem and rectify the problem\(s\).*$|$|\
 ^zzzzz-last_line-zzzzz$|$)"
 else 
 	cat
@@ -468,6 +550,8 @@ GREP_COLOR="$YELLOW" $search "(\
 ^.*warning:.*$|$|\
 ^.*WARNING:.*$|$|\
 ^.*xfs_log_force: error.*$|$|\
+^.*tainting kernel.*$|$|\
+^.*stderr.*$|$|\
 ^zzzzz-last_line-zzzzz$|$)"
 else 
 	cat
@@ -530,11 +614,23 @@ GREP_COLOR="$RED" $search "(\
 ^.*stonith-ng\[.*\]:  warning: log_action: fence_legacy\[.*\] stderr:.*$|$|\
 ^.*stonith: external_reset_req: 'vcenter reset' for host .* failed with rc.*$|$|\
 ^.*warning: Could not verify cluster configuration file /var/lib/pacemaker/cib/cib.xml: No such file or directory.*$|$|\
+^.*systemd\[.*\]: Stopping Pacemaker High Availability Cluster Manager....*$|$|\
+^.*pacemakerd\[.*\]:   notice: Invoking handler for signal 15: Terminated.*$|$|\
+^.*pacemakerd\[.*\]:   notice: Shutting down Pacemaker.*$|$|\
+^.*pacemakerd\[.*\]:   notice: Stopping crmd: Sent -15 to process.*$|$|\
+^.*crmd\[.*\]:   notice: Invoking handler for signal 15: Terminated.*$|$|\
+^.*crmd\[.*\]:   notice: Requesting shutdown, upper limit is .*ms.*$|$|\
+^.*corosync\[.*\]:  \[TOTEM \] Failed to receive the leave message..*$|$|\
+^.*corosync\[.*\]:  \[TOTEM \] Marking ringid .* interface .* FAULTY.*$|$|\
+^.*corosync\[.*\]:  \[MAIN  \] member section is deprecated..*$|$|\
+^.*corosync\[.*\]:  \[MAIN  \] Please migrate config file to nodelist..*$|$|\
 ^zzzzz-last_line-zzzzz$|$)"
 else 
 	cat
 fi
 }
+#stonith-ng\[.*\]:   notice: log_operation: Operation \'reboot\' \[.*\] \(call .* from crmd..*\) for host \'.*\' with device \'.*\' returned: 0 \(OK\)
+#stonith: Host bwdb-ha-cdlv ibmhmc_reset_req 1.
 
 #YELLOW
 function ha-yellow() {
@@ -550,6 +646,7 @@ GREP_COLOR="$YELLOW" $search "(\
 ^.*S_ELECTION.*$|$|\
 ^.*sbd_stonith can fence.*$|$|\
 ^.*state is now lost.*$|$|\
+^.*crmd\[.*\]:   notice: High CPU load detected:.*$|$|\
 ^zzzzz-last_line-zzzzz$|$)"
 else 
 	cat
@@ -576,6 +673,10 @@ GREP_COLOR="$GREEN" $search "(\
 ^.*sbd: \[.*\]: info: CIB reconnect successful.*$|$|\
 ^.*Servant starting for device.*$|$|\
 ^.*state is now member.*$|$|\
+^.*pacemakerd\[.*\]:   notice: Shutdown complete.*$|$|\
+^.*systemd\[.*\]: Stopped Pacemaker High Availability Cluster Manager..*$|$|\
+^.*systemd\[.*\]: Starting Pacemaker High Availability Cluster Manager....*$|$|\
+^.*systemd\[.*\]: Started Pacemaker High Availability Cluster Manager..*$|$|\
 ^zzzzz-last_line-zzzzz$|$)"
 else 
 	cat
@@ -605,6 +706,7 @@ GREP_COLOR="$GREEN" $search "(\
 <rsc_order |\
 ^clone |\
 ^colocation |\
+^fencing_topology |\
 ^group |\
 ^location |\
 ^ms |\
@@ -696,6 +798,7 @@ if [[ $SUPPORTCONFIG = true ]]; then
 GREP_COLOR="$YELLOW" $search "(\
 ^===========================.*$|$ |\
 ^#==\[ .* \].*=====================#$|$|\
+Verification Status: Differences Found|\
 ^zzzzz-last_line-zzzzz$|$)"
 else 
 	cat
@@ -709,6 +812,7 @@ function allyourlogsarebelongtome() {
 	filter-caas	|\
 	filter-ha |\
 	filter-sap |\
+	filter-soc |\
 	filter-test |\
 	general-red |\
 	general-yellow |\
