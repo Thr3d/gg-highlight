@@ -1,4 +1,7 @@
-* Thur July 5 2018  Jesse Chandler <jesse.chandler@suse.com> 1.1.5
+* Mon Oct 15 2018 Jesse Chandler <jesse.chandler@suse.com> 1.2.0
+- Add new filtering for systemd, and disk logs (disabled by default). Add additioan highlighting and filters
+
+* Thu Jul 5 2018  Jesse Chandler <jesse.chandler@suse.com> 1.1.5
 - Add additional highlighting and filters.
 
 * Tue May 29 2018  Jesse Chandler <jesse.chandler@suse.com> 1.1.4

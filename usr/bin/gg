@@ -6,7 +6,7 @@
 # Usage: gg [file]
 # GREP_COLOR="$COLOR" $search '^.*.*$|$' |\
 
-##TODO remove binary chars on the fly (Nasty bits added when syslog starts some times).
+##TODO remove binary chars on the fly (Nasty bits added when syslog starts sometimes).
 #This is the manual way to clean those up.
 #cat messages|tr -cd '\11\12\15\40-\176' > messages.new && mv -f messages.new messages
 ##TODO add bash completion
@@ -14,7 +14,7 @@
 ##TODO testing section for filtering and flag to enable test filtering
 ##TODO change filter/ignore options/fuctions to be the same word
 
-VERSION=1.1.5
+VERSION=1.2.0
 
 # Coloring
 RED='1;37;41'
@@ -40,6 +40,7 @@ CAAS_RED=true
 CAAS_YELLOW=false
 CAAS_GREEN=false
 SUPPORTCONFIG=true
+
 
 
 function usage()
@@ -71,6 +72,8 @@ if [ "$1" != "" ]; then
 			FILTER_SAP=true
 			FILTER_CAAS=true
 			FILTER_SOC=true
+			FILTER_SYSTEMD=false
+			FILTER_DISK=false
 			FILTER_TEST=false #enable to use test filters
 			;;
 
@@ -174,8 +177,6 @@ sshd.* pam_winbind.* granted access|\
 sshd.* subsystem request for sftp|\
 sshd.*: Accepted password|\
 sshd.*: Accepted publickey for|\
-sshd\[.*\]: Starting session: command for .* from .* port .* id .*|\
-sshd\[.*\]: Close session: user .* from .* port .* id .*|\
 sshd.*: Connection closed by|\
 sshd.*: Connection reset by|\
 sshd.*: Did not receive identification string from|\
@@ -200,6 +201,11 @@ sshd\[.* Starting session|\
 sshd\[.* Transfered:|\
 sshd\[.* User child is on|\
 sshd\[.*: error: PAM: User not known to the underlying authentication module for|\
+sshd\[.*\]: .* Session for user .* ended|\
+sshd\[.*\]: .* Session for user .* started|\
+sshd\[.*\]: Close session: user .* from .* port .* id .*|\
+sshd\[.*\]: Starting session: command for .* from .* port .* id .*|\
+sshd\[.*\]: Timeout, client not responding.|\
 su: \(to|\
 su: FAILED SU|\
 su: pam_unix.* session closed for user|\
@@ -243,6 +249,7 @@ useradd\[|\
 userdel\[|\
 vsftpd:|\
 xinetd|\
+ypxfr\[.*\]:|\
 zzzzz-last_line-zzzzz"
 else 
 	cat
@@ -277,6 +284,11 @@ function filter-ha() {
 if [[ $FILTER_HA = true ]]; then
 grep --text -Ev -- "\
 attrd_updater\[.*notice: crm_log_args: Invoked: attrd_updater|\
+cib:     info: cib_perform_op:	++|\
+cib:     info: cib_process_ping:	Reporting our current digest to|\
+cib:     info: cib_process_request:	Completed cib_modify operation for section nodes: OK|\
+cib:     info: cib_process_request:	Forwarding cib_modify operation for section nodes to all|\
+cib:     info: crm_compress_string:|\
 cib: \[.*\]: debug:|\
 cib\[.*\]:   notice: cib:diff:|\
 cib\[.*\]:   notice: log_cib_diff: cib:diff:|\
@@ -299,31 +311,29 @@ crmd.* notice: Transition.*Complete$|\
 crmd.*:   notice: Result of notify operation for rsc_|\
 crmd.*notice: State transition S_IDLE -> S_POLICY_ENGINE|\
 crmd.*notice: State transition S_TRANSITION_ENGINE -> S_IDLE|\
+crmd:     info: throttle_send_command:|\
 crmd: \[.*\]: debug:|\
 crmd\[.* notice: do_state_transition: State transition S_IDLE -> S_POLICY_ENGINE|\
 crmd\[.* notice: do_state_transition: State transition S_TRANSITION_ENGINE -> S_IDLE|\
 crmd\[.* notice: do_te_invoke: Processing graph|\
 crmd\[.* notice: run_graph: Transition|\
+crmd\[.*\]:   notice: Current ping state: S_IDLE|\
+crmd\[.*\]: message repeated .* times: \[   notice: Current ping state: S_IDLE\]|\
+pengine:     info: clone_print:|\
+pengine:     info: crm_compress_string:|\
+pengine:     info: LogActions:	Leave|\
+pengine:     info: RecurringOp:	Start recurring monitor|\
+pengine:     info: short_print:|\
 pengine: \[.*\]: debug:|\
 pengine\[.* notice: unpack_config: On loss of CCM Quorum: Ignore|\
 pengine\[.*:   notice: Calculated Transition.*.bz2$|\
 pengine\[.*:   notice: On loss of CCM Quorum: Ignore|\
 pengine\[.*:   notice: Relying on watchdog integration for fencing|\
+pengine\[.*\]:   notice: Watchdog will be used via SBD if fencing is required|\
 pengine\[.*notice: process_pe_message: Calculated Transition|\
 sbd: \[.*\]: info: Monitoring Pacemaker health|\
 stonith-ng: \[.*\]: debug:|\
 stonith-ng\[.*notice: unpack_config: On loss of CCM Quorum: Ignore|\
-cib:     info: crm_compress_string:|\
-pengine:     info: crm_compress_string:|\
-pengine:     info: LogActions:	Leave|\
-cib:     info: cib_process_request:	Completed cib_modify operation for section nodes: OK|\
-crmd:     info: throttle_send_command:|\
-pengine:     info: clone_print:|\
-pengine:     info: short_print:|\
-cib:     info: cib_perform_op:	++|\
-cib:     info: cib_process_request:	Forwarding cib_modify operation for section nodes to all|\
-cib:     info: cib_process_ping:	Reporting our current digest to|\
-pengine:     info: RecurringOp:	Start recurring monitor|\
 zzzzz-last_line-zzzzz"
 else 
 	cat
@@ -347,6 +357,7 @@ SAPHana\(.*\)\[.*\]: INFO: RA ==== begin action monitor_clone \(.*\) ====|\
 SAPHana\(.*\)\[.*\]: INFO: RA ==== end action monitor_clone with rc=0 \(.*\) \(.*s\)====|\
 SAPHana\(.*\)\[.*\]: INFO: RA ==== end action monitor_clone with rc=8 \(.*\) \(.*s\)====|\
 SAPHanaTopology\(.*\)\[.*\]: DEBUG:|\
+SAPHanaTopology\(.*\)\[.*\]: INFO: DEC: site=.*, mode=primary, hanaRemoteHost=.* - found by remote site \(.*\)|\
 SAPHanaTopology\(.*\)\[.*\]: INFO: DEC: site=.*, mode=primary, MAPPING=.*, hanaRemoteHost=.*|\
 SAPHanaTopology\(.*\)\[.*\]: INFO: DEC: site=.*, mode=sync, MAPPING=.*, hanaRemoteHost=.*|\
 SAPHanaTopology\(.*\)\[.*\]: INFO: DEC: site=.*, mode=syncmem, MAPPING=.*, hanaRemoteHost=.*|\
@@ -365,23 +376,23 @@ fi
 function filter-soc() {
 if [[ $FILTER_SOC = true ]]; then
 grep --text -Ev -- "\
-haproxy\[.*\]: |\
-chef-client\[.*\]: |\
-epmd: epmd: got partial packet only on file descriptor 4 \(0\)|\
-kernel: \[.*\] bond0: Setting MII monitoring interval to 100|\
-kernel: \[.*\] bond0: Setting xmit hash policy to layer2 \(0\)|\
-dnsmasq-dhcp\[.*\]: DHCPREQUEST\(.*\)|\
-dnsmasq-dhcp\[.*\]: DHCPACK\(.*\) .*|\
-aodh-evaluator\[.*\]: .* WARNING oslo_db.sqlalchemy.utils \[-\] Unique keys not in sort_keys. The sorting order may be unstable.|\
 aodh-evaluator\[.*\]: .* INFO aodh.evaluator \[-\] initiating evaluation cycle on 0 alarms|\
-sshd\[.*\]: error: maximum authentication attempts exceeded for .* from .* port .* ssh2 \[preauth\]|\
-sshd\[.*\]: Disconnecting: Too many authentication failures \[preauth\]|\
-ovs-vsctl: ovs|00001|db_ctl_base|ERR|no interface named|\
-su: pam_systemd\(su:session\): Cannot create session: Already running in a session|\
-dnsmasq-dhcp\[.*\]: read /var/lib/neutron/dhcp|\
-dnsmasq\[.*\]: read /var/lib/neutron/dhcp|\
+aodh-evaluator\[.*\]: .* WARNING oslo_db.sqlalchemy.utils \[-\] Unique keys not in sort_keys. The sorting order may be unstable.|\
+chef-client\[.*\]: |\
+dnsmasq-dhcp\[.*\]: DHCPACK\(.*\) .*|\
 dnsmasq-dhcp\[.*\]: DHCPDISCOVER|\
 dnsmasq-dhcp\[.*\]: DHCPOFFER|\
+dnsmasq-dhcp\[.*\]: DHCPREQUEST\(.*\)|\
+dnsmasq-dhcp\[.*\]: read /var/lib/neutron/dhcp|\
+dnsmasq\[.*\]: read /var/lib/neutron/dhcp|\
+epmd: epmd: got partial packet only on file descriptor 4 \(0\)|\
+haproxy\[.*\]: |\
+kernel: \[.*\] bond0: Setting MII monitoring interval to 100|\
+kernel: \[.*\] bond0: Setting xmit hash policy to layer2 \(0\)|\
+ovs-vsctl: ovs|00001|db_ctl_base|ERR|no interface named|\
+sshd\[.*\]: Disconnecting: Too many authentication failures \[preauth\]|\
+sshd\[.*\]: error: maximum authentication attempts exceeded for .* from .* port .* ssh2 \[preauth\]|\
+su: pam_systemd\(su:session\): Cannot create session: Already running in a session|\
 zzzzz-last_line-zzzzz"
 else 
 	cat
@@ -394,49 +405,145 @@ fi
 function filter-test() {
 if [[ $FILTER_TEST = true ]]; then
 grep --text -Ev -- "\
+ACPI Error:|\
+ACPI Exception:|\
+adclient\[.*\]: |\
+asamrcvr\[.*\]: |\
+avahi-daemon\[.*\]:|\
+cf3\[.*\]:|\
+cron\[.*\]: PAM adding faulty module:|\
+DBFS_/|\
+diagnostic.py\[.*\]: OMI restarted but not staying up.|\
+dzdo\[.*\]: |\
+EXT3-fs \(.*\): warning: maximal mount count reached, running e2fsck is recommended|\
+given is experimental at /cluster/local/cluster_scripts/perforcemodule.pl|\
 hpasmlited\[.*\]: KCS CHIF: Expected Cmd .*, Msg ID .*|\
 hpasmlited\[.*\]: KCS CHIF: Received Cmd .*, Msg ID .*|\
-SAPHanaSR-mon\[.* All checks passed -|\
-SAPHanaSR-mon\[.* Monitor startup|\
-SESSION = .* CMD =$|\
-smartd\[.*\]:|\
-kernel: \[    ........\] |\
 kernel: \[    .........\] |\
+kernel: \[    ........\] |\
 kernel: \[   .........\] |\
-systemd\[1\]: Failed to set up mount unit: Device or resource busy|\
-adclient\[.*\]: |\
+kernel: \[.*\] clearcache.sh \(.*\): drop_caches: 3|\
+kernel: \[.*\] EXT3-fs \(.*\): mounted filesystem with ordered data mode|\
+kernel: \[.*\] EXT3-fs \(.*\): recovery complete|\
+kernel: \[.*\] EXT3-fs \(.*\): using internal journal|\
+kernel: \[.*\] EXT3-fs \(.*\): warning: mounting fs with errors, running e2fsck is recommended|\
+kernel: \[.*\] kjournald starting.  Commit interval 15 seconds|\
+kernel: \[.*\] lpfc|\
+kernel: \[.*\] qla2xxx \[.*\]-.*: Unable to read SFP data \(102/a0/0\).|\
+LVM\(.*\)\[.*\]: INFO: Reading all physical volumes. This may take a while...|\
+lvm\[.*\]:|\
+nscd: .* monitored directory .* was |\
 nscd: .* monitored file .* was |\
 nscd: .* monitoring directory |\
 nscd: .* monitoring file |\
-nscd: .* monitored directory .* was |\
-su: pam_systemd\(su-l:session\): Cannot create session: Already running in a session|\
-usermod\[.*\]: add|\
+nscp\[.*\]: |\
+omid.service: Failed to read PID from file|\
+omid.service: PID file /var/opt/omi/run/omiserver.pid|\
+PAM adding faulty module:|\
+PAM unable to dlopen|\
+pam_vas:|\
+pengine\[.*\]:   notice: Calculated transition .*, saving inputs in /var/lib/pacemaker/pengine/pe-input-.*.bz2|\
 python\[.*\]: .* INFO |\
-su: message repeated .* times:|\
-cf3\[.*\]:|\
-ACPI Error:|\
-ACPI Exception:|\
-server\[.*\]: |\
-kernel: \[.*\] clearcache.sh \(.*\): drop_caches: 3|\
-DBFS_/|\
-kernel: \[.*\] qla2xxx \[.*\]-.*: Unable to read SFP data \(102/a0/0\).|\
-sshd\[.*\]: error: kex protocol error: type 30 seq 1 \[preauth\]|\
 rshd\[.*\]:|\
+rsyslogd-.*: action 'action 1' resumed \(module 'builtin:omfwd'\) \[try http://www.rsyslog.com/e/2359 \]|\
+rsyslogd.*: action 'action 1' resumed \(module 'builtin:omfwd'\) \[try http://www.rsyslog.com/e/0 \]|\
+SAPHanaSR-mon\[.* All checks passed -|\
+SAPHanaSR-mon\[.* Monitor startup|\
+server\[.*\]: |\
+SESSION = .* CMD =$|\
+smartd\[.*\]:|\
+sshd\[.*\]: error: kex protocol error: type 30 seq 1 \[preauth\]|\
 sshd\[.*\]: error: key_read: uudecode .* failed|\
-avahi-daemon\[.*\]:|\
-lvm\[.*\]:|\
-kernel: \[.*\] kjournald starting.  Commit interval 15 seconds|\
-kernel: \[.*\] EXT3-fs \(.*\): warning: mounting fs with errors, running e2fsck is recommended|\
-kernel: \[.*\] EXT3-fs \(.*\): using internal journal|\
-kernel: \[.*\] EXT3-fs \(.*\): recovery complete|\
-kernel: \[.*\] EXT3-fs \(.*\): mounted filesystem with ordered data mode|\
+su: message repeated .* times:|\
+su: pam_systemd\(su-l:session\): Cannot create session: Already running in a session|\
+systemd\[1\]: Failed to set up mount unit: Device or resource busy|\
+systemd\[1\]: omid.service: Supervising process|\
+systemd\[1\]: Started OMI CIM Server.|\
+systemd\[1\]: Starting OMI CIM Server...|\
+systemd\[1\]: Stopped OMI CIM Server.|\
+systemd\[1\]: Stopping OMI CIM Server...|\
+usermod\[.*\]: add|\
+vasd\[.*\]:|\
+when is experimental at /cluster/local/cluster_scripts/perforcemodule.pl|\
+dbus\[.*\]: \[system\] Activating via systemd: service name='org.freedesktop.PackageKit' unit='packagekit.service'|\
+systemd\[.*\]: Starting PackageKit Daemon...|\
+systemd\[.*\]: Started PackageKit Daemon.|\
+systemd\[1\]: Reloaded System Logging Service.|\
+systemd\[1\]: Started Cleanup of Temporary Directories.|\
+systemd\[1\]: Starting Cleanup of Temporary Directories...|\
+systemd\[1\]: Reloading System Logging Service.|\
+rsyslogd: \[origin .* rsyslogd was HUPed|\
+systemd\[1\]: Starting Discard unused blocks...|\
+systemd\[1\]: Started Discard unused blocks.|\
+lsvpd[44872]:|\
 zzzzz-last_line-zzzzz"
 else 
 	cat
 fi
 }
 
+
+
 ### END TEST Ignore ###
+
+## Disk Ignore ##
+function filter-disk() {
+if [[ $FILTER_DISK = true ]]; then
+grep --text -Ev -- "\
+kernel: .*: unknown partition table|\
+kernel: alua: device handler registered|\
+kernel: device-mapper: multipath: version .* loaded|\
+kernel: emc: device handler registered|\
+kernel: rdac: device handler registered|\
+kernel: scsi .:.:.:.: Attached scsi|\
+kernel: scsi .:.:.:.: Direct-Access|\
+kernel: scsi2 : IBM POWER Virtual FC Adapter|\
+kernel: sd .:.:.:.: Power-on or device reset occurred|\
+kernel: sd .:.:.:.:|\
+kernel: sd .:.:.:.: alua:|\
+kernel: SGI XFS with ACLs, security attributes, realtime, large block/inode numbers, no debug enabled|\
+multipathd\[.*\]: .*: ignoring map|\
+multipathd\[.*\]: .*: event checker started|\
+multipathd\[.*\]: path checkers start up|\
+multipathd\[.*\]: --------shut down-------|\
+multipathd\[.*\]: .*: stop event checker thread|\
+systemd\[1\]: Stopping LVM2 PV scan on device |\
+zzzzz-last_line-zzzzz"
+else 
+	cat
+fi
+}
+
+### END DISK Ignore ###
+
+## SYSTEMD Ignore ##
+function filter-systemd() {
+if [[ $FILTER_SYSTEMD = true ]]; then
+grep --text -Ev -- "\
+systemd\[.*\]: Starting Paths.|\
+systemd\[.*\]: Starting Timers.|\
+systemd\[.*\]: Starting Sockets.|\
+systemd\[.*\]: Starting Basic System.|\
+systemd\[.*\]: Starting Default.|\
+systemd\[.*\]: Stopping Default.|\
+systemd\[.*\]: Stopping Basic System.|\
+systemd\[.*\]: Stopping Paths.|\
+systemd\[.*\]: Stopping Timers.|\
+systemd\[.*\]: Stopping Sockets.|\
+systemd\[.*\]: Starting Shutdown.|\
+systemd\[1\]: Stopping user-.*.slice.|\
+systemd\[1\]: Removed slice user-.*.slice.|\
+systemd\[1\]: Starting user-.*.slice.|\
+systemd\[1\]: Created slice user-.*.slice.|\
+systemd\[1\]: Stopping user-.*.slice.|\
+systemd\[1\]: Removed slice user-.*.slice.|\
+zzzzz-last_line-zzzzz"
+else 
+	cat
+fi
+}
+
+### END SYSTEMD Ignore ###
 
 ## General ##
 #RED
@@ -453,10 +560,13 @@ GREP_COLOR="$RED" $search "(\
 ^.*Detected aborted journal.*$|$|\
 ^.*Detected IO errors while flushing file data on.*$|$|\
 ^.*device-mapper: multipath: Failing path.*$|$|\
+^.*error: fork: Cannot allocate memory.*$|$|\
 ^.*error: remounting filesystem read-only.*$|$|\
 ^.*Executing suicide fencing.*$|$|\
 ^.*FAILED.*$|$|\
 ^.*fatal.*$|$|\
+^.*FATAL:.*$|$|\
+^.*fork: retry: No child processes.*|$|\
 ^.*I/O error.*$|$|\
 ^.*init: Entering runlevel:.*$|$|\
 ^.*init: Switching to runlevel:.*$|$|\
@@ -464,9 +574,16 @@ GREP_COLOR="$RED" $search "(\
 ^.*kernel taint.*$|$|\
 ^.*kernel.* sd .* FAILED Result.*$|$|\
 ^.*kernel.* sd .* killing request.*$|$|\
+^.*kernel: \[.*\] ------------\[ cut here \]------------.*$|$|\
 ^.*kernel: \[.*\] Call Trace:.*$|$|\
+^.*kernel: \[.*\] invalid opcode:.*$|$|\
+^.*kernel: \[.*\] kernel BUG at.*$|$|\
 ^.*kernel: \[.*\] Killed process .* \(.*\) total-vm:.*$|$|\
+^.*kernel: \[.*\] nfs: server .* not responding, timed out$|\
 ^.*kernel: \[.*\] Out of memory: Kill process .* \(.*\) score .* or sacrifice child.*$|$|\
+^.*kernel: \[.*\] XFS .*: Corruption of in-memory data detected.  Shutting down filesystem.*$|$|\
+^.*kernel: \[.*\] XFS .*: Please umount the filesystem and rectify the problem\(s\).*$|$|\
+^.*kernel: \[.*\] XFS .*: xfs_do_force_shutdown.*$|$|\
 ^.*klogd.*started.*$|$|\
 ^.*Link Down Event.*$|$|\
 ^.*lost page write due to IO error.*$|$|\
@@ -490,13 +607,17 @@ GREP_COLOR="$RED" $search "(\
 ^.*segfault.*$|$|\
 ^.*SFAIL.*$|$|\
 ^.*shutdown.*: shutting down for system reboot.*$|$|\
+^.*sshd\[.*\]: error: fork: Cannot allocate memory.*$|$|\
 ^.*syslog-ng starting up.*$|$|\
 ^.*syslog-ng.*: syslog-ng shutting down; version=.*$|$|\
 ^.*syslog-ng.*: Termination requested via signal, terminating.*$|$|\
 ^.*syslogd.*restart.*$|$|\
 ^.*sysrq: SysRq : sysrq: Trigger a crash.*$|$|\
+^.*systemd-coredump\[.*\]: Process .* \(.*\) of user .* dumped core.*$|$|\
 ^.*systemd-logind\[.*\]: Power key pressed..*$|$|\
+^.*systemd-logind\[.*\]: Powering Off...$|\
 ^.*systemd-logind\[.*\]: System is powering down.*$|$|\
+^.*systemd\[1\]: systemd .* running in system mode..*$|$|\
 ^.*tainting kernel.*$|$|\
 ^.*taints kernel.*$|$|\
 ^.*timed out after.*$|$|\
@@ -505,18 +626,8 @@ GREP_COLOR="$RED" $search "(\
 ^.*x-info="http://www.rsyslog.com"\] exiting on signal 15..*$|$|\
 ^.*x-info="http://www.rsyslog.com"\] start.*$|$|\
 ^.*XFS.*: Log I/O Error Detected.  Shutting down filesystem.*$|$|\
-^.*systemd\[1\]: systemd .* running in system mode..*$|$|\
-^.*sshd\[.*\]: error: fork: Cannot allocate memory.*$|$|\
-^.*FATAL:.*$|$|\
-^.*error: fork: Cannot allocate memory.*$|$|\
-^.*systemd-coredump\[.*\]: Process .* \(.*\) of user .* dumped core.*$|$|\
-^.*kernel: \[.*\] kernel BUG at.*$|$|\
-^.*kernel: \[.*\] ------------\[ cut here \]------------.*$|$|\
-^.*kernel: \[.*\] invalid opcode:.*$|$|\
 ^.*xfs_do_force_shutdown.*$|$|\
-^.*kernel: \[.*\] XFS .*: Corruption of in-memory data detected.  Shutting down filesystem.*$|$|\
-^.*kernel: \[.*\] XFS .*: xfs_do_force_shutdown.*$|$|\
-^.*kernel: \[.*\] XFS .*: Please umount the filesystem and rectify the problem\(s\).*$|$|\
+^.*systemd\[1\]: Failed to start.*$|$|\
 ^zzzzz-last_line-zzzzz$|$)"
 else 
 	cat
@@ -530,6 +641,7 @@ GREP_COLOR="$YELLOW" $search "(\
 ^.*Bad protocol version.*$|$|\
 ^.*blocked FC remote port time out.*$|$|\
 ^.*BTRFS warning.*$|$|\
+^.*cgroup: fork rejected by pids controller.*$|$|\
 ^.*corosync.*Incrementing problem counter.*$|$|\
 ^.*corosync\[.*\]:  \[TOTEM \] Retransmit List.*$|$|\
 ^.*Couldn.t find device with.*$|$|\
@@ -541,17 +653,20 @@ GREP_COLOR="$YELLOW" $search "(\
 ^.*ERROR:.*$|$|\
 ^.*failed.*$|$|\
 ^.*kernel.* reservation conflict.*$|$|\
+^.*kernel: \[  .*\] .*: loading module not compiled with retpoline compiler.$|\
+^.*kernel: \[  .*\] Spectre V2 : System may be vulnerable to spectre v2$|\
+^.*kernel: \[.*\] nfs: server .* not responding, still trying$|\
 ^.*mcelog:.*$|$|\
 ^.*Protocol major versions differ.*$|$|\
 ^.*recoverable transport error.*$|$|\
 ^.*smartd.*: .* SMART Usage Attribute.*$|$|\
+^.*stderr.*$|$|\
+^.*tainting kernel.*$|$|\
 ^.*tur checker timed out.*$|$|\
 ^.*unhandled error.*$|$|\
 ^.*warning:.*$|$|\
 ^.*WARNING:.*$|$|\
 ^.*xfs_log_force: error.*$|$|\
-^.*tainting kernel.*$|$|\
-^.*stderr.*$|$|\
 ^zzzzz-last_line-zzzzz$|$)"
 else 
 	cat
@@ -582,13 +697,25 @@ GREP_COLOR="$RED" $search "(\
 ^.*cib\[.*\]:   notice: Disconnecting from Corosync.*$|$|\
 ^.*CLM CONFIGURATION CHANGE.*$|$|\
 ^.*cluster-dlm\[.*\]: fence_node_time:.*$|$|\
+^.*Corosync main process was not scheduled for.*$|$|\
+^.*corosync\[.*\]:   \[TOTEM \] Digest does not match.*$|$|\
 ^.*corosync\[.*\]:   \[TOTEM \] Failed to receive the leave message. failed:.*$|$|\
+^.*corosync\[.*\]:   \[TOTEM \] Invalid packet data.*$|$|\
+^.*corosync\[.*\]:   \[TOTEM \] Received message has invalid digest... ignoring..*$|$|\
+^.*corosync\[.*\]:  \[CLM   \]    r.* ip\(127.0.0.1\).*$|$|\
+^.*corosync\[.*\]:  \[MAIN  \] member section is deprecated..*$|$|\
+^.*corosync\[.*\]:  \[MAIN  \] Please migrate config file to nodelist..*$|$|\
 ^.*corosync\[.*\]:  \[pcmk  \] notice: pcmk_shutdown: Shuting down Pacemaker.*$|$|\
 ^.*corosync\[.*\]:  \[SERV  \] Unloading all Corosync service engines.*$|$|\
+^.*corosync\[.*\]:  \[TOTEM \] Failed to receive the leave message..*$|$|\
+^.*corosync\[.*\]:  \[TOTEM \] Marking ringid .* interface .* FAULTY.*$|$|\
 ^.*crit:.*$|$|\
 ^.*crmd\[.*\]:    error: crmd_fast_exit: Could not recover from internal error.*$|$|\
 ^.*crmd\[.*\]:    error:.*$|$|\
 ^.*crmd\[.*\]:   notice: abort_transition_graph: Transition aborted: Stonith failed.*$|$|\
+^.*crmd\[.*\]:   notice: Invoking handler for signal 15: Terminated.*$|$|\
+^.*crmd\[.*\]:   notice: Peer .* was terminated \(.*\) by .* on behalf of crmd..*: OK.*$|$|\
+^.*crmd\[.*\]:   notice: Requesting shutdown, upper limit is .*ms.*$|$|\
 ^.*crmd\[.*\]:   notice: tengine_stonith_callback: Stonith operation .* for .* failed (No route to host): aborting transition..*$|$|\
 ^.*crmd\[.*\]:   notice: tengine_stonith_callback: Stonith operation .*: No route to host.*$|$|\
 ^.*crmd\[.*\]:  warning: Another DC detected:.*$|$|\
@@ -600,9 +727,18 @@ GREP_COLOR="$RED" $search "(\
 ^.*crmd\[.*\]:.*notice: throttle_mode: High CIB load detected:.*$|$|\
 ^.*crmd\[.*\]:.*Our peer on the DC \(.*\) is dead.*$|$|\
 ^.*crmd\[.*\]:.*warning: do_recover: Fast-tracking shutdown in response to errors.*$|$|\
+^.*error: Could not execute .* Resource temporarily unavailable .*$|$|\
 ^.*external/vcenter\(.*\)\[.*\]: \[.*\]: ERROR:.*$|$|\
+^.*lrmd\[.*\]:    error: main: Failed to create IPC server: shutting down and inhibiting respawn.*$|$|\
+^.*lrmd\[.*\]:    error: mainloop_add_ipc_server: Could not start lrmd IPC server: Address already in use \(-98\).*$|$|\
+^.*lrmd\[.*\]:    error: qb_ipcs_us_publish: Could not bind AF_UNIX \(\): Address already in use \(98\).*$|$|\
+^.*pacemakerd\[.*\]:   notice: Invoking handler for signal 15: Terminated.*$|$|\
+^.*pacemakerd\[.*\]:   notice: Shutting down Pacemaker.*$|$|\
+^.*pacemakerd\[.*\]:   notice: Stopping crmd: Sent -15 to process.*$|$|\
 ^.*pengine\[.*\]:  warning: determine_online_status: Node .* is unclean.*$|$|\
 ^.*pengine\[.*\]:  warning: pe_fence_node: Node .* will be fenced because the node is no longer part of the cluster.*$|$|\
+^.*r.* ip.127.0.0.1..*$|$|\
+^.*Result of stop operation for .* Timed Out$|\
 ^.*sbd.* ERROR:.*$|$|\
 ^.*sbd.* WARN:.*$|$|\
 ^.*Scheduling Node .* for shutdown$|$|\
@@ -610,25 +746,31 @@ GREP_COLOR="$RED" $search "(\
 ^.*Scheduling Node .* for STONITH.*$|$|\
 ^.*stonith-ng.* wants to fence.*$|$|\
 ^.*stonith-ng\[.*\]:    error: remote_op_done: Operation reboot of .* by .* for .*: No route to host.*$|$|\
+^.*stonith-ng\[.*\]:   notice: Operation reboot of .* by .* for crmd..*@.*: OK$|\
 ^.*stonith-ng\[.*\]:   notice: stonith_choose_peer: Couldn't find anyone to fence.*$|$|\
 ^.*stonith-ng\[.*\]:  warning: log_action: fence_legacy\[.*\] stderr:.*$|$|\
 ^.*stonith: external_reset_req: 'vcenter reset' for host .* failed with rc.*$|$|\
-^.*warning: Could not verify cluster configuration file /var/lib/pacemaker/cib/cib.xml: No such file or directory.*$|$|\
 ^.*systemd\[.*\]: Stopping Pacemaker High Availability Cluster Manager....*$|$|\
-^.*pacemakerd\[.*\]:   notice: Invoking handler for signal 15: Terminated.*$|$|\
-^.*pacemakerd\[.*\]:   notice: Shutting down Pacemaker.*$|$|\
-^.*pacemakerd\[.*\]:   notice: Stopping crmd: Sent -15 to process.*$|$|\
-^.*crmd\[.*\]:   notice: Invoking handler for signal 15: Terminated.*$|$|\
-^.*crmd\[.*\]:   notice: Requesting shutdown, upper limit is .*ms.*$|$|\
-^.*corosync\[.*\]:  \[TOTEM \] Failed to receive the leave message..*$|$|\
-^.*corosync\[.*\]:  \[TOTEM \] Marking ringid .* interface .* FAULTY.*$|$|\
-^.*corosync\[.*\]:  \[MAIN  \] member section is deprecated..*$|$|\
-^.*corosync\[.*\]:  \[MAIN  \] Please migrate config file to nodelist..*$|$|\
+^.*warning: Could not verify cluster configuration file /var/lib/pacemaker/cib/cib.xml: No such file or directory.*$|$|\
+SBD_STARTMODE=\"clean\"|\
+^.*pengine\[.*\]:  warning: handle_startup_fencing: Blind faith: not fencing unseen nodes.*$|$|\
+^.*crmd: \[.*\]: info: te_fence_node: Executing reboot fencing operation.*|$|\
+^.*pengine: \[.*\]: WARN: pe_fence_node: Node .* will be fenced to recover from resource failure\(s\).*|$|\
+^.*corosync\[.*\]:   \[MAIN  \] Totem is unable to form a cluster because of an operating system or network fault\(reason: totem is continuously in gather state\). The most common cause of this message is that the local firewall is configured improperly..*$|$|\
+^.*systemd[1]: Failed to start.*$|$|\
+^.*crmd\[.*\]:    error: Cannot route message to unknown node.*$|$|\
+^.*LVM\(.*\)\[.*\]: ERROR: LVM: .* did not activate correctly.*$|$|\
+^.*pengine\[.*\]:  warning: Fencing and resource management disabled due to lack of quorum.*$|$|\
+^.*pengine\[.*\]:  warning: .* is unclean!.*$|$|\
+^.*pengine\[.*\]:   notice: Cannot fence unclean nodes until quorum is attained \(or no-quorum-policy is set to ignore\).*$|$|\
+^.*crmd\[.*\]:  warning: Action .* \(.*\) on .* failed \(target: . vs. rc: .\).*$|$|\
+^.*oralsnr\(.*\)\[.*\]: INFO: .*: required binary not installed.*$|$|\
 ^zzzzz-last_line-zzzzz$|$)"
 else 
 	cat
 fi
 }
+
 #stonith-ng\[.*\]:   notice: log_operation: Operation \'reboot\' \[.*\] \(call .* from crmd..*\) for host \'.*\' with device \'.*\' returned: 0 \(OK\)
 #stonith: Host bwdb-ha-cdlv ibmhmc_reset_req 1.
 
@@ -636,6 +778,10 @@ fi
 function ha-yellow() {
 if [[ $HA_YELLOW = true ]]; then
 GREP_COLOR="$YELLOW" $search "(\
+^.*corosync\[.*\]:   \[CPG   \] got procleave message from cluster node.*|$|\
+^.*corosync\[.*\]:   \[MAIN  \] interface section bindnetaddr is used together with nodelist. Nodelist one is going to be used..*|$|\
+^.*corosync\[.*\]:   \[MAIN  \] Please migrate config file to nodelist..*|$|\
+^.*crmd\[.*\]:   notice: High CPU load detected:.*$|$|\
 ^.*Executing reboot fencing operation .* on.*$|$|\
 ^.*I_ELECTION_DC.*$|$|\
 ^.*I_NOT_DC.*$|$|\
@@ -644,9 +790,12 @@ GREP_COLOR="$YELLOW" $search "(\
 ^.*notice: Removing.*from the membership list.*$|$|\
 ^.*Quorum lost.*$|$|\
 ^.*S_ELECTION.*$|$|\
+^.*SAPHana\(.*\)\[.*\]: INFO: LPA: Dual primary detected and AUTOMATED_REGISTER='false' ==> WAITING$|\
+^.*SAPHana\(.*\)\[.*\]: INFO: LPA: You need to manually sr_register the older primary$|\
 ^.*sbd_stonith can fence.*$|$|\
 ^.*state is now lost.*$|$|\
-^.*crmd\[.*\]:   notice: High CPU load detected:.*$|$|\
+debug: on|\
+^.*corosync\[.*\]:   \[QB    \] Denied connection, is not ready.*$|$|\
 ^zzzzz-last_line-zzzzz$|$)"
 else 
 	cat
@@ -677,6 +826,13 @@ GREP_COLOR="$GREEN" $search "(\
 ^.*systemd\[.*\]: Stopped Pacemaker High Availability Cluster Manager..*$|$|\
 ^.*systemd\[.*\]: Starting Pacemaker High Availability Cluster Manager....*$|$|\
 ^.*systemd\[.*\]: Started Pacemaker High Availability Cluster Manager..*$|$|\
+^.*crmd\[.*\]:   notice: peer_update_callback: Stonith/shutdown of .* not matched.*$|$|\
+^.*corosync\[.*\]:   \[MAIN  \] Corosync Cluster Engine exiting with status 0 at main.c:2056..*$|$|\
+^.*corosync\[.*\]:   \[MAIN  \] Corosync Cluster Engine \(.*\): started and ready to provide service..*$|$|\
+^.*corosync\[.*\]:   \[CPG   \] got procjoin message from cluster node .* \(r\(.*\) ip\(.*\) .* for pid .*$|\
+^.*corosync\[.*\]:   \[MAIN  \] Member joined: .*$|\
+^.*corosync\[.*\]:  \[MAIN  \] Corosync Cluster Engine \(.*\): started and ready to provide service.$|\
+^.*pacemakerd\[.*\]:   notice: Starting Pacemaker.*$|$|\
 ^zzzzz-last_line-zzzzz$|$)"
 else 
 	cat
@@ -711,11 +867,13 @@ GREP_COLOR="$GREEN" $search "(\
 ^location |\
 ^ms |\
 ^node |\
+^rsc_template |\
 ^op_defaults |\
 ^order |\
 ^primitive |\
 ^property |\
 ^rsc_defaults |\
+^alert |\
 ^zzzzz-last_line-zzzzz$|$)"
 else 
 	cat
@@ -728,7 +886,13 @@ if [[ $HACIB_YELLOW = true ]]; then
 GREP_COLOR="$YELLOW" $search "(\
 maintenance\=on|\
 name=\"maintenance\" value=\"true\"|\
+maintenance-mode=true|\
+maintenance=true|\
 standby\=on|\
+startup-fencing=false|\
+lpa_.*_lpt=10|\
+AUTOMATED_REGISTER=false|\
+AUTOMATED_REGISTER=no|\
 ^zzzzz-last_line-zzzzz$|$)"
 else 
 	cat
@@ -744,6 +908,8 @@ have-watchdog\=false|\
 name=\"maintenance-mode\" value=\"true\"|\
 name=\"stonith-enabled\" value=\"false\"|\
 stonith-enabled\=false|\
+no-quorum-policy=ignore|\
+is-managed=false|\
 ^zzzzz-last_line-zzzzz$|$)"
 else 
 	cat
@@ -759,6 +925,8 @@ if [[ $SAP_RED = true ]]; then
 GREP_COLOR="$RED" $search "(\
 ^.*PreferSiteTakeover selected so decrease promotion score here.*$|$|\
 ^.*Promote .* to be primary.*$|$|\
+^.*HANA_STATE_DEFECT.*$|$|\
+^.*ERROR: ACT: check_for_primary: we didn't expect srmode to be: DUMP:.*$|$\
 ^zzzzz-last_line-zzzzz$|$)"
 else 
 	cat
@@ -813,6 +981,8 @@ function allyourlogsarebelongtome() {
 	filter-ha |\
 	filter-sap |\
 	filter-soc |\
+	filter-disk |\
+	filter-systemd |\
 	filter-test |\
 	general-red |\
 	general-yellow |\
