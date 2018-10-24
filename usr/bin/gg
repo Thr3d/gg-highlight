@@ -584,6 +584,8 @@ GREP_COLOR="$RED" $search "(\
 ^.*kernel: \[.*\] XFS .*: Corruption of in-memory data detected.  Shutting down filesystem.*$|$|\
 ^.*kernel: \[.*\] XFS .*: Please umount the filesystem and rectify the problem\(s\).*$|$|\
 ^.*kernel: \[.*\] XFS .*: xfs_do_force_shutdown.*$|$|\
+^.*kernel: \[.*\] .*: page allocation failure.*$|$|\
+^.*kernel: \[.*\] SLAB: Unable to allocate memory.*$|$|\
 ^.*klogd.*started.*$|$|\
 ^.*Link Down Event.*$|$|\
 ^.*lost page write due to IO error.*$|$|\
