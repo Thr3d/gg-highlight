@@ -137,9 +137,9 @@ function iterate-filters() {
 function iterate-experimental() {
 	if [[ $EXPERIMENTAL = true ]]; then
 		greplist=()
-		for i in "${experiemntal[@]}"
+		for i in "${experimental[@]}"
 		do
-			greplist+=(-f /var/lib/gg-highlight/"$1".txt)
+			greplist+=(-f /var/lib/gg-highlight/"$i".txt)
 		done
 		$grepfilter "${greplist[@]}" --
 	else
