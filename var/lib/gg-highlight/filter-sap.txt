@@ -1,0 +1,18 @@
+HDB\[
+HDB_SYSTEMDB\[
+SAPFPA_00
+SAPHana\(.*\)\[.*\]: DEBUG:
+SAPHana\(.*\)\[.*\]: INFO: ACT site=.*, seting SOK for secondary \(1\)
+SAPHana\(.*\)\[.*\]: INFO: DEC analyze_hana_sync_statusSRS systemReplicationStatus.py \(to site '.*'\)-> 15
+SAPHana\(.*\)\[.*\]: INFO: DEC: secondary with sync status SOK ==> possible takeover node
+SAPHana\(.*\)\[.*\]: INFO: RA ==== begin action monitor_clone \(.*\) ====
+SAPHana\(.*\)\[.*\]: INFO: RA ==== end action monitor_clone with rc=0 \(.*\) \(.*s\)====
+SAPHana\(.*\)\[.*\]: INFO: RA ==== end action monitor_clone with rc=8 \(.*\) \(.*s\)====
+SAPHanaTopology\(.*\)\[.*\]: DEBUG:
+SAPHanaTopology\(.*\)\[.*\]: INFO: DEC: site=.*, mode=primary, hanaRemoteHost=.* - found by remote site \(.*\)
+SAPHanaTopology\(.*\)\[.*\]: INFO: DEC: site=.*, mode=primary, MAPPING=.*, hanaRemoteHost=.*
+SAPHanaTopology\(.*\)\[.*\]: INFO: DEC: site=.*, mode=sync, MAPPING=.*, hanaRemoteHost=.*
+SAPHanaTopology\(.*\)\[.*\]: INFO: DEC: site=.*, mode=syncmem, MAPPING=.*, hanaRemoteHost=.*
+SAPHanaTopology\(.*\)\[.*\]: INFO: RA ==== begin action monitor_clone \(.*\) ====
+SAPHanaTopology\(.*\)\[.*\]: INFO: RA ==== end action monitor_clone with rc=0 \(.*\) \(.*s\)====
+sapuxuserchk\[.*\]: pam_vas: Authentication .succeeded. for .Active Directory.

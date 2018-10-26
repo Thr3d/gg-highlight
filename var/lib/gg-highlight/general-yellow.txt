@@ -1,0 +1,29 @@
+^.*Bad protocol version.*$|$
+^.*blocked FC remote port time out.*$|$
+^.*BTRFS warning.*$|$
+^.*cgroup: fork rejected by pids controller.*$|$
+^.*corosync.*Incrementing problem counter.*$|$
+^.*corosync\[.*\]:  \[TOTEM \] Retransmit List.*$|$
+^.*Couldn.t find device with.*$|$
+^.*crmd\[.*\]:   notice: do_state_transition: State transition S_ELECTION -> S_INTEGRATION \[ input=I_ELECTION_DC cause=C_TIMER_POPPED origin=election_timeout_popped \].*$|$
+^.*crmd\[.*\]:   notice: terminate_cs_connection: Disconnecting from Corosync.*$|$
+^.*Delaying fencing operations until there are resources to manage.*$|$
+^.*device-mapper: .*error.*$|$
+^.*Error.*$|$
+^.*ERROR:.*$|$
+^.*failed.*$|$
+^.*kernel.* reservation conflict.*$|$
+^.*kernel: \[  .*\] .*: loading module not compiled with retpoline compiler.$
+^.*kernel: \[  .*\] Spectre V2 : System may be vulnerable to spectre v2$
+^.*kernel: \[.*\] nfs: server .* not responding, still trying$
+^.*mcelog:.*$|$
+^.*Protocol major versions differ.*$|$
+^.*recoverable transport error.*$|$
+^.*smartd.*: .* SMART Usage Attribute.*$|$
+^.*stderr.*$|$
+^.*tainting kernel.*$|$
+^.*tur checker timed out.*$|$
+^.*unhandled error.*$|$
+^.*warning:.*$|$
+^.*WARNING:.*$|$
+^.*xfs_log_force: error.*$|$

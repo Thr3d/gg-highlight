@@ -1,0 +1,18 @@
+kernel: .*: unknown partition table
+kernel: alua: device handler registered
+kernel: device-mapper: multipath: version .* loaded
+kernel: emc: device handler registered
+kernel: rdac: device handler registered
+kernel: scsi .:.:.:.: Attached scsi
+kernel: scsi .:.:.:.: Direct-Access
+kernel: scsi2 : IBM POWER Virtual FC Adapter
+kernel: sd .:.:.:.: Power-on or device reset occurred
+kernel: sd .:.:.:.:
+kernel: sd .:.:.:.: alua:
+kernel: SGI XFS with ACLs, security attributes, realtime, large block/inode numbers, no debug enabled
+multipathd\[.*\]: .*: ignoring map
+multipathd\[.*\]: .*: event checker started
+multipathd\[.*\]: path checkers start up
+multipathd\[.*\]: --------shut down-------
+multipathd\[.*\]: .*: stop event checker thread
+systemd\[1\]: Stopping LVM2 PV scan on device 
