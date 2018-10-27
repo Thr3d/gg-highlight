@@ -3,18 +3,15 @@
 # Description: Log filtering and highlighting
 # jesse.chandler@suse.com
 # Supportconfig/hb_report log filter & highlighter
-# Usage: gg [file]
-# GREP_COLOR="$COLOR" $search '^.*.*$|$' |\
+# Usage: gg [options] [file]
+# GREP_COLOR="$COLOR" $grepsearch|$grepfilter -f </var/lib/gg-highlight/file containing patterns. e.g. '^.*.*$|$'>
 
 ##TODO remove binary chars on the fly (Nasty bits added when syslog starts sometimes).
 #This is the manual way to clean those up.
 #cat messages|tr -cd '\11\12\15\40-\176' > messages.new && mv -f messages.new messages
 ##TODO add bash completion
-##TODO add option to enable/disable specific product filtering/highlighting
-##TODO testing section for filtering and flag to enable test filtering
-##TODO change filter/ignore options/fuctions to be the same word
 
-VERSION=1.2.0
+VERSION=1.2.1
 
 # Coloring
 RED='1;37;41'
@@ -29,6 +26,7 @@ yellowpatterns=("general-yellow" "ha-yellow" "sap-yellow" "supportconfig-yellow"
 greenpatterns=("general-green" "ha-green" "hacib-green")
 filters=("filter-general" "filter-ha" "filter-caas" "filter-sap" "filter-soc")
 experimental=("filter-test" "filter-disk" "filter-systemd")
+products=("ha" "caas" "sap" "soc")
 # Default Booleans
 FILTER=false
 EXPERIMENTAL=false
@@ -36,9 +34,11 @@ EXPERIMENTAL=false
 function usage()
 {
 	echo "Usage: gg [OPTION]... [FILE]"
-	echo "-i, --ignore 			Enable filtering"
-	echo "--version 			Display version"
-	echo "-h, --help 			Show this list"
+	echo "-i, --ignore, -f, --filter 			Enable filtering"
+	echo "-v, --version 					Display version"
+	echo "-h, --help 					Show this list"
+	echo "-d, --disable ["${products[@]}"]			disable product filter"
+	echo "-e, --experimental				enable experimental features"
 }
 
 function display_version()
@@ -46,24 +46,82 @@ function display_version()
 	echo "gg-highlight version $VERSION"
 }
 
-if [ "$1" != "" ]; then
-	case $1 in
-		-h)
-			usage
-			exit 1
-			;;
-		--version)
-			display_version
-			exit 1
-			;;
-		-i)
-			FILTER=true
-			;;
-		--experimental)
-			EXPERIMENTAL=true
-			;;
+function reduce-arrays() {
+        for i in "${!redpatterns[@]}"
+        do
+                if [[ "${redpatterns[$i]}" = "$1"* ]]
+                then
+                        unset "redpatterns[$i]"
+                fi
+        done
+        for i in "${!yellowpatterns[@]}"
+        do
+                if [[ "${yellowpatterns[$i]}" = "$1"* ]]
+                then
+                        unset "yellowpatterns[$i]"
+                fi
+        done
+        for i in "${!greenpatterns[@]}"
+        do
+                if [[ "${greenpatterns[$i]}" = "$1"* ]]
+                then
+                        unset "greenpatterns[$i]"
+                fi
+        done
+        for i in "${!filters[@]}"
+        do
+                if [[ "${filters[$i]}" = *"$1" ]]
+                then
+                        unset "filters[$i]"
+                fi
+        done
+}
 
-   esac
+if [ "$1" != "" ]; then
+        while true; do
+                case "$1" in
+                        -h | --help )
+                                usage
+                                exit 1
+                                ;;
+                        -v | --version )
+                                display_version
+                                exit 1
+                                ;;
+                        -i | --ignore | -f | --filter )
+                                FILTER=true
+                                shift
+                                ;;
+                        -d | --disable )
+				MATCH=false
+				for product in "${products[@]}"
+				do
+					if [[ "$product" = "$2" ]]; then
+						MATCH=true
+						break
+					fi
+				done
+				if [[ $MATCH = true ]]; then
+                                	reduce-arrays $2
+                                else
+                                        echo "-d/--disable must have a valid product name. ["${products[@]}"]"
+                                        exit 1
+                                fi
+                                shift 2
+                                ;;
+                        -e | --experimental )
+                                EXPERIMENTAL=true
+                                shift
+                                ;;
+                        -- )
+                                shift
+                                break
+                                ;;
+                        * )
+                                break
+                                ;;
+                esac
+        done
 fi
 
 # Check for arguments
@@ -83,12 +141,7 @@ function iterate-redhighlights() {
 	greplist=()
 	for i in "${redpatterns[@]}"
 	do
-		if [[ "$i" = *-red ]]
-		then
-			greplist+=( -f /var/lib/gg-highlight/"${i}".txt)
-		else
-			cat 
-		fi
+		greplist+=( -f /var/lib/gg-highlight/"${i}".txt)
 	done
 	GREP_COLOR="$RED" $grepsearch "${greplist[@]}"
 }
@@ -97,12 +150,7 @@ function iterate-yellowhighlights() {
 	greplist=()
 	for i in "${yellowpatterns[@]}"
 	do
-		if [[ "$i" = *-yellow ]]
-		then
-			greplist+=( -f /var/lib/gg-highlight/"${i}".txt)
-		else
-			cat 
-		fi
+		greplist+=( -f /var/lib/gg-highlight/"${i}".txt)
 	done
 	GREP_COLOR="$YELLOW" $grepsearch "${greplist[@]}"
 }
@@ -111,12 +159,7 @@ function iterate-greenhighlights() {
 	greplist=()
 	for i in "${greenpatterns[@]}"
 	do
-		if [[ "$i" = *-green ]]
-		then
-			greplist+=( -f /var/lib/gg-highlight/"${i}".txt)
-		else
-			cat 
-		fi
+		greplist+=( -f /var/lib/gg-highlight/"${i}".txt)
 	done
 	GREP_COLOR="$GREEN" $grepsearch "${greplist[@]}"
 }
