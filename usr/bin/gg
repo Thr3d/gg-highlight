@@ -137,13 +137,18 @@ if [[ ! -e $file_arg ]]; then
 	exit 1
 fi
 
+# Don't include hacib stuff unless "cib" is in the name of the file
+if ! [[ "$file_arg" = *"cib"* ]]; then
+        reduce-arrays "hacib"
+fi
+
 function iterate-redhighlights() {
 	greplist=()
 	for i in "${redpatterns[@]}"
 	do
 		greplist+=( -f /var/lib/gg-highlight/"${i}".txt)
 	done
-	GREP_COLOR="$RED" $grepsearch "${greplist[@]}"
+	LANG=C GREP_COLOR="$RED" $grepsearch "${greplist[@]}"
 }
 
 function iterate-yellowhighlights() {
@@ -152,7 +157,7 @@ function iterate-yellowhighlights() {
 	do
 		greplist+=( -f /var/lib/gg-highlight/"${i}".txt)
 	done
-	GREP_COLOR="$YELLOW" $grepsearch "${greplist[@]}"
+	LANG=C GREP_COLOR="$YELLOW" $grepsearch "${greplist[@]}"
 }
 
 function iterate-greenhighlights() {
@@ -161,7 +166,7 @@ function iterate-greenhighlights() {
 	do
 		greplist+=( -f /var/lib/gg-highlight/"${i}".txt)
 	done
-	GREP_COLOR="$GREEN" $grepsearch "${greplist[@]}"
+	LANG=C GREP_COLOR="$GREEN" $grepsearch "${greplist[@]}"
 }
 
 function iterate-filters() {
@@ -171,7 +176,7 @@ function iterate-filters() {
 		do
 			greplist+=(-f /var/lib/gg-highlight/"$i".txt)
 		done
-		$grepfilter "${greplist[@]}" --
+		LANG=C $grepfilter "${greplist[@]}" --
 	else
 		cat
 	fi
@@ -184,7 +189,7 @@ function iterate-experimental() {
 		do
 			greplist+=(-f /var/lib/gg-highlight/"$i".txt)
 		done
-		$grepfilter "${greplist[@]}" --
+		LANG=C $grepfilter "${greplist[@]}" --
 	else
 		cat
 	fi

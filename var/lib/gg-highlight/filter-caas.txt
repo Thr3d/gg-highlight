@@ -1,6 +1,5 @@
 hyperkube\[.*\]: I.* container_manager_linux.go:398\] \[ContainerManager\]: Discovered runtime cgroups name: /system.slice/docker.service
 hyperkube\[.*\]: I.* kubelet_node_status.go:247\] Setting node annotation to enable volume controller attach/detach
-hyperkube\[.*\]: I.* kubelet_node_status.go:247\] Setting node annotation to enable volume controller attach/detach
 hyperkube\[.*\]: I.* kubelet_node_status.go:410\] Recording NodeHasNoDiskPressure event message for node 127.0.0.1
 hyperkube\[.*\]: I.* kubelet_node_status.go:410\] Recording NodeHasSufficientDisk event message for node 127.0.0.1
 hyperkube\[.*\]: I.* kubelet_node_status.go:410\] Recording NodeHasSufficientMemory event message for node 127.0.0.1

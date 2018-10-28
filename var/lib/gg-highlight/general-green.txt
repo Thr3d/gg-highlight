@@ -1,4 +1,4 @@
  Verification Status: Passed
-^.*multipathd.*reinstated.*$|$
-^.*SuSEfirewall2 not active.*$|$
+^.*multipathd.*reinstated.*$
+^.*SuSEfirewall2 not active.*$
 ^.*tur checker reports path is up.*$|$

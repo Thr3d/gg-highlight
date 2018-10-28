@@ -125,7 +125,6 @@ systemd.*: Created slice User Slice of .*.
 systemd.*: Reached target Basic System.
 systemd.*: Reached target Default.
 systemd.*: Reached target Paths.
-systemd.*: Reached target Paths.
 systemd.*: Reached target Shutdown.
 systemd.*: Reached target Sockets.
 systemd.*: Reached target Timers.

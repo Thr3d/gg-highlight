@@ -13,5 +13,3 @@ systemd\[1\]: Stopping user-.*.slice.
 systemd\[1\]: Removed slice user-.*.slice.
 systemd\[1\]: Starting user-.*.slice.
 systemd\[1\]: Created slice user-.*.slice.
-systemd\[1\]: Stopping user-.*.slice.
-systemd\[1\]: Removed slice user-.*.slice.

@@ -1,80 +1,70 @@
-^.*A processor.*$|$
-^.*Aborting journal.*$|$
-^.*attrd\[.*\]:    error:.*$|$
+^.*Aborting journal.*$
+^.*attrd\[.*\]:    error:.*$
 ^.*BTRFS error.*$|$
-^.*BTRFS info \(device .*\): forced readonly.*$|$
-^.*BUG:.*$|$
-^.*Cancelling IO request due to timeout.*$|$
-^.*Detected aborted journal.*$|$
-^.*Detected IO errors while flushing file data on.*$|$
-^.*device-mapper: multipath: Failing path.*$|$
-^.*error: fork: Cannot allocate memory.*$|$
-^.*error: remounting filesystem read-only.*$|$
-^.*Executing suicide fencing.*$|$
-^.*FAILED.*$|$
-^.*fatal.*$|$
-^.*FATAL:.*$|$
-^.*fork: retry: No child processes.*|$
-^.*I/O error.*$|$
-^.*init: Entering runlevel:.*$|$
-^.*init: Switching to runlevel:.*$|$
-^.*IO failure.*$|$
-^.*kernel taint.*$|$
-^.*kernel.* sd .* FAILED Result.*$|$
-^.*kernel.* sd .* killing request.*$|$
-^.*kernel: \[.*\] ------------\[ cut here \]------------.*$|$
-^.*kernel: \[.*\] Call Trace:.*$|$
-^.*kernel: \[.*\] invalid opcode:.*$|$
-^.*kernel: \[.*\] kernel BUG at.*$|$
-^.*kernel: \[.*\] Killed process .* \(.*\) total-vm:.*$|$
+^.*BTRFS info \(device .*\): forced readonly.*$
+^.*BUG:.*$
+^.*Cancelling IO request due to timeout.*$
+^.*Detected aborted journal.*$
+^.*Detected IO errors while flushing file data on.*$
+^.*device-mapper: multipath: Failing path.*$
+^.*error: fork: Cannot allocate memory.*$
+^.*error: remounting filesystem read-only.*$
+^.*FAILED.*$
+^.*fatal.*$
+^.*FATAL:.*$
+^.*fork: retry: No child processes.*
+^.*I/O error.*$
+^.*init: Entering runlevel:.*$
+^.*init: Switching to runlevel:.*$
+^.*IO failure.*$
+^.*kernel taint.*$
+^.*kernel.* sd .* FAILED Result.*$
+^.*kernel.* sd .* killing request.*$
+^.*kernel: \[.*\] ------------\[ cut here \]------------.*$
+^.*kernel: \[.*\] Call Trace:.*$
+^.*kernel: \[.*\] invalid opcode:.*$
+^.*kernel: \[.*\] kernel BUG at.*$
+^.*kernel: \[.*\] Killed process .* \(.*\) total-vm:.*$
 ^.*kernel: \[.*\] nfs: server .* not responding, timed out$
-^.*kernel: \[.*\] Out of memory: Kill process .* \(.*\) score .* or sacrifice child.*$|$
-^.*kernel: \[.*\] XFS .*: Corruption of in-memory data detected.  Shutting down filesystem.*$|$
-^.*kernel: \[.*\] XFS .*: Please umount the filesystem and rectify the problem\(s\).*$|$
-^.*kernel: \[.*\] XFS .*: xfs_do_force_shutdown.*$|$
-^.*kernel: \[.*\] .*: page allocation failure.*$|$
-^.*kernel: \[.*\] SLAB: Unable to allocate memory.*$|$
-^.*klogd.*started.*$|$
-^.*Link Down Event.*$|$
-^.*lost page write due to IO error.*$|$
-^.*multipathd:.* - tur checker reports path is down.*$|$
-^.*multipathd:.*mark as failed.*$|$
-^.*No free memory.*$|$
-^.*NO_MEMORY.*$|$
-^.*NT_STATUS_ACCESS_DENIED.*$|$
-^.*oom-killer.*$|$
-^.*Oops:.*$|$
-^.*out of memory.*$|$
-^.*OutOfMemoryError.*$|$
-^.*pengine.*:    error:.*$|$
-^.*quorum lost.*$|$
-^.*Readonly filesystem.*$|$
-^.*rejecting I/O.*$|$
-^.*Requesting peer fencing.*$|$
-^.*reset successfully delivered to.*$|$
-^.*rsyslogd: \[origin software=\"rsyslogd\" swVersion=\".*\" x-pid=\".*\" x-info=\"http://www.rsyslog.com\"\] exiting on signal 15.*$|$
-^.*rsyslogd: \[origin software=\"rsyslogd\" swVersion=\".*\" x-pid=\".*\" x-info=\"http://www.rsyslog.com\"\] start.*$|$
-^.*segfault.*$|$
-^.*SFAIL.*$|$
-^.*shutdown.*: shutting down for system reboot.*$|$
-^.*sshd\[.*\]: error: fork: Cannot allocate memory.*$|$
-^.*syslog-ng starting up.*$|$
-^.*syslog-ng.*: syslog-ng shutting down; version=.*$|$
-^.*syslog-ng.*: Termination requested via signal, terminating.*$|$
-^.*syslogd.*restart.*$|$
-^.*sysrq: SysRq : sysrq: Trigger a crash.*$|$
-^.*systemd-coredump\[.*\]: Process .* \(.*\) of user .* dumped core.*$|$
-^.*systemd-logind\[.*\]: Power key pressed..*$|$
+^.*kernel: \[.*\] Out of memory: Kill process .* \(.*\) score .* or sacrifice child.*$
+^.*kernel: \[.*\] XFS .*: Corruption of in-memory data detected.  Shutting down filesystem.*$
+^.*kernel: \[.*\] XFS .*: Please umount the filesystem and rectify the problem\(s\).*$
+^.*kernel: \[.*\] XFS .*: xfs_do_force_shutdown.*$
+^.*kernel: \[.*\] .*: page allocation failure.*$
+^.*kernel: \[.*\] SLAB: Unable to allocate memory.*$
+^.*klogd.*started.*$
+^.*Link Down Event.*$
+^.*lost page write due to IO error.*$
+^.*multipathd:.* - tur checker reports path is down.*$
+^.*multipathd:.*mark as failed.*$
+^.*No free memory.*$
+^.*NO_MEMORY.*$
+^.*NT_STATUS_ACCESS_DENIED.*$
+^.*oom-killer.*$
+^.*Oops:.*$
+^.*out of memory.*$
+^.*OutOfMemoryError.*$
+^.*Readonly filesystem.*$
+^.*rejecting I/O.*$
+^.*rsyslogd: \[origin software=\"rsyslogd\" swVersion=\".*\" x-pid=\".*\" x-info=\"http://www.rsyslog.com\"\] exiting on signal 15.*$
+^.*rsyslogd: \[origin software=\"rsyslogd\" swVersion=\".*\" x-pid=\".*\" x-info=\"http://www.rsyslog.com\"\] start.*$
+^.*segfault.*$
+^.*shutdown.*: shutting down for system reboot.*$
+^.*sshd\[.*\]: error: fork: Cannot allocate memory.*$
+^.*syslog-ng starting up.*$
+^.*syslog-ng.*: syslog-ng shutting down; version=.*$
+^.*syslog-ng.*: Termination requested via signal, terminating.*$
+^.*syslogd.*restart.*$
+^.*sysrq: SysRq : sysrq: Trigger a crash.*$
+^.*systemd-coredump\[.*\]: Process .* \(.*\) of user .* dumped core.*$
+^.*systemd-logind\[.*\]: Power key pressed..*$
 ^.*systemd-logind\[.*\]: Powering Off...$
-^.*systemd-logind\[.*\]: System is powering down.*$|$
-^.*systemd\[1\]: systemd .* running in system mode..*$|$
-^.*tainting kernel.*$|$
-^.*taints kernel.*$|$
-^.*timed out after.*$|$
-^.*warning: update_failcount:.*$|$
-^.*Writing reset to node.*$|$
-^.*x-info="http://www.rsyslog.com"\] exiting on signal 15..*$|$
-^.*x-info="http://www.rsyslog.com"\] start.*$|$
-^.*XFS.*: Log I/O Error Detected.  Shutting down filesystem.*$|$
-^.*xfs_do_force_shutdown.*$|$
+^.*systemd-logind\[.*\]: System is powering down.*$
+^.*systemd\[1\]: systemd .* running in system mode..*$
+^.*tainting kernel.*$
+^.*taints kernel.*$
+^.*x-info="http://www.rsyslog.com"\] exiting on signal 15..*$
+^.*x-info="http://www.rsyslog.com"\] start.*$
+^.*XFS.*: Log I/O Error Detected.  Shutting down filesystem.*$
+^.*xfs_do_force_shutdown.*$
 ^.*systemd\[1\]: Failed to start.*$|$

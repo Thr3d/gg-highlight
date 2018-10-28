@@ -1,26 +1,26 @@
    Active: active
-^.*A new membership .* was formed..*$|$
-^.*Completed service synchronization, ready to provide service.*$|$
-^.*corosync.*Decrementing problem counter.*$|$
-^.*crmd\[.*\]:   notice: crm_update_quorum: Updating quorum status to true.*$|$
-^.*crmd\[.*\]:   notice: Result of start operation for .* on .*: 0 \(ok\).*$|$
-^.*crmd\[.*\]:   notice: Result of stop operation for .* on .*: 0 \(ok\).*$|$
-^.*Filesystem\(.*\)\[.*\]: INFO: unmounted .* successfully.*$|$
-^.*info: Node state: online.*$|$
-^.*info: Pacemaker health check: OK.*$|$
-^.*is now: member.*$|$
-^.*notice: Quorum acquired.*$|$
-^.*quorum acquired.*$|$
-^.*sbd: \[.*\]: info: CIB reconnect successful.*$|$
-^.*Servant starting for device.*$|$
-^.*state is now member.*$|$
-^.*pacemakerd\[.*\]:   notice: Shutdown complete.*$|$
-^.*systemd\[.*\]: Stopped Pacemaker High Availability Cluster Manager..*$|$
-^.*systemd\[.*\]: Starting Pacemaker High Availability Cluster Manager....*$|$
-^.*systemd\[.*\]: Started Pacemaker High Availability Cluster Manager..*$|$
-^.*crmd\[.*\]:   notice: peer_update_callback: Stonith/shutdown of .* not matched.*$|$
-^.*corosync\[.*\]:   \[MAIN  \] Corosync Cluster Engine exiting with status 0 at main.c:2056..*$|$
-^.*corosync\[.*\]:   \[MAIN  \] Corosync Cluster Engine \(.*\): started and ready to provide service..*$|$
+^.*A new membership .* was formed..*$
+^.*Completed service synchronization, ready to provide service.*$
+^.*corosync.*Decrementing problem counter.*$
+^.*crmd\[.*\]:   notice: crm_update_quorum: Updating quorum status to true.*$
+^.*crmd\[.*\]:   notice: Result of start operation for .* on .*: 0 \(ok\).*$
+^.*crmd\[.*\]:   notice: Result of stop operation for .* on .*: 0 \(ok\).*$
+^.*Filesystem\(.*\)\[.*\]: INFO: unmounted .* successfully.*$
+^.*info: Node state: online.*$
+^.*info: Pacemaker health check: OK.*$
+^.*is now: member.*$
+^.*notice: Quorum acquired.*$
+^.*quorum acquired.*$
+^.*sbd: \[.*\]: info: CIB reconnect successful.*$
+^.*Servant starting for device.*$
+^.*state is now member.*$
+^.*pacemakerd\[.*\]:   notice: Shutdown complete.*$
+^.*systemd\[.*\]: Stopped Pacemaker High Availability Cluster Manager..*$
+^.*systemd\[.*\]: Starting Pacemaker High Availability Cluster Manager....*$
+^.*systemd\[.*\]: Started Pacemaker High Availability Cluster Manager..*$
+^.*crmd\[.*\]:   notice: peer_update_callback: Stonith/shutdown of .* not matched.*$
+^.*corosync\[.*\]:   \[MAIN  \] Corosync Cluster Engine exiting with status 0 at main.c:2056..*$
+^.*corosync\[.*\]:   \[MAIN  \] Corosync Cluster Engine \(.*\): started and ready to provide service..*$
 ^.*corosync\[.*\]:   \[CPG   \] got procjoin message from cluster node .* \(r\(.*\) ip\(.*\) .* for pid .*$
 ^.*corosync\[.*\]:   \[MAIN  \] Member joined: .*$
 ^.*corosync\[.*\]:  \[MAIN  \] Corosync Cluster Engine \(.*\): started and ready to provide service.$
