@@ -1,1 +1,1 @@
-[^ ]*SAPHana\(.*\)\.*?\]: INFO: ACT: Demoted.*$|$
+[^ ]*SAPHana\(.*?\)\[.*?\]: INFO: ACT: Demoted.*$|$
