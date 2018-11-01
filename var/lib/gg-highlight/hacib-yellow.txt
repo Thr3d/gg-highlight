@@ -1,0 +1,9 @@
+maintenance\=on
+name=\"maintenance\" value=\"true\"
+maintenance-mode=true
+maintenance=true
+standby\=on
+startup-fencing=false
+lpa_.*_lpt=10
+AUTOMATED_REGISTER=false
+AUTOMATED_REGISTER=no

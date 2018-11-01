@@ -1,0 +1,78 @@
+[^ ]*cib\[.*?\]:   notice: Disconnecting from Corosync.*$
+[^ ]*CLM CONFIGURATION CHANGE.*$
+[^ ]*cluster-dlm\[.*?\]: fence_node_time:.*$
+[^ ]*Corosync main process was not scheduled for.*$
+[^ ]*corosync\[.*?\]:   \[TOTEM \] Digest does not match.*$
+[^ ]*corosync\[.*?\]:   \[TOTEM \] Failed to receive the leave message. failed:.*$
+[^ ]*corosync\[.*?\]:   \[TOTEM \] Invalid packet data.*$
+[^ ]*corosync\[.*?\]:   \[TOTEM \] Received message has invalid digest... ignoring..*$
+[^ ]*corosync\[.*?\]:  \[CLM   \]    r.*?ip\(127.0.0.1\).*$
+[^ ]*corosync\[.*?\]:  \[MAIN  \] member section is deprecated..*$
+[^ ]*corosync\[.*?\]:  \[MAIN  \] Please migrate config file to nodelist..*$
+[^ ]*corosync\[.*?\]:  \[pcmk  \] notice: pcmk_shutdown: Shuting down Pacemaker.*$
+[^ ]*corosync\[.*?\]:  \[SERV  \] Unloading all Corosync service engines.*$
+[^ ]*corosync\[.*?\]:  \[TOTEM \] Failed to receive the leave message..*$
+[^ ]*corosync\[.*?\]:  \[TOTEM \] Marking ringid .*? FAULTY.*$
+[^ ]*crit:.*$
+[^ ]*crmd\[.*?\]:    error: crmd_fast_exit: Could not recover from internal error.*$
+[^ ]*crmd\[.*?\]:    error:.*$
+[^ ]*crmd\[.*?\]:   notice: abort_transition_graph: Transition aborted: Stonith failed.*$
+[^ ]*crmd\[.*?\]:   notice: Invoking handler for signal 15: Terminated.*$
+[^ ]*crmd\[.*?\]:   notice: Peer .*?was terminated \(.*?\) by .*? OK.*$
+[^ ]*crmd\[.*?\]:   notice: Requesting shutdown, upper limit is .*$
+[^ ]*crmd\[.*?\]:   notice: tengine_stonith_callback: Stonith operation .*?No route to host.*$
+[^ ]*crmd\[.*?\]:  warning: Another DC detected:.*$
+[^ ]*crmd\[.*?\]:  warning: reap_dead_nodes: Our DC node \(.*?\) left the cluster.*$
+[^ ]*crmd\[.*?\]:.*?Cant retrieve the CIB.*$
+[^ ]*crmd\[.*?\]:.*?I_ERROR.*$
+[^ ]*crmd\[.*?\]:.*?I_TERMINATE.*$
+[^ ]*crmd\[.*?\]:.*?notice: throttle_handle_load:  High CPU load detected:.*$
+[^ ]*crmd\[.*?\]:.*?notice: throttle_mode: High CIB load detected:.*$
+[^ ]*crmd\[.*?\]:.*?Our peer on the DC \(.*?\) is dead.*$
+[^ ]*crmd\[.*?\]:.*?warning: do_recover: Fast-tracking shutdown in response to errors.*$
+[^ ]*error: Could not execute .*?Resource temporarily unavailable .*$
+[^ ]*external/vcenter\(.*?ERROR:.*$
+[^ ]*lrmd\[.*?\]:    error: main: Failed to create IPC server: shutting down and inhibiting respawn.*$
+[^ ]*lrmd\[.*?\]:    error: mainloop_add_ipc_server: Could not start lrmd IPC server: Address already in use \(-98\).*$
+[^ ]*lrmd\[.*?\]:    error: qb_ipcs_us_publish: Could not bind AF_UNIX \(\): Address already in use \(98\).*$
+[^ ]*pacemakerd\[.*?\]:   notice: Invoking handler for signal 15: Terminated.*$
+[^ ]*pacemakerd\[.*?\]:   notice: Shutting down Pacemaker.*$
+[^ ]*pacemakerd\[.*?\]:   notice: Stopping crmd: Sent -15 to process.*$
+[^ ]*pengine\[.*?\]:  warning: determine_online_status: Node .*?is unclean.*$
+[^ ]*pengine\[.*?\]:  warning: pe_fence_node: Node .*?will be fenced because the node is no longer part of the cluster.*$
+[^ ]*r.*?ip.127.0.0.1..*$
+[^ ]*Result of stop operation for .*?Timed Out$
+[^ ]*sbd.*?ERROR:.*$
+[^ ]*sbd.*?WARN:.*$
+[^ ]*Scheduling Node .*?for shutdown$
+[^ ]*Scheduling Node .*?for STONITH.*$
+[^ ]*stonith-ng.*?wants to fence.*$
+[^ ]*stonith-ng\[.*?\]:    error: remote_op_done: Operation reboot of .*?No route to host.*$
+[^ ]*stonith-ng\[.*?\]:   notice: Operation reboot of .*?OK$
+[^ ]*stonith-ng\[.*?\]:   notice: stonith_choose_peer: Couldn't find anyone to fence.*$
+[^ ]*stonith-ng\[.*?\]:  warning: log_action: fence_legacy\[.*?\] stderr:.*$
+[^ ]*stonith: external_reset_req: 'vcenter reset' for host .*?failed with rc.*$
+[^ ]*systemd\[.*?\]: Stopping Pacemaker High Availability Cluster Manager....*$
+[^ ]*warning: Could not verify cluster configuration file /var/lib/pacemaker/cib/cib.xml: No such file or directory.*$
+SBD_STARTMODE=\"clean\"
+[^ ]*pengine\[.*?\]:  warning: handle_startup_fencing: Blind faith: not fencing unseen nodes.*$
+[^ ]*crmd: \[.*?\]: info: te_fence_node: Executing reboot fencing operation.*$
+[^ ]*pengine: \[.*?\]: WARN: pe_fence_node: Node .*?will be fenced to recover from resource failure\(s\).*$
+[^ ]*corosync\[.*?\]:   \[MAIN  \] Totem is unable to form a cluster because of an operating system or network fault\(reason: totem is continuously in gather state\). The most common cause of this message is that the local firewall is configured improperly..*$
+[^ ]*systemd[1]: Failed to start.*$
+[^ ]*crmd\[.*?\]:    error: Cannot route message to unknown node.*$
+[^ ]*LVM\(.*?\)\[.*?\]: ERROR: LVM: .*?did not activate correctly.*$
+[^ ]*pengine\[.*?\]:  warning: Fencing and resource management disabled due to lack of quorum.*$
+[^ ]*pengine\[.*?\]:  warning: .*?is unclean!.*$
+[^ ]*pengine\[.*?\]:   notice: Cannot fence unclean nodes until quorum is attained \(or no-quorum-policy is set to ignore\).*$
+[^ ]*crmd\[.*?\]:  warning: Action .*?failed \(target: . vs. rc: .\).*$
+[^ ]*oralsnr\(.*?\)\[.*?\]: INFO: .*?: required binary not installed.*$
+[^ ]*Executing suicide fencing.*$
+[^ ]*pengine.*?:    error:.*$
+[^ ]*quorum lost.*$
+[^ ]*Requesting peer fencing.*$
+[^ ]*reset successfully delivered to.*$
+[^ ]*A processor.*$
+[^ ]*timed out after.*$
+[^ ]*warning: update_failcount:.*$
+[^ ]*Writing reset to node.*$|$
