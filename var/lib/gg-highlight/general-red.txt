@@ -2,7 +2,7 @@
 [^ ]*attrd\[.*?\]:    error:.*$
 [^ ]*BTRFS error.*$|$
 [^ ]*BTRFS info \(device .*?\): forced readonly.*$
-[^ ]*BUG:.*$
+ BUG:.*$
 [^ ]*Cancelling IO request due to timeout.*$
 [^ ]*Detected aborted journal.*$
 [^ ]*Detected IO errors while flushing file data on.*$
