@@ -138,7 +138,7 @@ if [[ ! -e $file_arg ]]; then
 fi
 
 # Don't include hacib stuff unless "cib" is in the name of the file
-if ! [[ "$file_arg" = *"cib"* ]]; then
+if  ! echo "$file_arg" | grep -E "ha.txt|*cib*"; then
         reduce-arrays "hacib"
 fi
 
