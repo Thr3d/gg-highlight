@@ -1,0 +1,5 @@
+[^ ]*PreferSiteTakeover selected so decrease promotion score here.*$
+[^ ]*Promote .*?to be primary.*$
+[^ ]*HANA_STATE_DEFECT.*$
+[^ ]*ERROR: ACT: check_for_primary: we didn't expect srmode to be: DUMP:.*$
+[^ ]*SFAIL.*$|$

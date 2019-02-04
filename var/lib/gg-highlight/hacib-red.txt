@@ -1,0 +1,7 @@
+\*\*\* Resource management is DISABLED \*\*\*
+have-watchdog\=false
+name=\"maintenance-mode\" value=\"true\"
+name=\"stonith-enabled\" value=\"false\"
+stonith-enabled\=false
+no-quorum-policy=ignore
+is-managed=false

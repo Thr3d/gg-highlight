@@ -1,0 +1,51 @@
+attrd_updater\[.*notice: crm_log_args: Invoked: attrd_updater
+cib:     info: cib_perform_op:  ++
+cib:     info: cib_process_ping:        Reporting our current digest to
+cib:     info: cib_process_request:     Completed cib_modify operation for section nodes: OK
+cib:     info: cib_process_request:     Forwarding cib_modify operation for section nodes to all
+cib:     info: crm_compress_string:
+cib: \[.*\]: debug:
+cib\[.*\]:   notice: cib:diff:
+cib\[.*\]:   notice: log_cib_diff: cib:diff:
+corosync\[.*\]:   \[CONFDB\] exit_fn for conn=
+corosync\[.*\]:   \[CONFDB\] lib_init_fn: conn=
+corosync\[.*\]:   \[CPG   \] cpg finalize for conn=
+corosync\[.*\]:   \[CPG   \] exit_fn for conn=
+corosync\[.*\]:   \[CPG   \] lib_init_fn: conn=.*, cpd=
+corosync\[.*\]:   \[IPC   \] IPC credentials for client pid .*: uid 0. gid 0
+corosync\[.*\]:   \[pcmk  \] debug: process_ais_message: Msg\[1\] \(dest=local:ais, from=.*:.*, remote=true, size=.*\)
+corosync\[.*\]:   \[QUORUM\] got quorate request on 
+corosync\[.*\]:   \[QUORUM\] got trackstart request on 
+corosync\[.*\]:   \[QUORUM\] lib_exit_fn: conn=
+corosync\[.*\]:   \[QUORUM\] lib_init_fn: conn=
+corosync\[.*\]:   \[QUORUM\] sending initial status to 
+corosync\[.*\]:   \[QUORUM\] sending quorum notification to .*, length = .*
+crm_attribute\[.*notice: crm_log_args: Invoked:
+crmd.* notice: Processing graph
+crmd.* notice: Transition.*Complete$
+crmd.*:   notice: Result of notify operation for rsc_
+crmd.*notice: State transition S_IDLE -> S_POLICY_ENGINE
+crmd.*notice: State transition S_TRANSITION_ENGINE -> S_IDLE
+crmd:     info: throttle_send_command:
+crmd: \[.*\]: debug:
+crmd\[.* notice: do_state_transition: State transition S_IDLE -> S_POLICY_ENGINE
+crmd\[.* notice: do_state_transition: State transition S_TRANSITION_ENGINE -> S_IDLE
+crmd\[.* notice: do_te_invoke: Processing graph
+crmd\[.* notice: run_graph: Transition
+crmd\[.*\]:   notice: Current ping state: S_IDLE
+crmd\[.*\]: message repeated .* times: \[   notice: Current ping state: S_IDLE\]
+pengine:     info: clone_print:
+pengine:     info: crm_compress_string:
+pengine:     info: LogActions:  Leave
+pengine:     info: RecurringOp: Start recurring monitor
+pengine:     info: short_print:
+pengine: \[.*\]: debug:
+pengine\[.* notice: unpack_config: On loss of CCM Quorum: Ignore
+pengine\[.*:   notice: Calculated Transition.*.bz2$
+pengine\[.*:   notice: On loss of CCM Quorum: Ignore
+pengine\[.*:   notice: Relying on watchdog integration for fencing
+pengine\[.*\]:   notice: Watchdog will be used via SBD if fencing is required
+pengine\[.*notice: process_pe_message: Calculated Transition
+sbd: \[.*\]: info: Monitoring Pacemaker health
+stonith-ng: \[.*\]: debug:
+stonith-ng\[.*notice: unpack_config: On loss of CCM Quorum: Ignore

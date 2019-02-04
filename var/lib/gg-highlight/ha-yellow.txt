@@ -1,0 +1,24 @@
+[^ ]*corosync\[.*?\]:   \[CPG   \] got procleave message from cluster node.*$
+[^ ]*corosync\[.*?\]:   \[MAIN  \] interface section bindnetaddr is used together with nodelist. Nodelist one is going to be used..*$
+[^ ]*corosync\[.*?\]:   \[MAIN  \] Please migrate config file to nodelist..*$
+[^ ]*crmd\[.*?\]:   notice: High CPU load detected:.*$
+[^ ]*Executing reboot fencing operation.*$
+[^ ]*I_ELECTION_DC.*$
+[^ ]*I_NOT_DC.*$
+[^ ]*info: We don.t have a DC right now..*$
+[^ ]*lrmd\[.*?\]:   notice: .*?:stderr \[ umount: .*?target is busy \].*$
+[^ ]*notice: Removing.*?from the membership list.*$
+[^ ]*Quorum lost.*$
+[^ ]*S_ELECTION.*$
+[^ ]*SAPHana\(.*?\)\[.*?\]: INFO: LPA: Dual primary detected and AUTOMATED_REGISTER='false' ==> WAITING$
+[^ ]*SAPHana\(.*?\)\[.*?\]: INFO: LPA: You need to manually sr_register the older primary$
+[^ ]*sbd_stonith can fence.*$
+[^ ]*state is now lost.*$
+debug: on
+[^ ]*corosync\[.*?\]:   \[QB    \] Denied connection, is not ready.*$
+[^ ]*corosync.*?Incrementing problem counter.*$
+[^ ]*corosync\[.*?\]:  \[TOTEM \] Retransmit List.*$
+[^ ]*Couldn.t find device with.*$
+[^ ]*crmd\[.*?\]:   notice: do_state_transition: State transition S_ELECTION -> S_INTEGRATION \[ input=I_ELECTION_DC cause=C_TIMER_POPPED origin=election_timeout_popped \].*$
+[^ ]*crmd\[.*?\]:   notice: terminate_cs_connection: Disconnecting from Corosync.*$
+[^ ]*Delaying fencing operations until there are resources to manage.*$|$
