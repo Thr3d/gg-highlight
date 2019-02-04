@@ -1,3 +1,6 @@
+* Mon Feb 04 2019 Jesse Chandler <jesse.chandler@suse.com> 1.2.1
+- Split patterns out to their own files. Some regex performance improvements.
+
 * Mon Oct 15 2018 Jesse Chandler <jesse.chandler@suse.com> 1.2.0
 - Add new filtering for systemd, and disk logs (disabled by default). Add additioan highlighting and filters
 
