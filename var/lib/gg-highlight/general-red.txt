@@ -3,6 +3,13 @@
 [^ ]*BTRFS error.*$|$
 [^ ]*BTRFS info \(device .*?\): forced readonly.*$
  BUG:.*$
+iscsid: Kernel reported iSCSI connection .* error \(1020 - ISCSI_ERR_TCP_CONN_CLOSE: TCP connection closed\) state.*$
+iscsid: Target dropping all connections, reconnect min.*$
+iscsid: connect to .* failed \(Connection refused\)$
+multipathd: .* - directio checker reports path is down$
+multipathd: checker failed path .*$
+multipathd: .*: remaining active paths: 0$
+kernel: \[.*\] device-mapper: multipath: Failing path .*$
 [^ ]*Cancelling IO request due to timeout.*$
 [^ ]*Detected aborted journal.*$
 [^ ]*Detected IO errors while flushing file data on.*$

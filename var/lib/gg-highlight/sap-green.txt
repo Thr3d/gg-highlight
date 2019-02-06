@@ -1,0 +1,6 @@
+SAPHanaTopology\(.*\)\[.*\]: INFO: RA ==== begin action monitor_clone \(.*\) ====$
+SAPHanaTopology\(.*\)\[.*\]: INFO: RA ==== end action monitor_clone with rc=0 \(.*\)====$
+SAPHana\(.*\)\[.*\]: INFO: RA ==== begin action monitor_clone \(.*\) ====$
+SAPHana\(.*\)\[.*\]: INFO: RA ==== end action monitor_clone with rc=8 \(.*\)====$
+SAPHana\(.*\]: INFO: RA ==== end action demote_clone with rc=0 \(.*\)====$
+SAPHana\(.*\)\[.*\]: INFO: DEC analyze_hana_sync_statusSRS systemReplicationStatus.py \(to site .*\)-> 15$|$
