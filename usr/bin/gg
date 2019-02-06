@@ -204,5 +204,4 @@ function allyourlogsarebelongtome() {
 	iterate-greenhighlights
 }
 
-cat $file_arg | allyourlogsarebelongtome
-#cat $file_arg | allyourlogsarebelongtome | less
+cat $file_arg | allyourlogsarebelongtome | less
