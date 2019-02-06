@@ -23,7 +23,7 @@ grepfilter='grep --text --line-buffered -Ev'
 # Lists/Arrays
 redpatterns=("general-red" "ha-red" "sap-red" "caas-red" "hacib-red")
 yellowpatterns=("general-yellow" "ha-yellow" "sap-yellow" "supportconfig-yellow" "hacib-yellow")
-greenpatterns=("general-green" "ha-green" "hacib-green")
+greenpatterns=("general-green" "ha-green" "hacib-green" "sap-green")
 filters=("filter-general" "filter-ha" "filter-caas" "filter-sap" "filter-soc")
 experimental=("filter-test" "filter-disk" "filter-systemd")
 products=("ha" "caas" "sap" "soc")
@@ -148,7 +148,7 @@ function iterate-redhighlights() {
 	do
 		greplist+=( -f /var/lib/gg-highlight/"${i}".txt)
 	done
-	LANG=C GREP_COLOR="$RED" $grepsearch "${greplist[@]}"
+	LANG=C LC_ALL=C GREP_COLOR="$RED" $grepsearch "${greplist[@]}"
 }
 
 function iterate-yellowhighlights() {
@@ -157,7 +157,7 @@ function iterate-yellowhighlights() {
 	do
 		greplist+=( -f /var/lib/gg-highlight/"${i}".txt)
 	done
-	LANG=C GREP_COLOR="$YELLOW" $grepsearch "${greplist[@]}"
+	LANG=C LC_ALL=C GREP_COLOR="$YELLOW" $grepsearch "${greplist[@]}"
 }
 
 function iterate-greenhighlights() {
@@ -166,7 +166,7 @@ function iterate-greenhighlights() {
 	do
 		greplist+=( -f /var/lib/gg-highlight/"${i}".txt)
 	done
-	LANG=C GREP_COLOR="$GREEN" $grepsearch "${greplist[@]}"
+	LANG=C LC_ALL=C GREP_COLOR="$GREEN" $grepsearch "${greplist[@]}"
 }
 
 function iterate-filters() {
@@ -176,7 +176,7 @@ function iterate-filters() {
 		do
 			greplist+=(-f /var/lib/gg-highlight/"$i".txt)
 		done
-		LANG=C $grepfilter "${greplist[@]}" --
+		LANG=C LC_ALL=C $grepfilter "${greplist[@]}" --
 	else
 		cat
 	fi
@@ -189,7 +189,7 @@ function iterate-experimental() {
 		do
 			greplist+=(-f /var/lib/gg-highlight/"$i".txt)
 		done
-		LANG=C $grepfilter "${greplist[@]}" --
+		LANG=C LC_ALL=C $grepfilter "${greplist[@]}" --
 	else
 		cat
 	fi
@@ -204,4 +204,5 @@ function allyourlogsarebelongtome() {
 	iterate-greenhighlights
 }
 
-cat $file_arg | allyourlogsarebelongtome | less
+cat $file_arg | allyourlogsarebelongtome
+#cat $file_arg | allyourlogsarebelongtome | less
