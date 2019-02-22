@@ -1,7 +1,7 @@
 aodh-evaluator\[.*\]: .* INFO aodh.evaluator \[-\] initiating evaluation cycle on 0 alarms
 aodh-evaluator\[.*\]: .* WARNING oslo_db.sqlalchemy.utils \[-\] Unique keys not in sort_keys. The sorting order may be unstable.
 chef-client\[.*\]: 
-dnsmasq-dhcp\[.*\]: DHCPACK\(.*\) .*
+dnsmasq-dhcp\[.*\]: DHCPACK\(.*\) 
 dnsmasq-dhcp\[.*\]: DHCPDISCOVER
 dnsmasq-dhcp\[.*\]: DHCPOFFER
 dnsmasq-dhcp\[.*\]: DHCPREQUEST\(.*\)

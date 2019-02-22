@@ -1,4 +1,4 @@
 SAPHana\(.*\]: INFO: DEC analyze_hana_sync_statusSRS systemReplicationStatus.py \(to site .*\)-> 13.*$
 SAPHana\(.*\]: INFO: DEC analyze_hana_sync_statusSRS systemReplicationStatus.py \(to site .*\)-> 14.*$
 SAPHana\(.*\]: INFO: RA ==== begin action demote_clone \(.*\) ====$
-[^ ]*SAPHana\(.*?\]: INFO: ACT: Demoted.*$|$
+SAPHana\(.*?\]: INFO: ACT: Demoted.*$|$

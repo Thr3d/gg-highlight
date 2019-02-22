@@ -69,3 +69,9 @@ rsyslogd: \[origin .* rsyslogd was HUPed
 systemd\[1\]: Starting Discard unused blocks...
 systemd\[1\]: Started Discard unused blocks.
 lsvpd[44872]:
+systemd\[.*\]: pam_unix\(systemd-user:session\): session opened for user
+systemd\[.*\]: pam_unix\(systemd-user:session\): session closed for user
+vasd\[.*\: vasd-ipc_temp \(.*\) exiting
+lrmd\[.*\]:   notice: executing - rsc:.* action:notify call_id:
+lrmd\[.*\]:   notice: finished - rsc:.* action:notify call_id:.* pid:.* exit-code:0 exec-time:.*ms queue-time:.*ms
+crmd\[.*\]:   notice: Result of notify operation for .* on .*: 0 \(ok\)

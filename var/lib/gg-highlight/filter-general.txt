@@ -3,7 +3,7 @@
 adcert.* WARN
 adclient.* INFO
 attrd: \[.*\]: debug:
-audit\(.*
+audit\(
 audit_printk_skb: .* callbacks suppressed
 auditd\[.*Audit daemon rotating log files
 automount\[
@@ -22,13 +22,13 @@ CRON\[.*\]:
 cron\[.*No such file or directory
 crontab\[.*\]:
 cryptctl\[.*: 
-dbus\[.* activated service .org.freedesktop.PackageKit.
-dbus\[.* Successfully activated service .org.freedesktop.hostname1.
-dbus\[.* Successfully activated service .org.freedesktop.RealtimeKit1.
-dbus\[.* Successfully activated service .org.freedesktop.timedate1
-dd.collector\[
-dd.dogstatsd\[
-dd.forwarder\[
+dbus\[.* activated service \.org\.freedesktop\.PackageKit\.
+dbus\[.* Successfully activated service \.org\.freedesktop\.hostname1\.
+dbus\[.* Successfully activated service \.org\.freedesktop\.RealtimeKit1\.
+dbus\[.* Successfully activated service \.org\.freedesktop\.timedate1
+dd\.collector\[
+dd\.dogstatsd\[
+dd\.forwarder\[
 dhcpcd\[
 end_request: I/O error, dev fd0, sector 0
 exportfs\(.*\)\[.*\]: INFO: Directory
@@ -40,7 +40,7 @@ ifdown:
 ifup-dhcp:
 ifup: 
 IIB\[
-info: Watchdog enabled.
+info: Watchdog enabled\.
 kernel: .* generic-usb 
 kernel: .* input: 
 kernel: .* usb .*: Manufacturer
@@ -63,8 +63,8 @@ puma\[
 puppet-agent\[.*\]: Applied catalog in
 puppet-agent\[.*
 rhnsd.* running program /usr/sbin/rhn_check
-rpc.idmapd\[
-rpc.mountd\[
+rpc\.idmapd\[
+rpc\.mountd\[
 rsyslogd-3000:
 rtkit-daemon\[
 sftp-server\[
@@ -123,23 +123,23 @@ systemd-logind.* New session .* of user
 systemd-logind.*: Removed session
 systemd.*: Created slice User Slice of .*.
 systemd.*: Reached target Basic System.
-systemd.*: Reached target Default.
-systemd.*: Reached target Paths.
-systemd.*: Reached target Shutdown.
-systemd.*: Reached target Sockets.
-systemd.*: Reached target Timers.
-systemd.*: Received SIGRTMIN+24 from PID .* \(kill\).
+systemd.*: Reached target Default\.
+systemd.*: Reached target Paths\.
+systemd.*: Reached target Shutdown\.
+systemd.*: Reached target Sockets\.
+systemd.*: Reached target Timers\.
+systemd.*: Received SIGRTMIN+24 from PID .* \(kill\)\.
 systemd.*: Removed slice User Slice of .*.
 systemd.*: Started User Manager for UID .*.
 systemd.*: Starting Exit the Session...
 systemd.*: Starting User Manager for UID .*...
 systemd.*: Startup finished in .*.
 systemd.*: Stopped target Basic System.
-systemd.*: Stopped target Default.
-systemd.*: Stopped target Paths.
-systemd.*: Stopped target Sockets.
-systemd.*: Stopped target Timers.
-systemd.*: Stopped User Manager for UID .*.
+systemd.*: Stopped target Default\.
+systemd.*: Stopped target Paths\.
+systemd.*: Stopped target Sockets\.
+systemd.*: Stopped target Timers\.
+systemd.*: Stopped User Manager for UID .*\.
 systemd.*: Stopping User Manager for UID .*...
 systemd: pam_unix\(systemd-user:session\): session closed for user .*
 systemd: pam_unix\(systemd-user:session\): session opened for user .*
