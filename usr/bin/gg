@@ -21,9 +21,9 @@ GREEN='01;32'
 grepsearch='grep -E --text --color=always --line-buffered'
 grepfilter='grep --text --line-buffered -Ev'
 # Lists/Arrays
-redpatterns=("general-red" "ha-red" "sap-red" "caas-red" "hacib-red")
-yellowpatterns=("general-yellow" "ha-yellow" "sap-yellow" "supportconfig-yellow" "hacib-yellow")
-greenpatterns=("general-green" "ha-green" "hacib-green" "sap-green")
+redpatterns=("general-red" "ha-red" "sap-red" "caas-red" "hacib-red" "drbd-red")
+yellowpatterns=("general-yellow" "ha-yellow" "sap-yellow" "supportconfig-yellow" "hacib-yellow" "drbd-yellow")
+greenpatterns=("general-green" "ha-green" "hacib-green" "sap-green" "drbd-green")
 filters=("filter-general" "filter-ha" "filter-caas" "filter-sap" "filter-soc")
 experimental=("filter-test" "filter-disk" "filter-systemd")
 products=("ha" "caas" "sap" "soc")

@@ -1,0 +1,8 @@
+drbd .*?: disk\( Consistent -> UpToDate \)
+drbd .*?: conn\( Unconnected -> Connecting \)
+drbd .*?: conn\( Connecting -> Connected \) peer\( Unknown -> Secondary \)
+drbd .*?: pdsk\( DUnknown -> Consistent \) repl\( Off -> WFBitMapS \)
+drbd .*?: Began resync as SyncSource \(will sync .*? KB \[.*? bits set\]\).
+drbd .*?: Handshake to peer .*? successful: Agreed network protocol version .*?$
+drbd .*?: my node_id: .*?$
+drbd .*?: Resync done \(total .*? sec; paused .*? sec; .*?/sec\)|$
