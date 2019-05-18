@@ -6,10 +6,11 @@ device-mapper: .*?error.*$
 Error.*$
 ERROR:.*$
 failed.*$
-kernel.*? reservation conflict.*$
+kernel: \[.*\] hpet.: lost .* rtc interrupts
 kernel: \[.*?\] .*?: loading module not compiled with retpoline compiler.$
-kernel: \[.*?\] Spectre V2 : System may be vulnerable to spectre v2$
 kernel: \[.*?\] nfs: server .* not responding, still trying$
+kernel.*? reservation conflict.*$
+kernel: \[.*?\] Spectre V2 : System may be vulnerable to spectre v2$
 mcelog:.*$
 Protocol major versions differ.*$
 recoverable transport error.*$

@@ -1,9 +1,16 @@
-maintenance\=on
-name=\"maintenance\" value=\"true\"
-maintenance-mode=true
-maintenance=true
-standby\=on
-startup-fencing=false
-lpa_.*_lpt=10
 AUTOMATED_REGISTER=false
 AUTOMATED_REGISTER=no
+AUTOMATIC_RECOVER=false
+AUTOMATIC_RECOVER=no
+is-managed="false"
+lpa_.*?_lpt=10
+maintenance=false
+maintenance-mode=true
+maintenance-mode="true"
+maintenance\=on
+maintenance=true
+name=\"maintenance\" value=\"true\"
+on-fail=([ignore|block|stop|restart|fence|standby]+)
+standby\=on
+startup-fencing=false
+trace_ra=1

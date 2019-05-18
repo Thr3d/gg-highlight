@@ -1,1 +1,4 @@
-drbd .*?: Cluster is now split|$
+drbd .*?: Cluster is now split
+drbd .*?: Failed: role( Secondary -> Primary )
+drbd .*?: Split-Brain detected but unresolved, dropping connection!$
+drbd .*?: State change failed: Need access to UpToDate data|$

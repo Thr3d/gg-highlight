@@ -1,4 +1,5 @@
- Verification Status: Passed
-multipathd.*?reinstated.*$
-SuSEfirewall2 not active.*$
-tur checker reports path is up.*$|$
+mcelog\[.*?\]: Corrected error$
+multipathd.*?reinstated.*?$
+SuSEfirewall2 not active.*?$
+tur checker reports path is up.*?$
+ Verification Status: Passed|$

@@ -4,8 +4,10 @@ adclient\[.*\]:
 asamrcvr\[.*\]: 
 avahi-daemon\[.*\]:
 cf3\[.*\]:
+crmd\[.*\]:   notice: Result of notify operation for .* on .*: 0 \(ok\)
 cron\[.*\]: PAM adding faulty module:
 DBFS_/
+dbus\[.*\]: \[system\] Activating via systemd: service name='org.freedesktop.PackageKit' unit='packagekit.service'
 diagnostic.py\[.*\]: OMI restarted but not staying up.
 dzdo\[.*\]: 
 EXT3-fs \(.*\): warning: maximal mount count reached, running e2fsck is recommended
@@ -23,8 +25,11 @@ kernel: \[.*\] EXT3-fs \(.*\): warning: mounting fs with errors, running e2fsck 
 kernel: \[.*\] kjournald starting.  Commit interval 15 seconds
 kernel: \[.*\] lpfc
 kernel: \[.*\] qla2xxx \[.*\]-.*: Unable to read SFP data \(102/a0/0\).
-LVM\(.*\)\[.*\]: INFO: Reading all physical volumes. This may take a while...
+lrmd\[.*\]:   notice: executing - rsc:.* action:notify call_id:
+lrmd\[.*\]:   notice: finished - rsc:.* action:notify call_id:.* pid:.* exit-code:0 exec-time:.*ms queue-time:.*ms
+lsvpd[44872]:
 lvm\[.*\]:
+LVM\(.*\)\[.*\]: INFO: Reading all physical volumes. This may take a while...
 nscd: .* monitored directory .* was 
 nscd: .* monitored file .* was 
 nscd: .* monitoring directory 
@@ -38,8 +43,9 @@ pam_vas:
 pengine\[.*\]:   notice: Calculated transition .*, saving inputs in /var/lib/pacemaker/pengine/pe-input-.*.bz2
 python\[.*\]: .* INFO 
 rshd\[.*\]:
-rsyslogd-.*: action 'action 1' resumed \(module 'builtin:omfwd'\) \[try http://www.rsyslog.com/e/2359 \]
 rsyslogd.*: action 'action 1' resumed \(module 'builtin:omfwd'\) \[try http://www.rsyslog.com/e/0 \]
+rsyslogd-.*: action 'action 1' resumed \(module 'builtin:omfwd'\) \[try http://www.rsyslog.com/e/2359 \]
+rsyslogd: \[origin .* rsyslogd was HUPed
 SAPHanaSR-mon\[.* All checks passed -
 SAPHanaSR-mon\[.* Monitor startup
 server\[.*\]: 
@@ -51,27 +57,21 @@ su: message repeated .* times:
 su: pam_systemd\(su-l:session\): Cannot create session: Already running in a session
 systemd\[1\]: Failed to set up mount unit: Device or resource busy
 systemd\[1\]: omid.service: Supervising process
+systemd\[1\]: Reloaded System Logging Service.
+systemd\[1\]: Reloading System Logging Service.
+systemd\[1\]: Started Cleanup of Temporary Directories.
+systemd\[1\]: Started Discard unused blocks.
 systemd\[1\]: Started OMI CIM Server.
+systemd\[1\]: Starting Cleanup of Temporary Directories...
+systemd\[1\]: Starting Discard unused blocks...
 systemd\[1\]: Starting OMI CIM Server...
 systemd\[1\]: Stopped OMI CIM Server.
 systemd\[1\]: Stopping OMI CIM Server...
+systemd\[.*\]: pam_unix\(systemd-user:session\): session closed for user
+systemd\[.*\]: pam_unix\(systemd-user:session\): session opened for user
+systemd\[.*\]: Started PackageKit Daemon.
+systemd\[.*\]: Starting PackageKit Daemon...
 usermod\[.*\]: add
 vasd\[.*\]:
-when is experimental at /cluster/local/cluster_scripts/perforcemodule.pl
-dbus\[.*\]: \[system\] Activating via systemd: service name='org.freedesktop.PackageKit' unit='packagekit.service'
-systemd\[.*\]: Starting PackageKit Daemon...
-systemd\[.*\]: Started PackageKit Daemon.
-systemd\[1\]: Reloaded System Logging Service.
-systemd\[1\]: Started Cleanup of Temporary Directories.
-systemd\[1\]: Starting Cleanup of Temporary Directories...
-systemd\[1\]: Reloading System Logging Service.
-rsyslogd: \[origin .* rsyslogd was HUPed
-systemd\[1\]: Starting Discard unused blocks...
-systemd\[1\]: Started Discard unused blocks.
-lsvpd[44872]:
-systemd\[.*\]: pam_unix\(systemd-user:session\): session opened for user
-systemd\[.*\]: pam_unix\(systemd-user:session\): session closed for user
 vasd\[.*\: vasd-ipc_temp \(.*\) exiting
-lrmd\[.*\]:   notice: executing - rsc:.* action:notify call_id:
-lrmd\[.*\]:   notice: finished - rsc:.* action:notify call_id:.* pid:.* exit-code:0 exec-time:.*ms queue-time:.*ms
-crmd\[.*\]:   notice: Result of notify operation for .* on .*: 0 \(ok\)
+when is experimental at /cluster/local/cluster_scripts/perforcemodule.pl

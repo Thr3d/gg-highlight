@@ -1,15 +1,16 @@
-systemd\[.*\]: Starting Paths\.
-systemd\[.*\]: Starting Timers\.
-systemd\[.*\]: Starting Sockets\.
-systemd\[.*\]: Starting Basic System\.
-systemd\[.*\]: Starting Default\.
-systemd\[.*\]: Stopping Default\.
-systemd\[.*\]: Stopping Basic System\.
-systemd\[.*\]: Stopping Paths\.
-systemd\[.*\]: Stopping Timers\.
-systemd\[.*\]: Stopping Sockets\.
-systemd\[.*\]: Starting Shutdown\.
-systemd\[1\]: Stopping user-.*.slice\.
+systemd\[1\]: Created slice user-.*.slice\.
 systemd\[1\]: Removed slice user-.*.slice\.
 systemd\[1\]: Starting user-.*.slice\.
-systemd\[1\]: Created slice user-.*.slice\.
+systemd\[1\]: Stopping user-.*.slice\.
+systemd: Started Session .* of user
+systemd\[.*\]: Starting Basic System\.
+systemd\[.*\]: Starting Default\.
+systemd\[.*\]: Starting Paths\.
+systemd\[.*\]: Starting Shutdown\.
+systemd\[.*\]: Starting Sockets\.
+systemd\[.*\]: Starting Timers\.
+systemd\[.*\]: Stopping Basic System\.
+systemd\[.*\]: Stopping Default\.
+systemd\[.*\]: Stopping Paths\.
+systemd\[.*\]: Stopping Sockets\.
+systemd\[.*\]: Stopping Timers\.

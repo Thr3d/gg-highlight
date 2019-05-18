@@ -1,10 +1,15 @@
-PreferSiteTakeover selected so decrease promotion score here.*$
-Promote .*?to be primary.*$
+ERROR: ACT: check_for_primary: we didn't expect srmode to be: DUMP:.*?$
 HANA_STATE_DEFECT.*$
-ERROR: ACT: check_for_primary: we didn't expect srmode to be: DUMP:.*$
-SAPHana\(.*\)\[.*\]: INFO: DEC analyze_hana_sync_statusSRS systemReplicationStatus.py \(to site .*\)-> 10$
-SAPHana\(.*\)\[.*\]: INFO: DEC analyze_hana_sync_statusSRS systemReplicationStatus.py \(to site .*\)-> 11.*$
-SAPHana\(.*\)\[.*\]: INFO: DEC analyze_hana_sync_statusSRS systemReplicationStatus.py \(to site .*\)-> 12.*$
-SAPHana\(.*\)\[.*\]: INFO: ACT site=.*, setting SFAIL for secondary \(.*\) - srRc=12$
-SAPHana\(.*\)\[.*\]: INFO: RA ==== end action monitor_clone with rc=1 \(.*\)====$
-SFAIL.*$|$
+PreferSiteTakeover selected so decrease promotion score here.*?$
+Promote .*?to be primary.*$
+SAPHana\(.*?\]: INFO: ACT: !!!!!!! Promote .*? to be primary\. !!!!!!
+SAPHana\(.*?\]: INFO: ACT site=.*, setting SFAIL for secondary \(.*\) - srRc=12$
+SAPHana\(.*?\]: INFO: ACT site=.*?, setting SFAIL for secondary \(.*?\) - srRc=12$
+SAPHana\(.*?\]: INFO: DEC analyze_hana_sync_statusSRS systemReplicationStatus.py \(to site .*?\)-> 10
+SAPHana\(.*?\]: INFO: DEC analyze_hana_sync_statusSRS systemReplicationStatus.py \(to site .*?\)-> 11
+SAPHana\(.*?\]: INFO: DEC analyze_hana_sync_statusSRS systemReplicationStatus.py \(to site .*?\)-> 12
+SAPHana\(.*?\]: INFO: DEC: Dual primary detected, other instance is PROMOTED and lpa stalemate ==> local restart$
+SAPHana\(.*?\]: INFO: RA ==== end action monitor_clone with rc=1 \(.*?\)====$
+SAPHana\(.*?\]: INFO: RA ==== end action monitor_clone with rc=1 \(.*?\)====$
+SAPHana\(.*?\]: INFO: RA ==== end action start_clone with rc=7 \(.*?\) \(.*?s\)====$
+SFAIL.*?$|$

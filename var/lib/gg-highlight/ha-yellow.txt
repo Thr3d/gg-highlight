@@ -1,31 +1,26 @@
 corosync\[.*?\]:   \[CPG   \] got procleave message from cluster node.*$
+corosync.*?Incrementing problem counter.*$
 corosync\[.*?\]:   \[MAIN  \] interface section bindnetaddr is used together with nodelist. Nodelist one is going to be used..*$
 corosync\[.*?\]:   \[MAIN  \] Please migrate config file to nodelist..*$
-crmd\[.*?\]:   notice: High CPU load detected:.*$
-Executing reboot fencing operation.*$
-I_ELECTION_DC.*$
-I_NOT_DC.*$
-info: We don.t have a DC right now..*$
-lrmd\[.*?\]:   notice: .*?:stderr \[ umount: .*?target is busy \].*$
-notice: Removing.*?from the membership list.*$
-Quorum lost.*$
-S_ELECTION.*$
-SAPHana\(.*?\)\[.*?\]: INFO: LPA: Dual primary detected and AUTOMATED_REGISTER='false' ==> WAITING$
-SAPHana\(.*?\)\[.*?\]: INFO: LPA: You need to manually sr_register the older primary$
-sbd_stonith can fence.*$
-state is now lost.*$
-debug: on
 corosync\[.*?\]:   \[QB    \] Denied connection, is not ready.*$
-corosync.*?Incrementing problem counter.*$
 corosync\[.*?\]:  \[TOTEM \] Retransmit List.*$
 Couldn.t find device with.*$
 crmd\[.*?\]:   notice: do_state_transition: State transition S_ELECTION -> S_INTEGRATION \[ input=I_ELECTION_DC cause=C_TIMER_POPPED origin=election_timeout_popped \].*$
-crmd\[.*?\]:   notice: terminate_cs_connection: Disconnecting from Corosync.*$
-drbd .*: conn\( Disconnecting -> StandAlone \)$
-drbd .*: disk\( Attaching -> Inconsistent \)$
-kernel: \[.*\] drbd .*: PingAck did not arrive in time\.$
-kernel: \[.*\] drbd .*: conn\( Connected -> NetworkFailure \) peer\( Primary -> Unknown \)$
-kernel: \[.*\] drbd .*: pdsk\( UpToDate -> DUnknown \) repl\( SyncTarget -> Off \)$
+crmd\[.*?\]:   notice: High CPU load detected:.*$
 crmd\[.*\]:   notice: Result of .*: 1 \(unknown error\)$
-Waiting for all cluster members. Current votes: . expected_votes: .$
-Delaying fencing operations until there are resources to manage.*$|$
+crmd\[.*?\]:   notice: terminate_cs_connection: Disconnecting from Corosync.*$
+debug: on
+Delaying fencing operations until there are resources to manage.*$
+Executing reboot fencing operation.*$
+I_ELECTION_DC.*$
+info: We don.t have a DC right now..*$
+I_NOT_DC.*$
+lrmd\[.*?\]:   notice: .*?:stderr \[ umount: .*?target is busy \].*$
+notice: Removing.*?from the membership list.*$
+Quorum lost.*$
+sbd\[.*?]: .*?:    error: servant: mbox read failed in servant.$
+sbd\[.*?\]: .*?:    error: servant: slot read failed in servant.$
+sbd_stonith can fence.*$
+S_ELECTION.*$
+state is now lost.*$
+Waiting for all cluster members. Current votes: . expected_votes: .$|$

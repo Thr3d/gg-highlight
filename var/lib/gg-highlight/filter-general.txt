@@ -1,25 +1,23 @@
--- MARK --
-/usr/sbin/cron\[
 adcert.* WARN
 adclient.* INFO
 attrd: \[.*\]: debug:
 audit\(
-audit_printk_skb: .* callbacks suppressed
 auditd\[.*Audit daemon rotating log files
+audit_printk_skb: .* callbacks suppressed
 automount\[
 blk_update_request: I/O error, dev fd0, sector 0
 cimserver\[
-collectd\[.*\]: Filter subsystem:
 collectd\[
-CRON.* \(root\) CMD \(\[ -x /usr/lib64/sa/sa1 \] && exec /usr/lib64/sa/sa1 -S ALL 1 1\)
-CRON.* pam_unix\(crond:session\): session closed for user
-cron.* pam_unix\(crond:session\): session closed for user
-CRON.* pam_unix\(crond:session\): session opened for user
-cron.* pam_unix\(crond:session\): session opened for user
-cron.*: \(root\) CMD \(\[ -x /usr/lib64/sa/sa1 \] \&\& exec /usr/lib64/sa/sa1 -S ALL 1 1\)
-cron\[.*\]: \(root\) CMD \(/usr/bin/salt-daemon-watcher --with-init\)
+collectd\[.*\]: Filter subsystem:
 CRON\[.*\]:
 cron\[.*No such file or directory
+cron.* pam_unix\(crond:session\): session closed for user
+CRON.* pam_unix\(crond:session\): session closed for user
+cron.* pam_unix\(crond:session\): session opened for user
+CRON.* pam_unix\(crond:session\): session opened for user
+cron\[.*\]: \(root\) CMD \(/usr/bin/salt-daemon-watcher --with-init\)
+cron.*: \(root\) CMD \(\[ -x /usr/lib64/sa/sa1 \] \&\& exec /usr/lib64/sa/sa1 -S ALL 1 1\)
+CRON.* \(root\) CMD \(\[ -x /usr/lib64/sa/sa1 \] && exec /usr/lib64/sa/sa1 -S ALL 1 1\)
 crontab\[.*\]:
 cryptctl\[.*: 
 dbus\[.* activated service \.org\.freedesktop\.PackageKit\.
@@ -37,8 +35,8 @@ fsaua\[
 fscachesize: 
 hpfiordo:
 ifdown: 
-ifup-dhcp:
 ifup: 
+ifup-dhcp:
 IIB\[
 info: Watchdog enabled\.
 kernel: .* generic-usb 
@@ -50,18 +48,19 @@ kernel: .* usb .*: New USB device strings
 kernel: .* usb .*: Product:
 kernel: .* usb .*: USB disconnect
 logger: INFO
-lrmd.*:   notice: executing - rsc:rsc_
-lrmd.*:   notice: finished - rsc:rsc_
 lrmd: \[.*\]: debug: .*
 lrmd: \[.*\]: info: operation monitor.* exited with return code 0
+lrmd.*:   notice: executing - rsc:rsc_
+lrmd.*:   notice: finished - rsc:rsc_
+-- MARK --
 no IPv6 routers present
 omiserver\[.*\]: pam_vas: Authentication <succeeded>
-PackageKit: daemon
 PackageKit:
 packagekitd
+PackageKit: daemon
 puma\[
-puppet-agent\[.*\]: Applied catalog in
 puppet-agent\[.*
+puppet-agent\[.*\]: Applied catalog in
 rhnsd.* running program /usr/sbin/rhn_check
 rpc\.idmapd\[
 rpc\.mountd\[
@@ -72,56 +71,60 @@ smartd.*failed to read Temperature
 snowagent:
 sntp\[
 splunk\[.*
-sshd.* pam_unix\(sshd:session\): session closed for user
-sshd.* pam_unix\(sshd:session\): session opened for user
-sshd.* pam_winbind.* granted access
-sshd.* subsystem request for sftp
+sshd.*Accepted keyboard-interactive
 sshd.*: Accepted password
 sshd.*: Accepted publickey for
+sshd\[.*\]: Close session: user .* from .* port .* id .*
+sshd\[.* Closing connection
 sshd.*: Connection closed by
+sshd\[.* Connection from
 sshd.*: Connection reset by
 sshd.*: Did not receive identification string from
 sshd.*: Disconnected
-sshd.*: Failed password
-sshd.*: Received disconnect from
-sshd.*Accepted keyboard-interactive
 sshd.*error: PAM: Authentication failure for
-sshd.*pam_lastlog
-sshd.*pam_unix\(sshd:auth\): authentication failure
-sshd\[.* Closing connection
-sshd\[.* Connection from
+sshd\[.*: error: PAM: User not known to the underlying authentication module for
 sshd\[.* Failed keyboard-interactive/pam for invalid user
+sshd.*: Failed password
 sshd\[.* input_userauth_request: invalid user
 sshd\[.* Invalid user .* from 
-sshd\[.* Postponed keyboard-interactive for invalid user .* from .* port 
-sshd\[.* Postponed keyboard-interactive for
+sshd.*pam_lastlog
+sshd.*pam_unix\(sshd:auth\): authentication failure
+sshd.* pam_unix\(sshd:session\): session closed for user
+sshd.* pam_unix\(sshd:session\): session opened for user
+sshd.* pam_winbind.* granted access
 sshd\[.* Postponed keyboard-interactive
+sshd\[.* Postponed keyboard-interactive for
+sshd\[.* Postponed keyboard-interactive for invalid user .* from .* port 
 sshd\[.* Postponed publickey for
-sshd\[.* Set /proc/self/oom_score_adj to 0
-sshd\[.* Starting session
-sshd\[.* Transfered:
-sshd\[.* User child is on
-sshd\[.*: error: PAM: User not known to the underlying authentication module for
+sshd.*: Received disconnect from
 sshd\[.*\]: .* Session for user .* ended
 sshd\[.*\]: .* Session for user .* started
-sshd\[.*\]: Close session: user .* from .* port .* id .*
+sshd\[.* Set /proc/self/oom_score_adj to 0
+sshd\[.* Starting session
 sshd\[.*\]: Starting session: command for .* from .* port .* id .*
+sshd.* subsystem request for sftp
 sshd\[.*\]: Timeout, client not responding.
-su: \(to
+sshd\[.* Transfered:
+sshd\[.* User child is on
+su\[.*\]: 
+sudo: 
+sudo.*pam_vas:
 su: FAILED SU
 su: pam_unix.* session closed for user
 su: pam_unix.* session opened for user
-su\[.*\]: 
-sudo.*pam_vas:
-sudo: 
 SuSEfirewall2: SuSEfirewall2 not active
-syslog-ng.*Log statistics
+su: \(to
 syslog-ng\[.*\]: Connection failed\; error=.Connection refused.
 syslog-ng\[.*\]: I/O error occurred while writing; fd='16', error='Connection refused \(111\)|syslog-ng\[.*\]: Connection broken; time_reopen='60'
+syslog-ng.*Log statistics
 SYSTEMCHECK: 
+systemd\[1\]: Started Session
+systemd\[1\]: Starting Session
+systemd.*: Created slice User Slice of .*.
 systemd-logind.* New session .* of user
 systemd-logind.*: Removed session
-systemd.*: Created slice User Slice of .*.
+systemd: pam_unix\(systemd-user:session\): session closed for user .*
+systemd: pam_unix\(systemd-user:session\): session opened for user .*
 systemd.*: Reached target Basic System.
 systemd.*: Reached target Default\.
 systemd.*: Reached target Paths\.
@@ -141,12 +144,9 @@ systemd.*: Stopped target Sockets\.
 systemd.*: Stopped target Timers\.
 systemd.*: Stopped User Manager for UID .*\.
 systemd.*: Stopping User Manager for UID .*...
-systemd: pam_unix\(systemd-user:session\): session closed for user .*
-systemd: pam_unix\(systemd-user:session\): session opened for user .*
-systemd\[1\]: Started Session
-systemd\[1\]: Starting Session
 useradd\[
 userdel\[
+/usr/sbin/cron\[
 vsftpd:
 xinetd
 ypxfr\[.*\]:

@@ -1,8 +1,13 @@
-drbd .*?: disk\( Consistent -> UpToDate \)
-drbd .*?: conn\( Unconnected -> Connecting \)
+drbd .*?: Began resync as SyncSource \(will sync .*? KB \[.*? bits set\]\)
+drbd .*?: conn\( Connecting -> Connected \) peer\( Unknown -> Primary \)
 drbd .*?: conn\( Connecting -> Connected \) peer\( Unknown -> Secondary \)
-drbd .*?: pdsk\( DUnknown -> Consistent \) repl\( Off -> WFBitMapS \)
-drbd .*?: Began resync as SyncSource \(will sync .*? KB \[.*? bits set\]\).
+drbd .*?: conn\( Unconnected -> Connecting \)
+drbd .*?: disk\( Consistent -> UpToDate \)
 drbd .*?: Handshake to peer .*? successful: Agreed network protocol version .*?$
+drbd .*?: helper command: /sbin/drbdadm initial-split-brain exit code 0 \(0x0\)$
 drbd .*?: my node_id: .*?$
-drbd .*?: Resync done \(total .*? sec; paused .*? sec; .*?/sec\)|$
+drbd .*?: pdsk\( DUnknown -> Consistent \) repl\( Off -> WFBitMapS \)
+drbd .*?: Resync done \(total .*? sec; paused .*? sec; .*?/sec\)
+drbd .*?: Split-Brain detected, manually solved. Sync from peer node
+drbd .*?: Split-Brain detected, . primaries, automatically solved. Sync from peer node
+drbd .*?: Split-Brain detected, . primaries, automatically solved. Sync from this node$|$

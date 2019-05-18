@@ -1,9 +1,11 @@
-drbd .*?: pdsk\( UpToDate -> DUnknown \) repl\( Established -> Off \)
-drbd .*?: PingAck did not arrive in time.
 drbd .*?: conn\( Connected -> NetworkFailure \) peer\( Primary -> Unknown \)
+drbd .*?: conn\( Disconnecting -> StandAlone \)
 drbd .*?: conn\( NetworkFailure -> Unconnected \)
-drbd .*?: pdsk\( Consistent -> Outdated \)
-drbd .*?: pdsk\( Outdated -> Inconsistent \) repl\( WFBitMapS -> SyncSource \)
-drbd .*?: pdsk\( Inconsistent -> UpToDate \) repl\( SyncSource -> Established \)
+drbd .*?: disk\( Attaching -> Inconsistent \)
+drbd .*?: disk\( Detaching -> Diskless \)
 drbd .*?: disk\( UpToDate -> Consistent \)
-drbd .*?: disk\( Detaching -> Diskless \)|$
+drbd .*?: pdsk\( Consistent -> Outdated \)
+drbd .*?: pdsk\( Inconsistent -> UpToDate \) repl\( SyncSource -> Established \)
+drbd .*?: pdsk\( Outdated -> Inconsistent \) repl\( WFBitMapS -> SyncSource \)
+drbd .*?: pdsk\( UpToDate -> DUnknown \) repl\( Established -> Off \)
+drbd .*?: PingAck did not arrive in time.|$

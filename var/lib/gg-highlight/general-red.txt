@@ -3,47 +3,51 @@ attrd\[.*?\]:    error:.*$
 BTRFS error.*$
 BTRFS info \(device .*?\): forced readonly.*$
  BUG:.*$
-iscsid: Kernel reported iSCSI connection .* error \(1020 - ISCSI_ERR_TCP_CONN_CLOSE: TCP connection closed\) state.*$
-iscsid: Target dropping all connections, reconnect min.*$
-iscsid: connect to .* failed \(Connection refused\)$
-multipathd: .* - directio checker reports path is down$
-multipathd: checker failed path .*$
-multipathd: .*: remaining active paths: 0$
-kernel: \[.*\] device-mapper: multipath: Failing path .*$
 Cancelling IO request due to timeout.*$
 Detected aborted journal.*$
 Detected IO errors while flushing file data on.*$
 device-mapper: multipath: Failing path.*$
+EDAC sbridge .*?: HANDLING MCE MEMORY ERROR
 error: fork: Cannot allocate memory.*$
 error: remounting filesystem read-only.*$
 FAILED.*$
 fatal.*$
 FATAL:.*$
 fork: retry: No child processes.*
-I/O error.*$
 init: Entering runlevel:.*$
 init: Switching to runlevel:.*$
+I/O error.*$
 IO failure.*$
-kernel taint.*$
-kernel.*?FAILED Result.*$
-kernel.*?killing request.*$
-kernel: \[.*?\] ------------\[ cut here \]------------.*$
+iscsid: connect to .* failed \(Connection refused\)$
+iscsid: Kernel reported iSCSI connection .* error \(1020 - ISCSI_ERR_TCP_CONN_CLOSE: TCP connection closed\) state.*$
+iscsid: Target dropping all connections, reconnect min.*$
 kernel: \[.*?\] Call Trace:.*$
+kernel: \[.*?\] ------------\[ cut here \]------------.*$
+kernel: \[.*\] device-mapper: multipath: Failing path .*$
+kernel.*?FAILED Result.*$
 kernel: \[.*?\] invalid opcode:.*$
 kernel: \[.*?\] kernel BUG at.*$
 kernel: \[.*?\] Killed process .*?\(.*?\) total-vm:.*$
+kernel.*?killing request.*$
 kernel: \[.*?\] nfs: server .*?not responding, timed out$
 kernel: \[.*?\] Out of memory: Kill process .*?\(.*?\) score .*?or sacrifice child.*$
+kernel: \[.*?\] .*?: page allocation failure.*$
+kernel: \[.*?\] sched: RT throttling activated$
+kernel: \[.*?\] SLAB: Unable to allocate memory.*$
+kernel taint.*$
 kernel: \[.*?\] XFS .*?: Corruption of in-memory data detected\.  Shutting down filesystem.*$
 kernel: \[.*?\] XFS .*?: Please umount the filesystem and rectify the problem\(s\).*$
 kernel: \[.*?\] XFS .*?: xfs_do_force_shutdown.*$
-kernel: \[.*?\] .*?: page allocation failure.*$
-kernel: \[.*?\] SLAB: Unable to allocate memory.*$
 klogd.*?started.*$
 Link Down Event.*$
 lost page write due to IO error.*$
-multipathd:.*?- tur checker reports path is down.*$
+mce: \[Hardware Error\]: Machine check events logged
+mcelog\[.*?\]: Corrected memory errors on page .*? exceed threshold .*?$
+multipathd: checker failed path .*$
+multipathd: .* - directio checker reports path is down$
 multipathd:.*?mark as failed.*$
+multipathd: .*: remaining active paths: 0$
+multipathd:.*?- tur checker reports path is down.*$
 No free memory.*$
 NO_MEMORY.*$
 NT_STATUS_ACCESS_DENIED.*$
@@ -58,20 +62,24 @@ rsyslogd: \[origin software=\"rsyslogd\" swVersion=\".*?\" x-pid=\".*?\" x-info=
 segfault.*$
 shutting down for system reboot.*$
 sshd\[.*?\]: error: fork: Cannot allocate memory.*$
+syslogd.*?restart.*$
 syslog-ng starting up.*$
 syslog-ng.*?: syslog-ng shutting down; version=.*$
 syslog-ng.*?: Termination requested via signal, terminating.*$
-syslogd.*?restart.*$
 sysrq: SysRq : sysrq: Trigger a crash.*$
-systemd-coredump\[.*?\]: Process .*?dumped core.*$
-systemd-logind\[.*?\]: Power key pressed\..*$
-systemd-logind\[.*?\]: Powering Off\.\.\.$
-systemd-logind\[.*?\]: System is powering down.*$
+systemd\[1\]: Failed to start.*$
 systemd\[1\]: systemd .*?running in system mode\..*$
+systemd-coredump\[.*?\]: Process .*?dumped core.*$
+systemd-logind\[.*?\]: Powering Off\.\.\.$
+systemd-logind\[.*?\]: Power key pressed\..*$
+systemd-logind\[.*?\]: System is powering down.*$
+systemd\[.*?\]: Out of memory.$
 tainting kernel.*$
 taints kernel.*$
-x-info="http://www\.rsyslog\.com"\] exiting on signal 15\..*$
-x-info="http://www\.rsyslog\.com"\] start.*$
-XFS.*?: Log I/O Error Detected\.  Shutting down filesystem.*$
 xfs_do_force_shutdown.*$
-systemd\[1\]: Failed to start.*$|$
+XFS.*?: Log I/O Error Detected\.  Shutting down filesystem.*$
+XFS \(.*?\): Metadata corruption detected
+XFS \(.*?\): metadata I/O error:
+XFS \(.*?\): Unmount and run xfs_repair
+x-info="http://www\.rsyslog\.com"\] exiting on signal 15\..*$
+x-info="http://www\.rsyslog\.com"\] start.*$|$
