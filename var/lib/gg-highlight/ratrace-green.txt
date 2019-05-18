@@ -1,0 +1,1 @@
+DBG: saphana_monitor_clone: get_hana_landscape_status=4|$
