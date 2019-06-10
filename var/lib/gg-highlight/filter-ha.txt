@@ -48,5 +48,8 @@ pengine\[.*:   notice: Relying on watchdog integration for fencing
 pengine\[.* notice: unpack_config: On loss of CCM Quorum: Ignore
 pengine\[.*\]:   notice: Watchdog will be used via SBD if fencing is required
 sbd: \[.*\]: info: Monitoring Pacemaker health
+sbd\[.*?\]:   notice: main: Doing flush \+ writing 'b' to sysrq on timeout
 stonith-ng: \[.*\]: debug:
+stonith-ng\[.*?\]:   notice: On loss of CCM Quorum: Ignore
 stonith-ng\[.*notice: unpack_config: On loss of CCM Quorum: Ignore
+stonith-ng\[.*?\]:   notice: Watchdog will be used via SBD if fencing is required

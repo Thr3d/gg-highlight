@@ -1,7 +1,8 @@
 Aborting journal.*$
-attrd\[.*?\]:    error:.*$
+attrd\[[[:digit:]]{1,}\]:    error:.*$
 BTRFS error.*$
 BTRFS info \(device .*?\): forced readonly.*$
+BTRFS: Transaction aborted \(error -2\)
  BUG:.*$
 Cancelling IO request due to timeout.*$
 Detected aborted journal.*$
@@ -14,6 +15,7 @@ FAILED.*$
 fatal.*$
 FATAL:.*$
 fork: retry: No child processes.*
+general protection fault: 0000 \[#1\] SMP
 init: Entering runlevel:.*$
 init: Switching to runlevel:.*$
 I/O error.*$
@@ -42,7 +44,7 @@ klogd.*?started.*$
 Link Down Event.*$
 lost page write due to IO error.*$
 mce: \[Hardware Error\]: Machine check events logged
-mcelog\[.*?\]: Corrected memory errors on page .*? exceed threshold .*?$
+mcelog\[[[:digit:]]{1,}\]: Corrected memory errors on page .*? exceed threshold .*?$
 multipathd: checker failed path .*$
 multipathd: .* - directio checker reports path is down$
 multipathd:.*?mark as failed.*$
@@ -55,13 +57,15 @@ oom-killer.*$
 Oops:.*$
 out of memory.*$
 OutOfMemoryError.*$
+pm-profiler: Power Button pressed, executing /sbin/shutdown -h now
 Readonly filesystem.*$
 rejecting I/O.*$
 rsyslogd: \[origin software=\"rsyslogd\" swVersion=\".*?\" x-pid=\".*?\" x-info=\"http://www\.rsyslog\.com\"\] exiting on signal 15.*$
 rsyslogd: \[origin software=\"rsyslogd\" swVersion=\".*?\" x-pid=\".*?\" x-info=\"http://www\.rsyslog\.com\"\] start.*$
 segfault.*$
+shutdown\[[[:digit:]]{1,}\]: shutting down for system halt
 shutting down for system reboot.*$
-sshd\[.*?\]: error: fork: Cannot allocate memory.*$
+sshd\[[[:digit:]]{1,}\]: error: fork: Cannot allocate memory.*$
 syslogd.*?restart.*$
 syslog-ng starting up.*$
 syslog-ng.*?: syslog-ng shutting down; version=.*$
@@ -69,13 +73,15 @@ syslog-ng.*?: Termination requested via signal, terminating.*$
 sysrq: SysRq : sysrq: Trigger a crash.*$
 systemd\[1\]: Failed to start.*$
 systemd\[1\]: systemd .*?running in system mode\..*$
-systemd-coredump\[.*?\]: Process .*?dumped core.*$
-systemd-logind\[.*?\]: Powering Off\.\.\.$
-systemd-logind\[.*?\]: Power key pressed\..*$
-systemd-logind\[.*?\]: System is powering down.*$
-systemd\[.*?\]: Out of memory.$
+systemd-coredump\[[[:digit:]]{1,}\]: Process .*?dumped core.*$
+systemd\[[[:digit:]]{1,}\]: Out of memory.$
+systemd-logind\[[[:digit:]]{1,}\]: Powering Off\.\.\.$
+systemd-logind\[[[:digit:]]{1,}\]: Power key pressed\..*$
+systemd-logind\[[[:digit:]]{1,}\]: System is powering down.*$
 tainting kernel.*$
 taints kernel.*$
+winbindd\[[[:digit:]]{1,}\]:   Could not write result
+winbindd\[[[:digit:]]{1,}\]: .*?/winbindd/winbindd_dual.c:.*?\(child_write_response\)
 xfs_do_force_shutdown.*$
 XFS.*?: Log I/O Error Detected\.  Shutting down filesystem.*$
 XFS \(.*?\): Metadata corruption detected

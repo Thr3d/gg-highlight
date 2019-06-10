@@ -1,10 +1,16 @@
+SAPHana\(.*?\]: INFO: ACT: SAPHANA Instance .*? started: .*?WaitforStarted#012OK
+SAPHana\(.*?\]: INFO: ACT: SAP Instance .*? stopped: .*?WaitforStopped#012OK
+SAPHana\(.*?\]: INFO: ACT: Starting SAPHANA Instance .*?Start#012OK
+SAPHana\(.*?\]: INFO: ACT: Stopping SAP Instance .*?Stop#012OK$
 SAPHana\(.*?\]: INFO: DEC analyze_hana_sync_statusSRS systemReplicationStatus.py \(to site .*?\)-> 15$
 SAPHana\(.*?\]: INFO: RA ==== begin action monitor_clone \(.*?\) ====$
+SAPHana\(.*?\]: INFO: RA ==== begin action promote_clone \(.*?\) ====$
 SAPHana\(.*?\]: INFO: RA ==== begin action start_clone \(.*?\) ====$
 SAPHana\(.*?\]: INFO: RA ==== begin action stop_clone \(.*?\) ====$
 SAPHana\(.*?\]: INFO: RA ==== end action demote_clone with rc=0 \(.*?\)====$
 SAPHana\(.*?\]: INFO: RA ==== end action monitor_clone with rc=0 \(.*?\)====$
 SAPHana\(.*?\]: INFO: RA ==== end action monitor_clone with rc=8 \(.*?\)====$
+SAPHana\(.*?\]: INFO: RA ==== end action promote_clone with rc=0 \(.*?\)====$
 SAPHana\(.*?\]: INFO: RA ==== end action start_clone with rc=0 \(.*?\)====$
 SAPHana\(.*?\]: INFO: RA ==== end action stop_clone with rc=0 \(.*?\)====$
 SAPHanaTopology\(.*?\]: INFO: RA ==== begin action monitor_clone \(.*?\) ====$

@@ -3,4 +3,5 @@ SAPHana\(.*?\]: INFO: DEC analyze_hana_sync_statusSRS systemReplicationStatus.py
 SAPHana\(.*?\]: INFO: DEC analyze_hana_sync_statusSRS systemReplicationStatus.py \(to site .*?\)-> 14
 SAPHana\(.*?\]: INFO: LPA: Dual primary detected and AUTOMATED_REGISTER='false' ==> WAITING$
 SAPHana\(.*?\]: INFO: LPA: You need to manually sr_register the older primary$
-SAPHana\(.*?\]: INFO: RA ==== begin action demote_clone \(.*?\) ====$|$
+SAPHana\(.*?\]: INFO: RA ==== begin action demote_clone \(.*?\) ====$
+SAPHanaTopology\(.*?\]: INFO: RA ==== end action monitor_clone with rc=7 \(.*?\)====|$

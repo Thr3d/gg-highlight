@@ -1,26 +1,28 @@
-corosync\[.*?\]:   \[CPG   \] got procleave message from cluster node.*$
+corosync\[[[:digit:]]{1,}\]:   \[CPG   \] got procleave message from cluster node.*$
+corosync\[[[:digit:]]{1,}\]:   \[MAIN  \] interface section bindnetaddr is used together with nodelist. Nodelist one is going to be used..*$
+corosync\[[[:digit:]]{1,}\]:   \[MAIN  \] Please migrate config file to nodelist..*$
+corosync\[[[:digit:]]{1,}\]:   \[QB    \] Denied connection, is not ready.*$
+corosync\[[[:digit:]]{1,}\]:  \[TOTEM \] Retransmit List.*$
 corosync.*?Incrementing problem counter.*$
-corosync\[.*?\]:   \[MAIN  \] interface section bindnetaddr is used together with nodelist. Nodelist one is going to be used..*$
-corosync\[.*?\]:   \[MAIN  \] Please migrate config file to nodelist..*$
-corosync\[.*?\]:   \[QB    \] Denied connection, is not ready.*$
-corosync\[.*?\]:  \[TOTEM \] Retransmit List.*$
 Couldn.t find device with.*$
-crmd\[.*?\]:   notice: do_state_transition: State transition S_ELECTION -> S_INTEGRATION \[ input=I_ELECTION_DC cause=C_TIMER_POPPED origin=election_timeout_popped \].*$
-crmd\[.*?\]:   notice: High CPU load detected:.*$
+crmd\[[[:digit:]]{1,}\]:   notice: do_state_transition: State transition S_ELECTION -> S_INTEGRATION \[ input=I_ELECTION_DC cause=C_TIMER_POPPED origin=election_timeout_popped \].*$
+crmd\[[[:digit:]]{1,}\]:   notice: High CPU load detected:.*$
+crmd\[[[:digit:]]{1,}\]:   notice: terminate_cs_connection: Disconnecting from Corosync.*$
 crmd\[.*\]:   notice: Result of .*: 1 \(unknown error\)$
-crmd\[.*?\]:   notice: terminate_cs_connection: Disconnecting from Corosync.*$
-debug: on
 Delaying fencing operations until there are resources to manage.*$
 Executing reboot fencing operation.*$
+fence_azure_arm: Timed out waiting to power ON
 I_ELECTION_DC.*$
 info: We don.t have a DC right now..*$
 I_NOT_DC.*$
-lrmd\[.*?\]:   notice: .*?:stderr \[ umount: .*?target is busy \].*$
+lrmd\[[[:digit:]]{1,}\]:   notice: .*?:stderr \[ Marked additional .*? as out-of-sync based on AL. \]
+lrmd\[[[:digit:]]{1,}\]:   notice: .*?:stderr \[ umount: .*?target is busy \].*$
+lrmd: \[[[:digit:]]{1,}\]: WARN: configuration advice: reduce operation contention either by increasing lrmd max_children or by increasing intervals of monitor operations
 notice: Removing.*?from the membership list.*$
 Quorum lost.*$
-sbd\[.*?]: .*?:    error: servant: mbox read failed in servant.$
-sbd\[.*?\]: .*?:    error: servant: slot read failed in servant.$
+sbd\[[[:digit:]]{1,}\]: .*?:    error: servant: ([slot|mbox]+) read failed in servant.$
 sbd_stonith can fence.*$
 S_ELECTION.*$
 state is now lost.*$
+stonith-ng\[[[:digit:]]{1,}\]:  warning: fence_azure_arm\[[[:digit:]]{1,}\]: stderr: \[ Timed out waiting to power ON \]
 Waiting for all cluster members. Current votes: . expected_votes: .$|$

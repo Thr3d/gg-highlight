@@ -8,4 +8,5 @@ drbd .*?: pdsk\( Consistent -> Outdated \)
 drbd .*?: pdsk\( Inconsistent -> UpToDate \) repl\( SyncSource -> Established \)
 drbd .*?: pdsk\( Outdated -> Inconsistent \) repl\( WFBitMapS -> SyncSource \)
 drbd .*?: pdsk\( UpToDate -> DUnknown \) repl\( Established -> Off \)
-drbd .*?: PingAck did not arrive in time.|$
+drbd .*?: PingAck did not arrive in time.
+drbd .*?: timeout while waiting for feature packet|$

@@ -2,6 +2,7 @@ Bad protocol version.*$
 blocked FC remote port time out.*$
 BTRFS warning.*$
 cgroup: fork rejected by pids controller.*$
+cron\[[[:digit:]]{1,}\]: \(CRON\) bad
 device-mapper: .*?error.*$
 Error.*$
 ERROR:.*$

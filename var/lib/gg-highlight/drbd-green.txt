@@ -9,5 +9,4 @@ drbd .*?: my node_id: .*?$
 drbd .*?: pdsk\( DUnknown -> Consistent \) repl\( Off -> WFBitMapS \)
 drbd .*?: Resync done \(total .*? sec; paused .*? sec; .*?/sec\)
 drbd .*?: Split-Brain detected, manually solved. Sync from peer node
-drbd .*?: Split-Brain detected, . primaries, automatically solved. Sync from peer node
 drbd .*?: Split-Brain detected, . primaries, automatically solved. Sync from this node$|$

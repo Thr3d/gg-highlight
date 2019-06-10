@@ -1,103 +1,110 @@
 A processor.*$
-cib\[.*?\]:   notice: Disconnecting from Corosync.*$
+cib\[[[:digit:]]{1,}\]:   notice: Disconnecting from Corosync.*$
 CLM CONFIGURATION CHANGE.*$
 ^CLOUD_NETCONFIG_MANAGE='yes'
 cloud-netconfig: removing address .*? from interface .*?$
-cluster-dlm\[.*?\]: fence_node_time:.*$
-corosync\[.*?\]:  \[CLM   \]    r.*?ip\(127.0.0.1\).*$
-corosync\[.*?\]:  \[MAIN  \] member section is deprecated..*$
-corosync\[.*?\]:  \[MAIN  \] Please migrate config file to nodelist..*$
+cluster-dlm\[[[:digit:]]{1,}\]: fence_node_time:.*$
+corosync\[[[:digit:]]{1,}\]:  \[CLM   \]    r.*?ip\(127.0.0.1\).*$
+corosync\[[[:digit:]]{1,}\]:  \[MAIN  \] member section is deprecated..*$
+corosync\[[[:digit:]]{1,}\]:  \[MAIN  \] Please migrate config file to nodelist..*$
+corosync\[[[:digit:]]{1,}\]:   \[MAIN  \] Totem is unable to form a cluster because of an operating system or network fault\(reason: totem is continuously in gather state\). The most common cause of this message is that the local firewall is configured improperly..*$
+corosync\[[[:digit:]]{1,}\]:  \[pcmk  \] notice: pcmk_shutdown: Shuting down Pacemaker.*$
+corosync\[[[:digit:]]{1,}\]:  \[SERV  \] Unloading all Corosync service engines.*$
+corosync\[[[:digit:]]{1,}\]:   \[TOTEM \] Digest does not match.*$
+corosync\[[[:digit:]]{1,}\]:  \[TOTEM \] Failed to receive the leave message..*$
+corosync\[[[:digit:]]{1,}\]:   \[TOTEM \] Failed to receive the leave message. failed:.*$
+corosync\[[[:digit:]]{1,}\]:  \[TOTEM \] Incoming packet has different crypto type. Rejecting
+corosync\[[[:digit:]]{1,}\]:   \[TOTEM \] Invalid packet data.*$
+corosync\[[[:digit:]]{1,}\]:  \[TOTEM \] Invalid packet data
+corosync\[[[:digit:]]{1,}\]:  \[TOTEM \] Marking ringid .*? FAULTY.*$
+corosync\[[[:digit:]]{1,}\]:   \[TOTEM \] Received message has invalid digest... ignoring..*$
+corosync\[[[:digit:]]{1,}\]:  \[TOTEM \] Received message has invalid digest... ignoring.
+corosync\[[[:digit:]]{1,}\]:  \[TOTEM \] Type of received message is wrong...  ignoring -2.
 Corosync main process was not scheduled for.*$
-corosync\[.*?\]:   \[MAIN  \] Totem is unable to form a cluster because of an operating system or network fault\(reason: totem is continuously in gather state\). The most common cause of this message is that the local firewall is configured improperly..*$
-corosync\[.*?\]:  \[pcmk  \] notice: pcmk_shutdown: Shuting down Pacemaker.*$
-corosync\[.*?\]:  \[SERV  \] Unloading all Corosync service engines.*$
-corosync\[.*?\]:   \[TOTEM \] Digest does not match.*$
-corosync\[.*?\]:  \[TOTEM \] Failed to receive the leave message..*$
-corosync\[.*?\]:   \[TOTEM \] Failed to receive the leave message. failed:.*$
-corosync\[.*?\]:   \[TOTEM \] Invalid packet data.*$
-corosync\[.*?\]:  \[TOTEM \] Marking ringid .*? FAULTY.*$
-corosync\[.*?\]:   \[TOTEM \] Received message has invalid digest... ignoring..*$
 crit:.*$
 CRIT: Refusing to be promoted to Primary without UpToDate data
-crmd[1949]:   notice: Requesting fencing (reboot) of node .*$
-crmd\[.*?\]:.*?Cant retrieve the CIB.*$
-crmd\[.*?\]:    error:.*$
-crmd\[.*?\]:    error: Cannot route message to unknown node.*$
-crmd\[.*?\]:    error: crmd_fast_exit: Could not recover from internal error.*$
-crmd\[.*?\]:.*?I_ERROR.*$
-crmd: \[.*?\]: info: te_fence_node: Executing reboot fencing operation.*$
-crmd\[.*?\]:.*?I_TERMINATE.*$
-crmd\[.*?\]:   notice: abort_transition_graph: Transition aborted: Stonith failed.*$
-crmd\[.*?\]:   notice: Invoking handler for signal 15: Terminated.*$
-crmd\[.*\]:   notice: No devices found in cluster to fence .*, giving up$
-crmd\[.*\]:   notice: Peer .* was not terminated \(off\) by <anyone> for .*: No such device .* by client .*$
-crmd\[.*\]:   notice: Peer .* was not terminated \(reboot\) by <anyone> for .*: No such device .*$
-crmd\[.*?\]:   notice: Peer .*?was terminated \(.*?\) by .*? OK.*$
-crmd\[.*\]:   notice: Requesting fencing \(reboot\) of node .*$
-crmd\[.*?\]:   notice: Requesting shutdown, upper limit is .*$
-crmd\[.*?\]:   notice: Result of stop operation for .*?: 1 \(unknown error\)
-crmd\[.*\]:   notice: Stonith operation .*: No such device \(-19\)$
-crmd\[.*?\]:   notice: tengine_stonith_callback: Stonith operation .*?No route to host.*$
-crmd\[.*?\]:.*?notice: throttle_handle_load:  High CPU load detected:.*$
-crmd\[.*?\]:.*?notice: throttle_mode: High CIB load detected:.*$
-crmd\[.*?\]:.*?Our peer on the DC \(.*?\) is dead.*$
-crmd\[.*?\]:  warning: Action .*?failed \(target: . vs. rc: .\).*$
-crmd\[.*?\]:  warning: Another DC detected:.*$
-crmd\[.*?\]:.*?warning: do_recover: Fast-tracking shutdown in response to errors.*$
-crmd\[.*?\]:  warning: reap_dead_nodes: Our DC node \(.*?\) left the cluster.*$
+crmd\[[[:digit:]]{1,}\]:.*?Cant retrieve the CIB.*$
+crmd\[[[:digit:]]{1,}\]:    error:.*$
+crmd\[[[:digit:]]{1,}\]:    error: Cannot route message to unknown node.*$
+crmd\[[[:digit:]]{1,}\]:    error: crmd_fast_exit: Could not recover from internal error.*$
+crmd\[[[:digit:]]{1,}\]:.*?I_ERROR.*$
+crmd: \[[[:digit:]]{1,}\]: info: te_fence_node: Executing reboot fencing operation.*$
+crmd\[[[:digit:]]{1,}\]:.*?I_TERMINATE.*$
+crmd\[[[:digit:]]{1,}\]:   notice: abort_transition_graph: Transition aborted: Stonith failed.*$
+crmd\[[[:digit:]]{1,}\]:   notice: Invoking handler for signal 15: Terminated.*$
+crmd\[[[:digit:]]{1,}\]:   notice: No devices found in cluster to fence .*, giving up$
+crmd\[[[:digit:]]{1,}\]:   notice: Peer .* was not terminated \(off\) by <anyone> for .*: No such device .* by client .*$
+crmd\[[[:digit:]]{1,}\]:   notice: Peer .* was not terminated \(reboot\) by <anyone> for .*: No such device .*$
+crmd\[[[:digit:]]{1,}\]:   notice: Peer .*?was terminated \(.*?\) by .*? OK.*$
+crmd\[[[:digit:]]{1,}\]:   notice: Requesting fencing \(reboot\) of node .*$
+crmd\[[[:digit:]]{1,}\]:   notice: Requesting fencing \(reboot\) of node .*$
+crmd\[[[:digit:]]{1,}\]:   notice: Requesting shutdown, upper limit is .*$
+crmd\[[[:digit:]]{1,}\]:   notice: Result of stop operation for .*?: 1 \(unknown error\)
+crmd\[[[:digit:]]{1,}\]:   notice: Stonith operation . for .*? failed \(No such device\): aborting transition.
+crmd\[[[:digit:]]{1,}\]:   notice: Stonith operation .*: No such device \(-19\)$
+crmd\[[[:digit:]]{1,}\]:   notice: tengine_stonith_callback: Stonith operation .*?No route to host.*$
+crmd\[[[:digit:]]{1,}\]:.*?notice: throttle_handle_load:  High CPU load detected:.*$
+crmd\[[[:digit:]]{1,}\]:.*?notice: throttle_mode: High CIB load detected:.*$
+crmd\[[[:digit:]]{1,}\]:   notice: Transition aborted: Stonith failed
+crmd\[[[:digit:]]{1,}\]:.*?Our peer on the DC \(.*?\) is dead.*$
+crmd\[[[:digit:]]{1,}\]:  warning: Action .*?failed \(target: . vs. rc: .\).*$
+crmd\[[[:digit:]]{1,}\]:  warning: Another DC detected:.*$
+crmd\[[[:digit:]]{1,}\]:.*?warning: do_recover: Fast-tracking shutdown in response to errors.*$
+crmd\[[[:digit:]]{1,}\]:  warning: reap_dead_nodes: Our DC node \(.*?\) left the cluster.*$
 error: Could not execute .*?Resource temporarily unavailable .*$
 Executing suicide fencing.*$
 external/vcenter\(.*?ERROR:.*$
-lrmd\[.*?\]:    error: main: Failed to create IPC server: shutting down and inhibiting respawn.*$
-lrmd\[.*?\]:    error: mainloop_add_ipc_server: Could not start lrmd IPC server: Address already in use \(-98\).*$
-lrmd\[.*?\]:    error: qb_ipcs_us_publish: Could not bind AF_UNIX \(\): Address already in use \(98\).*$
-LVM\(.*?\)\[.*?\]: ERROR: LVM: .*?did not activate correctly.*$
-oralsnr\(.*?\)\[.*?\]: INFO: .*?: required binary not installed.*$
-pacemakerd\[.*?\]:   notice: Invoking handler for signal 15: Terminated.*$
-pacemakerd\[.*?\]:   notice: Shutting down Pacemaker.*$
-pacemakerd\[.*?\]:   notice: Stopping crmd: Sent -15 to process.*$
+lrmd\[[[:digit:]]{1,}\]:    error: main: Failed to create IPC server: shutting down and inhibiting respawn.*$
+lrmd\[[[:digit:]]{1,}\]:    error: mainloop_add_ipc_server: Could not start lrmd IPC server: Address already in use \(-98\).*$
+lrmd\[[[:digit:]]{1,}\]:    error: qb_ipcs_us_publish: Could not bind AF_UNIX \(\): Address already in use \(98\).*$
+LVM\(.*?\)\[[[:digit:]]{1,}\]: ERROR: LVM: .*?did not activate correctly.*$
+oralsnr\(.*?\)\[[[:digit:]]{1,}\]: INFO: .*?: required binary not installed.*$
+pacemakerd\[[[:digit:]]{1,}\]:   notice: Invoking handler for signal 15: Terminated.*$
+pacemakerd\[[[:digit:]]{1,}\]:   notice: Shutting down Pacemaker.*$
+pacemakerd\[[[:digit:]]{1,}\]:   notice: Stopping crmd: Sent -15 to process.*$
+pengine\[[[:digit:]]{1,}\]:   notice: .* - blocked\)$
+pengine\[[[:digit:]]{1,}\]:   notice: Cannot fence unclean nodes until quorum is attained \(or no-quorum-policy is set to ignore\).*$
+pengine\[[[:digit:]]{1,}\]:   notice: Configuration ERRORs found during PE processing.  Please run "crm_verify -L" to identify issues.$
+pengine\[[[:digit:]]{1,}\]:   notice:  \* Fence \(reboot\) .*?$
+pengine\[[[:digit:]]{1,}\]:  warning: determine_online_status: Node .*?is unclean.*$
+pengine\[[[:digit:]]{1,}\]:  warning: Fencing and resource management disabled due to lack of quorum.*$
+pengine\[[[:digit:]]{1,}\]:  warning: handle_startup_fencing: Blind faith: not fencing unseen nodes.*$
+pengine\[[[:digit:]]{1,}\]:  warning: .*?is unclean!.*$
+pengine\[[[:digit:]]{1,}\]:  warning: pe_fence_node: Node .*?will be fenced because the node is no longer part of the cluster.*$
+pengine: \[[[:digit:]]{1,}\]: WARN: pe_fence_node: Node .*?will be fenced to recover from resource failure\(s\).*$
 pengine.*?:    error:.*$
-pengine\[.*\]:   notice: .* - blocked\)$
-pengine\[.*?\]:   notice: Cannot fence unclean nodes until quorum is attained \(or no-quorum-policy is set to ignore\).*$
-pengine\[.*?\]:   notice: Configuration ERRORs found during PE processing.  Please run "crm_verify -L" to identify issues.$
-pengine\[.*?\]:  warning: determine_online_status: Node .*?is unclean.*$
-pengine\[.*?\]:  warning: Fencing and resource management disabled due to lack of quorum.*$
-pengine\[.*?\]:  warning: handle_startup_fencing: Blind faith: not fencing unseen nodes.*$
-pengine\[.*?\]:  warning: .*?is unclean!.*$
-pengine\[.*?\]:  warning: pe_fence_node: Node .*?will be fenced because the node is no longer part of the cluster.*$
-pengine: \[.*?\]: WARN: pe_fence_node: Node .*?will be fenced to recover from resource failure\(s\).*$
 quorum lost.*$
 Requesting peer fencing.*$
 reset successfully delivered to.*$
 Result of stop operation for .*?Timed Out$
 r.*?ip\.127\.0\.0\.1\..*$
-sbd\[.*?\]:    emerg: do_exit: Rebooting system: reboot$
-sbd\[.*?\]: .*?:    emerg: do_exit: Rebooting system: reboot$
+sbd\[[[:digit:]]{1,}\]:    emerg: do_exit: Rebooting system: reboot$
+sbd\[[[:digit:]]{1,}\]: .*?:    emerg: do_exit: Rebooting system: reboot$
+sbd\[[[:digit:]]{1,}\]: .*?:   notice: servant: Received command reset from .*? on disk .*$
+sbd\[[[:digit:]]{1,}\]:  warning: inquisitor_child: .*? requested a reset
 sbd.*?ERROR:.*$
-sbd\[.*?\]: .*?:   notice: servant: Received command reset from .*? on disk .*$
 SBD_STARTMODE=\"clean\"
 sbd.*?WARN:.*$
-sbd\[.*?\]:  warning: inquisitor_child: .*? requested a reset
 Scheduling Node .*?for shutdown$
 Scheduling Node .*?for STONITH.*$
 stonith: external_reset_req: 'vcenter reset' for host .*?failed with rc.*$
+stonith-ng\[[[:digit:]]{1,}\]:    error: Operation reboot of .* by <no-one> for .*: No such device$
+stonith-ng\[[[:digit:]]{1,}\]:    error: remote_op_done: Operation reboot of .*?No route to host.*$
+stonith-ng\[[[:digit:]]{1,}\]:   notice: .* can not fence \(reboot\) .*: dynamic-list$
+stonith-ng\[[[:digit:]]{1,}\]:   notice: Couldn't find anyone to fence \(off\) .* with any device$
+stonith-ng\[[[:digit:]]{1,}\]:   notice: Couldn't find anyone to fence \(reboot\) .* with any device$
+stonith-ng\[[[:digit:]]{1,}\]:   notice: Initiating manual confirmation
+stonith-ng\[[[:digit:]]{1,}\]:   notice: Injecting manual confirmation that .* is safely off/down$
+stonith-ng\[[[:digit:]]{1,}\]:   notice: Operation off of .* by a human for .*: OK$
+stonith-ng\[[[:digit:]]{1,}\]:   notice: Operation reboot of .* by <no-one> for .*: No such device$
+stonith-ng\[[[:digit:]]{1,}\]:   notice: Operation reboot of .*?OK$
+stonith-ng\[[[:digit:]]{1,}\]:   notice: Received manual confirmation that .* is fenced$
+stonith-ng\[[[:digit:]]{1,}\]:   notice: stonith_choose_peer: Couldn't find anyone to fence.*$
+stonith-ng\[[[:digit:]]{1,}\]:  warning: log_action: fence_legacy\[.*?\] stderr:.*$
 stonith-ng\[.*\:    error: Operation off of .* by <no-one> for .*: No such device$
-stonith-ng\[.*\]:    error: Operation reboot of .* by <no-one> for .*: No such device$
-stonith-ng\[.*?\]:    error: remote_op_done: Operation reboot of .*?No route to host.*$
-stonith-ng\[.*\]:   notice: .* can not fence \(reboot\) .*: dynamic-list$
-stonith-ng\[.*\]:   notice: Couldn't find anyone to fence \(off\) .* with any device$
-stonith-ng\[.*\]:   notice: Couldn't find anyone to fence \(reboot\) .* with any device$
-stonith-ng\[.*\]:   notice: Initiating manual confirmation
-stonith-ng\[.*\]:   notice: Injecting manual confirmation that .* is safely off/down$
-stonith-ng\[.*\]:   notice: Operation off of .* by a human for .*: OK$
-stonith-ng\[.*\]:   notice: Operation reboot of .* by <no-one> for .*: No such device$
-stonith-ng\[.*?\]:   notice: Operation reboot of .*?OK$
-stonith-ng\[.*\]:   notice: Received manual confirmation that .* is fenced$
-stonith-ng\[.*?\]:   notice: stonith_choose_peer: Couldn't find anyone to fence.*$
 stonith-ng.*?wants to fence.*$
-stonith-ng\[.*?\]:  warning: log_action: fence_legacy\[.*?\] stderr:.*$
 systemd[1]: Failed to start.*$
-systemd\[.*?\]: Stopping Pacemaker High Availability Cluster Manager....*$
+systemd\[[[:digit:]]{1,}\]: Stopping Pacemaker High Availability Cluster Manager....*$
 timed out after.*$
 \[TOTEM \] Retransmit List:
 warning: Could not verify cluster configuration file /var/lib/pacemaker/cib/cib.xml: No such file or directory.*$

@@ -1,36 +1,40 @@
    Active: active
 A new membership .*?was formed..*?$
 Completed service synchronization, ready to provide service.*?$
-corosync\[.*?\]:   \[CPG   \] got procjoin message from cluster node .*?for pid .*?$
 corosync.*?Decrementing problem counter.*?$
-corosync\[.*?\]:   \[MAIN  \] Corosync Cluster Engine exiting with status 0 at main.c:2056..*?$
-corosync\[.*?\]:   \[MAIN  \] Corosync Cluster Engine \(.*?\): started and ready to provide service..*?$
-corosync\[.*?\]:   \[MAIN  \] Member joined: .*?$
-corosync\[.*?\]:   \[MAIN  \] Member joined: .*$
-crmd\[.*?\]:   notice: crm_update_quorum: Updating quorum status to true.*?$
-crmd\[.*?\]:   notice: Initiating start operation
-crmd\[.*?\]:   notice: Initiating stop operation
-crmd\[.*?\]:   notice: peer_update_callback: Stonith/shutdown of .*? not matched.*?$
-crmd\[.*?\]:   notice: Result of start operation for .*?: 0 \(ok\).*?$
-crmd\[.*?\]:   notice: Result of stop operation for .*?: 0 \(ok\).*?$
+corosync\[[[:digit:]]{1,}\]:   \[CPG   \] got procjoin message from cluster node .*?for pid .*?$
+corosync\[[[:digit:]]{1,}\]:   \[MAIN  \] Corosync Cluster Engine exiting with status 0 at main.c:2056..*?$
+corosync\[[[:digit:]]{1,}\]:   \[MAIN  \] Corosync Cluster Engine \(.*?\): started and ready to provide service..*?$
+corosync\[[[:digit:]]{1,}\]:   \[MAIN  \] Member joined: .*?$
+corosync\[[[:digit:]]{1,}\]:   \[MAIN  \] Member joined: .*$
+crmd\[[[:digit:]]{1,}\]:   notice: crm_update_quorum: Updating quorum status to true.*?$
+crmd\[[[:digit:]]{1,}\]:   notice: Initiating demote operation
+crmd\[[[:digit:]]{1,}\]:   notice: Initiating promote operation .*? locally on .*?$
+crmd\[[[:digit:]]{1,}\]:   notice: Initiating start operation
+crmd\[[[:digit:]]{1,}\]:   notice: Initiating stop operation
+crmd\[[[:digit:]]{1,}\]:   notice: peer_update_callback: Stonith/shutdown of .*? not matched.*?$
+crmd\[[[:digit:]]{1,}\]:   notice: Result of promote operation for .*?: 0 \(ok\)$
+crmd\[[[:digit:]]{1,}\]:   notice: Result of start operation for .*?: 0 \(ok\).*?$
+crmd\[[[:digit:]]{1,}\]:   notice: Result of stop operation for .*?: 0 \(ok\).*?$
+crmd\[[[:digit:]]{1,}\]:   notice: Result of promote operation for .*? on .*?: 0 \(ok\)
 Filesystem\(.*?\]: INFO: unmounted .*?successfully.*?$
 info: Node state: online.*?$
 info: Pacemaker health check: OK.*?$
 is now: member.*?$
 notice: Quorum acquired.*?$
-pacemakerd\[.*?\]:   notice: Shutdown complete.*?$
-pacemakerd\[.*?\]:   notice: Starting Pacemaker.*?$
-pengine\[.*?\]:   notice: Demote .*?$
-pengine\[.*?\]:   notice: Move .*?$
-pengine\[.*?\]:   notice: Promote .*?$
-pengine\[.*?\]:   notice: Recover .*?$
-pengine\[.*?\]:   notice: Restart .*?$
-pengine\[.*?\]:   notice: Start .*?$
-pengine\[.*?\]:   notice: Stop    .*?$
+pacemakerd\[[[:digit:]]{1,}\]:   notice: Shutdown complete.*?$
+pacemakerd\[[[:digit:]]{1,}\]:   notice: Starting Pacemaker.*?$
+pengine\[[[:digit:]]{1,}\]:   notice: Demote .*?$
+pengine\[[[:digit:]]{1,}\]:   notice: Move .*?$
+pengine\[[[:digit:]]{1,}\]:   notice: Promote .*?$
+pengine\[[[:digit:]]{1,}\]:   notice: Recover .*?$
+pengine\[[[:digit:]]{1,}\]:   notice: Restart .*?$
+pengine\[[[:digit:]]{1,}\]:   notice: Start .*?$
+pengine\[[[:digit:]]{1,}\]:   notice: Stop    .*?$
 quorum acquired.*?$
-sbd: \[.*?\]: info: CIB reconnect successful.*?$
+sbd: \[[[:digit:]]{1,}\]: info: CIB reconnect successful.*?$
 Servant starting for device.*?$
 state is now member.*?$
-systemd\[.*?\]: Started Pacemaker High Availability Cluster Manager..*?$
-systemd\[.*?\]: Starting Pacemaker High Availability Cluster Manager....*?$
-systemd\[.*?\]: Stopped Pacemaker High Availability Cluster Manager..*?$|$
+systemd\[[[:digit:]]{1,}\]: Started Pacemaker High Availability Cluster Manager..*?$
+systemd\[[[:digit:]]{1,}\]: Starting Pacemaker High Availability Cluster Manager....*?$
+systemd\[[[:digit:]]{1,}\]: Stopped Pacemaker High Availability Cluster Manager..*?$|$

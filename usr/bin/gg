@@ -31,8 +31,7 @@ products=("ha" "caas" "sap" "soc")
 FILTER=false
 EXPERIMENTAL=false
 
-function usage()
-{
+function usage() {
 	echo "Usage: gg [OPTION]... [FILE]"
 	echo "-i, --ignore, -f, --filter 			Enable filtering"
 	echo "-v, --version 					Display version"
@@ -41,8 +40,7 @@ function usage()
 	echo "-e, --experimental				enable experimental features"
 }
 
-function display_version()
-{
+function display_version() {
 	echo "gg-highlight version $VERSION"
 }
 
@@ -196,7 +194,6 @@ function iterate-experimental() {
 }
 
 function allyourlogsarebelongtome() {
-	
 	iterate-filters |\
 	iterate-experimental |\
 	iterate-redhighlights |\

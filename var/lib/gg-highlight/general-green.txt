@@ -1,3 +1,4 @@
+kernel: \[.*?\] hv_utils: Shutdown request received - graceful shutdown initiated
 mcelog\[.*?\]: Corrected error$
 multipathd.*?reinstated.*?$
 SuSEfirewall2 not active.*?$
