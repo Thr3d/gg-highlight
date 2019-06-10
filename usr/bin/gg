@@ -11,7 +11,7 @@
 #cat messages|tr -cd '\11\12\15\40-\176' > messages.new && mv -f messages.new messages
 ##TODO add bash completion
 
-VERSION=1.2.1
+VERSION=1.2.2
 
 # Coloring
 RED='1;37;41'
