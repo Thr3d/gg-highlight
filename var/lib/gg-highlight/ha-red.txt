@@ -54,6 +54,7 @@ crmd\[[[:digit:]]{1,}\]:  warning: reap_dead_nodes: Our DC node \(.*?\) left the
 error: Could not execute .*?Resource temporarily unavailable .*$
 Executing suicide fencing.*$
 external/vcenter\(.*?ERROR:.*$
+kernel: watchdog watchdog0: watchdog did not stop!
 lrmd\[[[:digit:]]{1,}\]:    error: main: Failed to create IPC server: shutting down and inhibiting respawn.*$
 lrmd\[[[:digit:]]{1,}\]:    error: mainloop_add_ipc_server: Could not start lrmd IPC server: Address already in use \(-98\).*$
 lrmd\[[[:digit:]]{1,}\]:    error: qb_ipcs_us_publish: Could not bind AF_UNIX \(\): Address already in use \(98\).*$
@@ -78,13 +79,17 @@ Requesting peer fencing.*$
 reset successfully delivered to.*$
 Result of stop operation for .*?Timed Out$
 r.*?ip\.127\.0\.0\.1\..*$
+sbd\[.*?\]:    cluster:  warning: notify_parent: Our parent is dead
 sbd\[[[:digit:]]{1,}\]:    emerg: do_exit: Rebooting system: reboot$
 sbd\[[[:digit:]]{1,}\]: .*?:    emerg: do_exit: Rebooting system: reboot$
 sbd\[[[:digit:]]{1,}\]: .*?:   notice: servant: Received command reset from .*? on disk .*$
 sbd\[[[:digit:]]{1,}\]:  warning: inquisitor_child: .*? requested a reset
 sbd.*?ERROR:.*$
+sbd\[.*?\]:    error: messenger: Message is not delivered via more then a half of devices
+sbd\[.*?\]:       pcmk:  warning: notify_parent: Our parent is dead.
 SBD_STARTMODE=\"clean\"
 sbd.*?WARN:.*$
+sbd\[.*?\]:  warning: messenger: Process .*? failed to deliver!
 Scheduling Node .*?for shutdown$
 Scheduling Node .*?for STONITH.*$
 stonith: external_reset_req: 'vcenter reset' for host .*?failed with rc.*$
@@ -104,6 +109,8 @@ stonith-ng\[[[:digit:]]{1,}\]:  warning: log_action: fence_legacy\[.*?\] stderr:
 stonith-ng\[.*\:    error: Operation off of .* by <no-one> for .*: No such device$
 stonith-ng.*?wants to fence.*$
 systemd[1]: Failed to start.*$
+systemd\[1\]: sbd.service: Control process exited, code=exited status=1
+systemd\[1\]: sbd.service: Main process exited, code=killed, status=9/KILL
 systemd\[[[:digit:]]{1,}\]: Stopping Pacemaker High Availability Cluster Manager....*$
 timed out after.*$
 \[TOTEM \] Retransmit List:

@@ -1,8 +1,9 @@
-hyperkube\[.*?\]: I.* container_manager_linux\.go:398\] \[ContainerManager\]: Discovered runtime cgroups name: /system\.slice/docker\.service
-hyperkube\[.*?\]: I.* kubelet_node_status\.go:247\] Setting node annotation to enable volume controller attach/detach
-hyperkube\[.*?\]: I.* kubelet_node_status\.go:410\] Recording NodeHasNoDiskPressure event message for node 127\.0\.0\.1
-hyperkube\[.*?\]: I.* kubelet_node_status\.go:410\] Recording NodeHasSufficientDisk event message for node 127\.0\.0\.1
-hyperkube\[.*?\]: I.* kubelet_node_status\.go:410\] Recording NodeHasSufficientMemory event message for node 127\.0\.0\.1
-hyperkube\[.*?\]: I.* qos_container_manager_linux\.go:286\] \[ContainerManager\]: Updated QoS cgroup configuration
+hyperkube\[.*?\]: I.*? container_manager_linux\.go:.*?\] \[ContainerManager\]: Discovered runtime cgroups name: /system\.slice/docker\.service
+hyperkube\[.*?\]: I.*? kubelet_node_status\.go:.*?\] Recording NodeHasNoDiskPressure event message for node 127\.0\.0\.1
+hyperkube\[.*?\]: I.*? kubelet_node_status\.go:.*?\] Recording NodeHasSufficientDisk event message for node 127\.0\.0\.1
+hyperkube\[.*?\]: I.*? kubelet_node_status\.go:.*?\] Recording NodeHasSufficientMemory event message for node 127\.0\.0\.1
+hyperkube\[.*?\]: I.*? kubelet_node_status\.go:.*?\] Recording NodeHasSufficientPID event message for node 127.0.0.1
+hyperkube\[.*?\]: I.*? kubelet_node_status\.go:.*?\] Setting node annotation to enable volume controller attach/detach
+hyperkube\[.*?\]: I.*? qos_container_manager_linux\.go:.*?\] \[ContainerManager\]: Updated QoS cgroup configuration
 salt-minion\[.*?\]: \[WARNING \] Unable to find IPv6 record for ".*?" causing a 10 second timeout when rendering grains\. Set the dns or /etc/hosts for IPv6 to clear this\.
 systemd\[.*?\]: Received SIGRTMIN\+24 from PID .*? \(kill\)

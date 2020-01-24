@@ -12,4 +12,5 @@ SAPHana\(.*?\]: INFO: DEC: Dual primary detected, other instance is PROMOTED and
 SAPHana\(.*?\]: INFO: RA ==== end action monitor_clone with rc=1 \(.*?\)====$
 SAPHana\(.*?\]: INFO: RA ==== end action monitor_clone with rc=1 \(.*?\)====$
 SAPHana\(.*?\]: INFO: RA ==== end action start_clone with rc=7 \(.*?\) \(.*?s\)====$
+crmd\[.*?\]:   notice: .*? \[ 124:P::::\\nPRIM\\n \]
 SFAIL.*?$|$

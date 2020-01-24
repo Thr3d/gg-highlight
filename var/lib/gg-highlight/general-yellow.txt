@@ -2,6 +2,9 @@ Bad protocol version.*$
 blocked FC remote port time out.*$
 BTRFS warning.*$
 cgroup: fork rejected by pids controller.*$
+charon: .*?\] giving up after 5 retransmits
+charon: .*?\] peer not responding, trying again \(.*?\)
+charon: .*?\] retransmit . of request with message ID 0$
 cron\[[[:digit:]]{1,}\]: \(CRON\) bad
 device-mapper: .*?error.*$
 Error.*$
