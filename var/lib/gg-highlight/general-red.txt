@@ -23,23 +23,23 @@ IO failure.*$
 iscsid: connect to .* failed \(Connection refused\)$
 iscsid: Kernel reported iSCSI connection .* error \(1020 - ISCSI_ERR_TCP_CONN_CLOSE: TCP connection closed\) state.*$
 iscsid: Target dropping all connections, reconnect min.*$
-kernel: \[.*?\] Call Trace:.*$
-kernel: \[.*?\] ------------\[ cut here \]------------.*$
-kernel: \[.*\] device-mapper: multipath: Failing path .*$
+kernel: \[[[:digit:]]{1,}\] Call Trace:.*$
+kernel: \[[[:digit:]]{1,}\] ------------\[ cut here \]------------.*$
+kernel: \[[[:digit:]]{1,}\] device-mapper: multipath: Failing path .*$
 kernel.*?FAILED Result.*$
-kernel: \[.*?\] invalid opcode:.*$
-kernel: \[.*?\] kernel BUG at.*$
-kernel: \[.*?\] Killed process .*?\(.*?\) total-vm:.*$
+kernel: \[[[:digit:]]{1,}\] invalid opcode:.*$
+kernel: \[[[:digit:]]{1,}\] kernel BUG at.*$
+kernel: \[[[:digit:]]{1,}\] Killed process .*?\(.*?\) total-vm:.*$
 kernel.*?killing request.*$
-kernel: \[.*?\] nfs: server .*?not responding, timed out$
-kernel: \[.*?\] Out of memory: Kill process .*?\(.*?\) score .*?or sacrifice child.*$
-kernel: \[.*?\] .*?: page allocation failure.*$
-kernel: \[.*?\] sched: RT throttling activated$
-kernel: \[.*?\] SLAB: Unable to allocate memory.*$
+kernel: \[[[:digit:]]{1,}\] nfs: server .*?not responding, timed out$
+kernel: \[[[:digit:]]{1,}\] Out of memory: Kill process .*?\(.*?\) score .*?or sacrifice child.*$
+kernel: \[[[:digit:]]{1,}\] .*?: page allocation failure.*$
+kernel: \[[[:digit:]]{1,}\] sched: RT throttling activated$
+kernel: \[[[:digit:]]{1,}\] SLAB: Unable to allocate memory.*$
 kernel taint.*$
-kernel: \[.*?\] XFS .*?: Corruption of in-memory data detected\.  Shutting down filesystem.*$
-kernel: \[.*?\] XFS .*?: Please umount the filesystem and rectify the problem\(s\).*$
-kernel: \[.*?\] XFS .*?: xfs_do_force_shutdown.*$
+kernel: \[[[:digit:]]{1,}\] XFS .*?: Corruption of in-memory data detected\.  Shutting down filesystem.*$
+kernel: \[[[:digit:]]{1,}\] XFS .*?: Please umount the filesystem and rectify the problem\(s\).*$
+kernel: \[[[:digit:]]{1,}\] XFS .*?: xfs_do_force_shutdown.*$
 klogd.*?started.*$
 Link Down Event.*$
 lost page write due to IO error.*$

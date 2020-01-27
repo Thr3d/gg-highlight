@@ -1,1 +1,1 @@
-hyperkube\[.*?\]: I.*?kubelet\.go:1820\] skipping pod synchronization - \.*?is not healthy:.*$|$
+hyperkube\[[[:digit:]]{1,}\]: I.*?kubelet\.go:[[:digit:]]{1,}\] skipping pod synchronization - \.*?is not healthy:.*$|$

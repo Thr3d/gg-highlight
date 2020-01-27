@@ -9,7 +9,7 @@ corosync\[[[:digit:]]{1,}\]:   \[MAIN  \] Member joined: .*?$
 corosync\[[[:digit:]]{1,}\]:   \[MAIN  \] Member joined: .*$
 crmd\[[[:digit:]]{1,}\]:   notice: crm_update_quorum: Updating quorum status to true.*?$
 crmd\[[[:digit:]]{1,}\]:   notice: Initiating demote operation
-crmd\[[[:digit:]]{1,}\]:   notice: Initiating promote operation .*? locally on .*?$
+crmd\[[[:digit:]]{1,}\]:   notice: Initiating promote operation
 crmd\[[[:digit:]]{1,}\]:   notice: Initiating start operation
 crmd\[[[:digit:]]{1,}\]:   notice: Initiating stop operation
 crmd\[[[:digit:]]{1,}\]:   notice: peer_update_callback: Stonith/shutdown of .*? not matched.*?$
