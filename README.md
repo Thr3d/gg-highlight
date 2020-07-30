@@ -4,7 +4,7 @@ It has aggressive filtering which can be enabled with -i (disabled by default) t
 
 **Install:**
 ```
-zypper addrepo http://smt.lab.novell.com/collective/collective.repo
+zypper addrepo http://smt.suse.cloud/collective/collective.repo
 zypper in gg-highlight
 ```
 **Usage:**
