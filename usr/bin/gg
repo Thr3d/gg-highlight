@@ -36,8 +36,8 @@ function usage() {
 	echo "-i, --ignore, -f, --filter     (default: false) Enable filtering"
 	echo "-v, --version 					Display version"
 	echo "-h, --help 					Show this list"
-	echo "-d, --disable ["${products[@]}"](default: none)  exclude product patterns"
-	echo "-e, --experimental	       (default: false) enable experimental features"
+	echo "-d, --disable ["${products[@]}"](default: none)  Exclude product patterns"
+	echo "-e, --experimental	       (default: false) Enable experimental features"
 }
 
 function display_version() {
