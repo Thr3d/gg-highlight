@@ -32,12 +32,12 @@ FILTER=false
 EXPERIMENTAL=false
 
 function usage() {
-	echo "Usage: gg [OPTION]... [FILE]"
-	echo "-i, --ignore, -f, --filter 			Enable filtering"
+	echo "Usage: gg [OPTION]... <FILE>"
+	echo "-i, --ignore, -f, --filter     (default: false) Enable filtering"
 	echo "-v, --version 					Display version"
 	echo "-h, --help 					Show this list"
-	echo "-d, --disable ["${products[@]}"]			disable product filter"
-	echo "-e, --experimental				enable experimental features"
+	echo "-d, --disable ["${products[@]}"](default: none)  Exclude product patterns"
+	echo "-e, --experimental	       (default: false) Enable experimental features"
 }
 
 function display_version() {
@@ -125,6 +125,7 @@ fi
 # Check for arguments
 if [ $# -eq 0 ]; then
     echo "No arguments provided"
+    usage
     exit 1
 fi
 
