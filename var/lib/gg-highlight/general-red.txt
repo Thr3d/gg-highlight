@@ -1,3 +1,4 @@
+dsm_ism_srvmgrd\[[[:digit:]]{1,}\]: .* The iDRAC Service Module received a request from the server operating system \(OS\) to stop the services of Service Module.
 Aborting journal.*$
 attrd\[[[:digit:]]{1,}\]:    error:.*$
 BTRFS error.*$
@@ -23,32 +24,32 @@ IO failure.*$
 iscsid: connect to .* failed \(Connection refused\)$
 iscsid: Kernel reported iSCSI connection .* error \(1020 - ISCSI_ERR_TCP_CONN_CLOSE: TCP connection closed\) state.*$
 iscsid: Target dropping all connections, reconnect min.*$
-kernel: \[[[:digit:]]{1,}\] Call Trace:.*$
-kernel: \[[[:digit:]]{1,}\] ------------\[ cut here \]------------.*$
-kernel: \[[[:digit:]]{1,}\] device-mapper: multipath: Failing path .*$
+kernel: \[.*?\] Call Trace:.*$
+kernel: \[.*?\] ------------\[ cut here \]------------.*$
+kernel: \[.*\] device-mapper: multipath: Failing path .*$
 kernel.*?FAILED Result.*$
-kernel: \[[[:digit:]]{1,}\] invalid opcode:.*$
-kernel: \[[[:digit:]]{1,}\] kernel BUG at.*$
-kernel: \[[[:digit:]]{1,}\] Killed process .*?\(.*?\) total-vm:.*$
+kernel: \[.*?\] invalid opcode:.*$
+kernel: \[.*?\] kernel BUG at.*$
+kernel: \[.*?\] Killed process .*?\(.*?\) total-vm:.*$
 kernel.*?killing request.*$
-kernel: \[[[:digit:]]{1,}\] nfs: server .*?not responding, timed out$
-kernel: \[[[:digit:]]{1,}\] Out of memory: Kill process .*?\(.*?\) score .*?or sacrifice child.*$
-kernel: \[[[:digit:]]{1,}\] .*?: page allocation failure.*$
-kernel: \[[[:digit:]]{1,}\] sched: RT throttling activated$
-kernel: \[[[:digit:]]{1,}\] SLAB: Unable to allocate memory.*$
+kernel: \[.*?\] nfs: server .*?not responding, timed out$
+kernel: \[.*?\] Out of memory: Kill process .*?\(.*?\) score .*?or sacrifice child.*$
+kernel: \[.*?\] .*?: page allocation failure.*$
+kernel: \[.*?\] sched: RT throttling activated$
+kernel: \[.*?\] SLAB: Unable to allocate memory.*$
 kernel taint.*$
-kernel: \[[[:digit:]]{1,}\] XFS .*?: Corruption of in-memory data detected\.  Shutting down filesystem.*$
-kernel: \[[[:digit:]]{1,}\] XFS .*?: Please umount the filesystem and rectify the problem\(s\).*$
-kernel: \[[[:digit:]]{1,}\] XFS .*?: xfs_do_force_shutdown.*$
+kernel: \[.*?\] XFS .*?: Corruption of in-memory data detected\.  Shutting down filesystem.*$
+kernel: \[.*?\] XFS .*?: Please umount the filesystem and rectify the problem\(s\).*$
+kernel: \[.*?\] XFS .*?: xfs_do_force_shutdown.*$
 klogd.*?started.*$
 Link Down Event.*$
 lost page write due to IO error.*$
 mce: \[Hardware Error\]: Machine check events logged
 mcelog\[[[:digit:]]{1,}\]: Corrected memory errors on page .*? exceed threshold .*?$
-multipathd: checker failed path .*$
+multipathd\[[[:digit:]]{1,}\]: checker failed path .*$
 multipathd: .* - directio checker reports path is down$
-multipathd:.*?mark as failed.*$
-multipathd: .*: remaining active paths: 0$
+multipathd\[[[:digit:]]{1,}\]: .*?mark as failed.*$
+multipathd\[[[:digit:]]{1,}\]: .*?: remaining active paths: 0$
 multipathd:.*?- tur checker reports path is down.*$
 No free memory.*$
 NO_MEMORY.*$
@@ -87,5 +88,27 @@ XFS.*?: Log I/O Error Detected\.  Shutting down filesystem.*$
 XFS \(.*?\): Metadata corruption detected
 XFS \(.*?\): metadata I/O error:
 XFS \(.*?\): Unmount and run xfs_repair
+mcelog\[.*?\]: corrected Socket memory error count exceeded threshold: .*?$
+kernel: EXT4-fs error .*? Corrupt filesystem$
+Stale file handle
+kernel: .*? NIC Link is Down$
+md.*?: cannot assemble multi-zone RAID0 with default_layout setting
+md.*?: please set raid0.default_layout to 1 or 2
+md: pers->run\(\) failed \.\.\.
+kernel: EXT4-fs \(.*?\): warning: mounting fs with errors, running e2fsck is recommended
+kernel: EXT4-fs \(.*?\): error count since last fsck: .*$
+kernel: EXT4-fs \(.*?\): ([initial|last]+) error .*$
+kernel: EXT4-fs error \(.*?\): .*$
+kernel: JBD2: Spotted dirty metadata buffer .*$
+kernel: sched: RT throttling activated
+lsass: \[lsass\] Domain .*? is now offline
+kernel: \[.*?\] mlx5_core .*?: TX timeout detected
+iscsid\[.*?\]: iscsid: Kernel reported iSCSI connection .*? ISCSI_ERR_NOP_TIMEDOUT: A NOP has timed out
+kernel: \[.*?\]  connection.:.: detected conn error
+lvm\[[[:digit:]]{1,}\]:   Refusing refresh of partial LV .*?\. Use '--activationmode partial' to override\.
+lvm\[[[:digit:]]{1,}\]:   Aborting\.  LV .*? is now incomplete and '--activationmode partial' was not specified\.
+lvm\[[[:digit:]]{1,}\]:   Failed to suspend .*?\.
+qla2xxx .*?: Abort command issued nexus.*$
+qla2xxx .*?: DEVICE RESET ISSUED nexus.*$
 x-info="http://www\.rsyslog\.com"\] exiting on signal 15\..*$
 x-info="http://www\.rsyslog\.com"\] start.*$|$

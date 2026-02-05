@@ -28,3 +28,5 @@
 ^rsc_template 
 ^rsc_ticket
 <rsc_ticket
+<lrm_resource
+rc-code="0"

@@ -1,3 +1,5 @@
+: ok
+'ok'
    Active: active
 A new membership .*?was formed..*?$
 Completed service synchronization, ready to provide service.*?$
@@ -7,16 +9,17 @@ corosync\[[[:digit:]]{1,}\]:   \[MAIN  \] Corosync Cluster Engine exiting with s
 corosync\[[[:digit:]]{1,}\]:   \[MAIN  \] Corosync Cluster Engine \(.*?\): started and ready to provide service..*?$
 corosync\[[[:digit:]]{1,}\]:   \[MAIN  \] Member joined: .*?$
 corosync\[[[:digit:]]{1,}\]:   \[MAIN  \] Member joined: .*$
-crmd\[[[:digit:]]{1,}\]:   notice: crm_update_quorum: Updating quorum status to true.*?$
-crmd\[[[:digit:]]{1,}\]:   notice: Initiating demote operation
-crmd\[[[:digit:]]{1,}\]:   notice: Initiating promote operation
-crmd\[[[:digit:]]{1,}\]:   notice: Initiating start operation
-crmd\[[[:digit:]]{1,}\]:   notice: Initiating stop operation
-crmd\[[[:digit:]]{1,}\]:   notice: peer_update_callback: Stonith/shutdown of .*? not matched.*?$
-crmd\[[[:digit:]]{1,}\]:   notice: Result of promote operation for .*?: 0 \(ok\)$
-crmd\[[[:digit:]]{1,}\]:   notice: Result of start operation for .*?: 0 \(ok\).*?$
-crmd\[[[:digit:]]{1,}\]:   notice: Result of stop operation for .*?: 0 \(ok\).*?$
-crmd\[[[:digit:]]{1,}\]:   notice: Result of promote operation for .*? on .*?: 0 \(ok\)
+corosync\[[[:digit:]]{1,}\]:   \[TOTEM \] Automatically recovered ring .
+crmd\[[[:digit:]]{1,}\]:[[:blank:]]{1,3}notice: crm_update_quorum: Updating quorum status to true.*?$
+crmd\[[[:digit:]]{1,}\]:[[:blank:]]{1,3}notice: Initiating demote operation
+crmd\[[[:digit:]]{1,}\]:[[:blank:]]{1,3}notice: Initiating promote operation .*? locally on .*?$
+crmd\[[[:digit:]]{1,}\]:[[:blank:]]{1,3}notice: Initiating start operation
+crmd\[[[:digit:]]{1,}\]:[[:blank:]]{1,3}notice: Initiating stop operation
+crmd\[[[:digit:]]{1,}\]:[[:blank:]]{1,3}notice: peer_update_callback: Stonith/shutdown of .*? not matched.*?$
+crmd\[[[:digit:]]{1,}\]:[[:blank:]]{1,3}notice: Result of promote operation for .*?: 0 \(ok\)$
+crmd\[[[:digit:]]{1,}\]:[[:blank:]]{1,3}notice: Result of start operation for .*?: 0 \(ok\).*?$
+crmd\[[[:digit:]]{1,}\]:[[:blank:]]{1,3}notice: Result of stop operation for .*?: 0 \(ok\).*?$
+crmd\[[[:digit:]]{1,}\]:[[:blank:]]{1,3}notice: Result of promote operation for .*? on .*?: 0 \(ok\)
 Filesystem\(.*?\]: INFO: unmounted .*?successfully.*?$
 info: Node state: online.*?$
 info: Pacemaker health check: OK.*?$
@@ -24,17 +27,37 @@ is now: member.*?$
 notice: Quorum acquired.*?$
 pacemakerd\[[[:digit:]]{1,}\]:   notice: Shutdown complete.*?$
 pacemakerd\[[[:digit:]]{1,}\]:   notice: Starting Pacemaker.*?$
-pengine\[[[:digit:]]{1,}\]:   notice: Demote .*?$
-pengine\[[[:digit:]]{1,}\]:   notice: Move .*?$
-pengine\[[[:digit:]]{1,}\]:   notice: Promote .*?$
-pengine\[[[:digit:]]{1,}\]:   notice: Recover .*?$
-pengine\[[[:digit:]]{1,}\]:   notice: Restart .*?$
-pengine\[[[:digit:]]{1,}\]:   notice: Start .*?$
-pengine\[[[:digit:]]{1,}\]:   notice: Stop    .*?$
+pengine\[[[:digit:]]{1,}\]:[[:blank:]]{1,3}notice: Demote .*?$
+pengine\[[[:digit:]]{1,}\]:[[:blank:]]{1,3}notice: Move .*?$
+pengine\[[[:digit:]]{1,}\]:[[:blank:]]{1,3}notice: Promote .*?$
+pengine\[[[:digit:]]{1,}\]:[[:blank:]]{1,3}notice: Recover .*?$
+pengine\[[[:digit:]]{1,}\]:[[:blank:]]{1,3}notice: Restart .*?$
+pengine\[[[:digit:]]{1,}\]:[[:blank:]]{1,3}notice: Start .*?$
+pengine\[[[:digit:]]{1,}\]:[[:blank:]]{1,3}notice: Stop    .*?$
+pengine\[[[:digit:]]{1,}\]:[[:blank:]]{1,3}notice:  \* Demote .*?$
+pengine\[[[:digit:]]{1,}\]:[[:blank:]]{1,3}notice:  \* Move .*?$
+pengine\[[[:digit:]]{1,}\]:[[:blank:]]{1,3}notice:  \* Promote .*?$
+pengine\[[[:digit:]]{1,}\]:[[:blank:]]{1,3}notice:  \* Recover .*?$
+pengine\[[[:digit:]]{1,}\]:[[:blank:]]{1,3}notice:  \* Restart .*?$
+pengine\[[[:digit:]]{1,}\]:[[:blank:]]{1,3}notice:  \* Start .*?$
+pengine\[[[:digit:]]{1,}\]:[[:blank:]]{1,3}notice:  \* Stop .*?$
+pacemaker-schedulerd\[[[:digit:]]{1,}\]:[[:blank:]]{1,2}notice:  \* ([Start|Stop|Shutdown|Restart|Recover|Promote|Demote|Move|Fence]+) .*?$
+pacemaker-controld\[[[:digit:]]{1,}\]:[[:blank:]]{1,2}notice: Initiating ([start|stop|promote|demote]+).*? operation .*?$
+pacemaker-schedulerd\[[[:digit:]]{1,}\]:[[:blank:]]{1,2}notice: Actions: ([Start|Stop|Shutdown|Restart|Recover|Promote|Demote|Move|Fence]+) .*?$
+pacemaker-controld\[[[:digit:]]{1,}\]: notice: Result of start operation for .*?: ok$
+pacemaker-execd\[[[:digit:]]{1,}\]:[[:blank:]]{1,3}notice: executing - rsc:.*?$
+lrmd\[[[:digit:]]{1,}\]:[[:blank:]]{1,3}notice: executing - rsc:.*?$
+pacemaker-execd\[[[:digit:]]{1,}\]:  notice: finished - .*? action:.*? exit-code:0 .*?$
+pacemaker-controld\[[[:digit:]]{1,}\]: notice: Result of .*? operation for .*?: 0 \(ok\)$
+pacemaker-controld\[[[:digit:]]{1,}\]: notice: Result of .*? operation for .*?: ok
+corosync\[[[:digit:]]{1,}\]:   \[TOTEM \] ring . active with no faults
 quorum acquired.*?$
 sbd: \[[[:digit:]]{1,}\]: info: CIB reconnect successful.*?$
+sbd\[.*?\]:   notice: inquisitor_child: Servant /dev/.*? is healthy \(age: 0\)
 Servant starting for device.*?$
 state is now member.*?$
+external/ec2\(.*?\]: info: status check for .*? is running$
+pacemaker-controld\[[[:digit:]]{1,}\]:  notice: State transition S_STARTING -> S_PENDING
 systemd\[[[:digit:]]{1,}\]: Started Pacemaker High Availability Cluster Manager..*?$
 systemd\[[[:digit:]]{1,}\]: Starting Pacemaker High Availability Cluster Manager....*?$
 systemd\[[[:digit:]]{1,}\]: Stopped Pacemaker High Availability Cluster Manager..*?$|$

@@ -2,15 +2,25 @@ ERROR: ACT: check_for_primary: we didn't expect srmode to be: DUMP:.*?$
 HANA_STATE_DEFECT.*$
 PreferSiteTakeover selected so decrease promotion score here.*?$
 Promote .*?to be primary.*$
-SAPHana\(.*?\]: INFO: ACT: !!!!!!! Promote .*? to be primary\. !!!!!!
-SAPHana\(.*?\]: INFO: ACT site=.*?, setting SFAIL for secondary \(.*?\) - srRc=12$
-SAPHana\(.*?\]: INFO: DEC analyze_hana_sync_statusSRS systemReplicationStatus.py \(to site .*?\)-> 10
-SAPHana\(.*?\]: INFO: DEC analyze_hana_sync_statusSRS systemReplicationStatus.py \(to site .*?\)-> 11
-SAPHana\(.*?\]: INFO: DEC analyze_hana_sync_statusSRS systemReplicationStatus.py \(to site .*?\)-> 12
-SAPHana\(.*?\]: INFO: DEC: Dual primary detected, other instance is PROMOTED and lpa stalemate ==> local restart$
-SAPHana\(.*?\]: INFO: RA ==== end action monitor_clone with rc=1 \(.*?\)====$
-SAPHana\(.*?\]: INFO: RA ==== end action monitor_clone with rc=1 \(.*?\)====$
-SAPHana\(.*?\]: INFO: RA ==== end action start_clone with rc=7 \(.*?\) \(.*?s\)====$
-SAPHana.*?\(.*?\]: INFO: RA ==== end action monitor_clone with rc=9 \(.*?\) \(.*?s\)====
-crmd\[.*?\]:   notice: .*? \[ 124:P::::\\nPRIM\\n \]
+SAPHana\(.*? INFO: ACT: !!!!!!! Promote .*? to be primary\. !!!!!!
+SAPHana\(.*? INFO: ACT site=.*, setting SFAIL for secondary \(.*\) - srRc=12$
+SAPHana\(.*? INFO: ACT site=.*?, setting SFAIL for secondary \(.*?\) - srRc=12$
+SAPHana\(.*? INFO: DEC analyze_hana_sync_statusSRS systemReplicationStatus.py \(to site .*?\)-> 10
+SAPHana\(.*? INFO: DEC analyze_hana_sync_statusSRS systemReplicationStatus.py \(to site .*?\)-> 11
+SAPHana\(.*? INFO: DEC analyze_hana_sync_statusSRS systemReplicationStatus.py \(to site .*?\)-> 12
+SAPHana\(.*? INFO: DEC: Dual primary detected, other instance is PROMOTED and lpa stalemate ==> local restart$
+SAPHana\(.*? INFO: RA ==== end action monitor_clone with rc=1 \(.*?\)====$
+SAPHana\(.*? INFO: RA ==== end action monitor_clone with rc=1 \(.*?\)====$
+SAPHana\(.*? INFO: RA ==== end action start_clone with rc=7 \(.*?\)====$
+SAPHana\(.*? INFO: RA ==== end action start_clone with rc=1 \(.*?\)====$
+SAPHana\(.*? INFO: RA ==== end action monitor_clone with rc=9 \(.*?\)====$
+SAPHana\(.*? INFO: ACT: saphana_monitor_clone: SECONDARY still in status WAITING - Primary is still missing
+SAPHana\(.*? INFO: DEC: secondary has unexpected sync status .*? ==> RESCORE
+SAPHanaController\(.*? INFO: DEC: Dual primary detected, other instance is PROMOTED and lpa stalemate ==> local restart$
+SAPHanaController\(.*? INFO: RA ==== end action monitor_clone with rc=1 \(.*?\)====$
+SAPHanaController\(.*? INFO: RA ==== end action monitor_clone with rc=1 \(.*?\)====$
+SAPHanaController\(.*? INFO: RA ==== end action start_clone with rc=7 \(.*?\)====$
+SAPHanaController\(.*? INFO: RA ==== end action monitor_clone with rc=7 \(.*?\)====$
+SAPHanaController\(.*? INFO: RA ==== end action start_clone with rc=1 \(.*?\)====$
+SAPHanaController\(.*? INFO: RA ==== end action monitor_clone with rc=9 \(.*?\)====$
 SFAIL.*?$|$

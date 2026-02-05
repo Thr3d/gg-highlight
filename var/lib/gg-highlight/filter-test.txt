@@ -69,9 +69,132 @@ systemd\[1\]: Stopped OMI CIM Server.
 systemd\[1\]: Stopping OMI CIM Server...
 systemd\[.*\]: pam_unix\(systemd-user:session\): session closed for user
 systemd\[.*\]: pam_unix\(systemd-user:session\): session opened for user
+pam_unix\(sudo:session\): session opened for user
+pam_unix\(sudo:session\): session closed for user
 systemd\[.*\]: Started PackageKit Daemon.
 systemd\[.*\]: Starting PackageKit Daemon...
 usermod\[.*\]: add
 vasd\[.*\]:
 vasd\[.*\: vasd-ipc_temp \(.*\) exiting
 when is experimental at /cluster/local/cluster_scripts/perforcemodule.pl
+IPv4: martian source
+ll header:
+systemd: Received SIGRTMIN\+24 from PID .*? \(kill\)
+net_ratelimit: .*? callbacks suppressed
+SAPHana\(.*? INFO: RA: SRHOOK1=$
+SAPHana\(.*? INFO: RA: SRHOOK2=$
+SAPHana\(.*? INFO: RA: SRHOOK2=SOK$
+SAPHana\(.*? INFO: RA: SRHOOK2=PRIM$
+SAPHana\(.*? INFO: RA: SRHOOK3=SOK$
+SAPHana\(.*? INFO: RA: SRHOOK3=PRIM$
+pengine\[.*? notice: On loss of CCM Quorum: Ignore
+SAPC05_00\[.*?\]:
+pgsql\(.*?\)\[.*?\]: INFO:
+redirectserver\(.*?\)\[.*?\]: INFO:
+nagios: Auto-save of retention data completed successfully.
+nagios: SERVICE NOTIFICATION:
+nagios: EXTERNAL COMMAND:
+systemd\[1\]: Configuration file .*? is marked executable. Please remove executable permission bits. Proceeding anyway.
+systemd\[1\]: Configuration file .* is marked world-inaccessible. This has no effect as configuration data is accessible via APIs without restrictions. Proceeding anyway.
+stonith-ng\[.*?\]:  warning: fence_vmware_soap\[.*?\] stderr: \[   InsecureRequestWarning\) \]
+stonith-ng\[.*?\]:  warning: fence_vmware_soap.*InsecureRequestWarning: Unverified HTTPS request is being made. Adding certificate verification is strongly advised.
+If the volume has a lot of files then setting volume ownership could be slow,
+snmpd\[.*?\]: Connection from UDP: \[.*?\]:161
+Poll UPS \[.*?\] failed - Driver not connected
+upsd\[.*?\]: Can't connect to UPS .*?: No such file or directory
+upsmon\[.*?\]: UPS .*? is unavailable
+adquery\[.*?\]: INFO  AUDIT_TRAIL
+pacemaker-schedulerd\[.*?\]:  notice: Re-initiated expired calculated failure
+pacemaker-controld\[.*?\]:  notice: Initiating cancel operation
+pacemaker-schedulerd\[.*?\]:  notice: Ignoring expired calculated failure
+Poll UPS \[myups@localhost\] failed - Data stale
+systemd\[.*?\]: Closed D-Bus User Message Bus Socket.
+systemd\[.*?\]: Starting D-Bus User Message Bus Socket.
+systemd\[.*?\]: Listening on D-Bus User Message Bus Socket.
+/azure-events: INFO: handleLocalEvents: current state = AVAILABLE; pending local clusterEvents = None
+systemd\[1\]: Started Update cloud-netconfig Setup.
+systemd\[1\]: Starting Update cloud-netconfig Setup...
+SAP.*\[.*?\]: ... Monitoring: Stop Workp. .*?, PID
+ SAP.*?\[.*?\]: ... 
+dsc_host\[.*?\]: segfault at 28 ip 0000000000433fb4 sp 00007ff......... error 4 in dsc_host\[400000\+94000\]
+python3\[.*?\]: .*? INFO .*?Microsoft.EnterpriseCloud
+python3\[.*?\]: .*? INFO .*?Microsoft.Azure
+python3\[.*?\]: .*? INFO .*?Qualys.LinuxAgent.Azure
+python3\[.*?\]: .*? INFO ExtHandler \[PERIODIC\] Using host plugin as default channel.
+systemd-logind\[.*?\]: Session .*? logged out. Waiting for processes to exit.
+systemd-tmpfiles\[.*?\]:
+azcopy\[.*?\]: .*? REQUEST/RESPONSE
+salt-minion\[
+device-mapper: core: blkid: sending ioctl 5331 to DM device without required privilege.
+warning: fence_legacy\[.*?\] stderr: \[   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current \]
+warning: fence_legacy\[.*?\] stderr: \[                                  Dload  Upload   Total   Spent    Left  Speed \]
+warning: fence_legacy\[.*?\] stderr: \[ #015  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0#015100    19  100    19    0     0  .*? 0 --:--:-- --:--:-- --:--:-- 19000 \]
+external/ec2\(.*?\]: info: status check for .* is running
+external/ec2\(.*?\]: info: Operation status passed
+RunTysonAgent.pl\[.*?\]: stty: 'standard input': Inappropriate ioctl for device
+sshd\[.*?\]: gkr-pam: error looking up user information
+sshd\[.*?\]: pam_unix\(sshd:auth\): check pass; user unknown
+vsftpd\[.*?\]:
+sapuxuserchk: pam_warn\(sapstartsrv:auth\)
+sapuxuserchk: pam_unix\(login:auth\): authentication failure
+atd\[.*?\]: File .* is in wrong format - aborting
+wickedd-dhcp4\[.*?\]: unable to build DHCP4 message
+wickedd-dhcp4\[.*?\]: usb0: DHCP4 discovery failed
+wickedd-dhcp4\[.*?\]: usb0: cannot request a link local address
+pam_unix\(runuser-l:session\): session closed for user
+pam_unix\(runuser-l:session\): session opened for user hnpadm by \(uid=0\)
+nrpe\[.*?\]:
+sudo\[.*?\]:   nagios :
+systemd\[.*?\]: Starting The Salt Minion\.\.\.
+systemd\[.*?\]: Started The Salt Minion\.
+systemd\[.*?\]: salt-minion.service: Main process exited, code=exited, status=77/n/a
+systemd\[.*?\]: salt-minion.service: Unit entered failed state\.
+systemd\[.*?\]: salt-minion.service: Failed with result 'exit-code'\.
+systemd\[.*?\]: salt-minion.service: Service hold-off time over, scheduling restart\.
+systemd\[.*?\]: Stopped The Salt Minion\.
+sudo\[.*?\]: pam_systemd\(sudo:session\): Cannot create session: Already running in a session
+snmptrapd\[.*?\]:
+pam_limits\(.*?:session\): invalid line
+systemd\[1\]: Starting Hostname Service...
+dbus\[.*?\]: \[system\] Successfully activated service 'org.freedesktop.hostname1'
+systemd\[1\]: Started Hostname Service.
+dbus\[.*?\]: \[system\] Activating via systemd: service name='org.freedesktop.hostname1' unit='dbus-org.freedesktop.hostname1.service'
+pam_systemd\(sudo:session\): Failed to create session: File exists
+Failed to start session scope session-15.scope: Unit session-15.scope already exists.
+dbus-daemon\[.*?\]: \[system\] Successfully activated service 'org.freedesktop.hostname1'
+dbus-daemon\[.*?\]: \[system\] Activating via systemd: service name='org.freedesktop.hostname1' unit='dbus-org.freedesktop.hostname1.service'
+dbus-daemon\[.*?\]: \[system\] Successfully activated service 'org.opensuse.Snapper'
+dbus-daemon\[.*?\]: \[system\] Activating service name='org.opensuse.Snapper'
+systemd\[1\]: Started Timeline of Snapper Snapshots.
+systemd\[1\]: session-.*.scope: Succeeded.
+SAPHana\(.*\]: INFO: DEC: scoring_crm_master: set score 100
+SAPHana\(.*\]: INFO: DEC: scoring_crm_master: set score 150
+SAPHana\(.*\]: INFO: DEC: scoring_crm_master: sync\(PRIM\) is  matching syncPattern
+SAPHana\(.*\]: INFO: DEC: saphana_monitor_primary: scoring_crm_master\(4:P:master1:master:worker:master,PRIM\)
+SAPHana\(.*\]: INFO: DEC: saphana_monitor_secondary: scoring_crm_master\(4:S:master1:master:worker:master,SOK\)
+SAPHana\(.*\]: INFO: DEC: scoring_crm_master: roles\(4:S:master1:master:worker:master\) are matching pattern
+SAPHana\(.*\]: INFO: DEC: scoring_crm_master: roles\(4:P:master1:master:worker:master\) are matching pattern
+SAPHana\(.*\]: INFO: DEC: scoring_crm_master: sync\(SOK\) is  matching syncPattern \(SOK\)
+bundle\[.*\]: /srv/www/hawk
+systemd\[1\]: \[/usr/lib/systemd/system/chronyd.service:.*?\] Unknown lvalue
+filebeat\[.*\]:
+Filebeat sends log files to
+current state = AVAILABLE; pending local clusterEvents = None
+SAPHana\(.*?\]: INFO: DEC: hana_..._site_srHook_.*?=
+SAPHana\(.*?\]: INFO: DEC: hana_..._site_srHook_.*? is empty or SWAIT. Take polling attribute: hana_..._sync_state=PRIM
+SAPHana\(.*?\]: INFO: DEC: hana_..._site_srHook_.*? is empty or SWAIT. Take polling attribute: hana_..._sync_state=SOK
+SAPHana\(.*?\]: INFO: DEC: Finally get_SRHOOK\(\)=PRIM
+SAPHana\(.*?\]: INFO: DEC: Finally get_SRHOOK\(\)=SOK
+SAPHana\(.*?\]: INFO: DEC: scoring_crm_master: sync\(PRIM\) is matching syncPattern \(\.\*\)
+SAPHana\(.*?\]: INFO: DEC: scoring_crm_master: sync\(SOK\) is matching syncPattern \(SOK\)
+SAPHana\(.*?\]: INFO: scoring_crm_master: sync\(SOK\) is matching syncPattern \(SOK\)
+traps: dsc_host
+Unit not needed anymore. Stopping
+Starting User Runtime Directory /run/user/0...
+Started User Runtime Directory /run/user/0.
+Stopping User Runtime Directory /run/user/0...
+Stopped User Runtime Directory /run/user/0.
+account .*? has expired
+conversation failed
+non-alphanumeric key .*? in /etc/environment', ignoring
+systemd\[1\]: session-.*?: Deactivated successfully.

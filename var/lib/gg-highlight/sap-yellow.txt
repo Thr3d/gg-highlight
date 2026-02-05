@@ -1,7 +1,10 @@
-SAPHana\(.*?\]: INFO: ACT: Demoted.*$
-SAPHana\(.*?\]: INFO: DEC analyze_hana_sync_statusSRS systemReplicationStatus.py \(to site .*?\)-> 13
-SAPHana\(.*?\]: INFO: DEC analyze_hana_sync_statusSRS systemReplicationStatus.py \(to site .*?\)-> 14
-SAPHana\(.*?\]: INFO: LPA: Dual primary detected and AUTOMATED_REGISTER='false' ==> WAITING$
-SAPHana\(.*?\]: INFO: LPA: You need to manually sr_register the older primary$
-SAPHana\(.*?\]: INFO: RA ==== begin action demote_clone \(.*?\) ====$
-SAPHanaTopology\(.*?\]: INFO: RA ==== end action monitor_clone with rc=7 \(.*?\)====|$
+SAPHana\(.*? INFO: ACT: Demoted.*$
+SAPHana\(.*? INFO: DEC analyze_hana_sync_statusSRS systemReplicationStatus.py \(to site .*?\)-> 13
+SAPHana\(.*? INFO: DEC analyze_hana_sync_statusSRS systemReplicationStatus.py \(to site .*?\)-> 14
+SAPHana\(.*? INFO: LPA: Dual primary detected and AUTOMATED_REGISTER='false' ==> WAITING$
+SAPHana\(.*? INFO: LPA: You need to manually sr_register the older primary$
+SAPHana\(.*? INFO: LPA: Still waiting for remote site to report LPA status
+SAPHana\(.*? INFO: ACT: wait_for_primary_master ==> WAITING$
+SAPHana\(.*? INFO: RA ==== begin action demote_clone \(.*?\) ====$
+PreferSiteTakeover selected BUT remote site is not in sync
+SAPHanaTopology\(.*? INFO: RA ==== end action monitor_clone with rc=7 \(.*?\)====|$

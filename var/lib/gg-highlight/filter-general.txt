@@ -150,3 +150,5 @@ userdel\[
 vsftpd:
 xinetd
 ypxfr\[.*\]:
+print_req_error: I/O error, dev fd0, sector 0
+floppy: error 10 while reading block 0

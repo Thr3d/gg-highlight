@@ -1,1 +1,11 @@
-hyperkube\[[[:digit:]]{1,}\]: I.*?kubelet\.go:[[:digit:]]{1,}\] skipping pod synchronization - \.*?is not healthy:.*$|$
+etcdserver: timed out waiting for read index response \(local node might have slow network\)
+etcdserver: read-only range request "key:\"/registry/health\" " with result "error:context canceled" took too long \(.*?\) to execute
+etcdserver/api/etcdhttp: /health error; no leader \(status code 503\)
+etcdserver: read-only range request "key:\"/registry/health\" " with result "error:context deadline exceeded" took too long
+etcdserver: server is likely overloaded
+etcdserver: failed to send out heartbeat on time \(exceeded the 100ms timeout for .*?\)
+leaderelection.go:.*? error retrieving resource lock kube-system/kube-scheduler: etcdserver: request timed out
+leaderelection.go:.*? error retrieving resource lock kube-system/kube-scheduler: Get .*? \(Client.Timeout exceeded while awaiting headers\)
+net.ipv4.ip_forward = 0
+net.ipv4.ip_forward=0
+hyperkube\[.*?\]: I.*?kubelet\.go:1820\] skipping pod synchronization - \.*?is not healthy:.*$|$

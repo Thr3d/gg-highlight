@@ -1,0 +1,5 @@
+attrd_peer_update:	Setting .*?_state.*?: UNDEFINED -> DEMOTED
+attrd_peer_update:	Setting .*?_roles.*:
+SAPHana\(.*? INFO: ACT site=.*, setting SOK for secondary \(1\)
+log_finished:.*?finished - rsc:.*? action:.*? exit-code:0
+process_lrm_event:.*?Result of .*? operation for .*?: 0 \(ok\)|$

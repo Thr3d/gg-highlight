@@ -1,0 +1,3 @@
+Result of probe operation for .* on
+Requesting local execution of .* operation
+Result of ([start|stop|monitor]+) operation for .* on|$

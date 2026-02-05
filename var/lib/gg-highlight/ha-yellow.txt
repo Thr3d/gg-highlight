@@ -1,3 +1,5 @@
+: not running
+'not running'
 corosync\[[[:digit:]]{1,}\]:   \[CPG   \] got procleave message from cluster node.*$
 corosync\[[[:digit:]]{1,}\]:   \[MAIN  \] interface section bindnetaddr is used together with nodelist. Nodelist one is going to be used..*$
 corosync\[[[:digit:]]{1,}\]:   \[MAIN  \] Please migrate config file to nodelist..*$
@@ -6,7 +8,8 @@ corosync\[[[:digit:]]{1,}\]:  \[TOTEM \] Retransmit List.*$
 corosync.*?Incrementing problem counter.*$
 Couldn.t find device with.*$
 crmd\[[[:digit:]]{1,}\]:   notice: do_state_transition: State transition S_ELECTION -> S_INTEGRATION \[ input=I_ELECTION_DC cause=C_TIMER_POPPED origin=election_timeout_popped \].*$
-crmd\[[[:digit:]]{1,}\]:   notice: High CPU load detected:.*$
+crmd\[[[:digit:]]{1,}\]:[[:blank:]]{1,3}notice: High CPU load detected: .*$
+pacemaker-controld\[[[:digit:]]{1,}\]:  notice: High CPU load detected: .*?$
 crmd\[[[:digit:]]{1,}\]:   notice: terminate_cs_connection: Disconnecting from Corosync.*$
 crmd\[.*\]:   notice: Result of .*: 1 \(unknown error\)$
 Delaying fencing operations until there are resources to manage.*$
@@ -25,4 +28,8 @@ sbd_stonith can fence.*$
 S_ELECTION.*$
 state is now lost.*$
 stonith-ng\[[[:digit:]]{1,}\]:  warning: fence_azure_arm\[[[:digit:]]{1,}\]: stderr: \[ Timed out waiting to power ON \]
+crm-fence-peer\.9\.sh\[[[:digit:]]{1,}\]: INFO peers are reachable, my disk is UpToDate: placed constraint .*?$
+crm-fence-peer\.9\.sh\[[[:digit:]]{1,}\]: INFO suitable constraint already placed:
+name=\"maintenance-mode\" value=\"true\"
+name=\"stonith-enabled\" value=\"false\"
 Waiting for all cluster members. Current votes: . expected_votes: .$|$

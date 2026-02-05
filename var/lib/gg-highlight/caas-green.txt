@@ -1,0 +1,7 @@
+raft.*? INFO: .*? became follower at term
+raft.*? INFO: .*? is starting a new election at term
+rafthttp: peer .*? became active
+embed: ready to serve client requests
+etcdserver/api/etcdhttp: /health OK \(status code 200\)
+leaderelection.go:.*? successfully acquired lease kube-system/kube-scheduler
+raft.*? INFO: raft.node: .*? elected leader .*? at term|$

@@ -25,15 +25,20 @@ crmd: \[.*\]: debug:
 crmd:     info: throttle_send_command:
 crmd\[.*\]: message repeated .* times: \[   notice: Current ping state: S_IDLE\]
 crmd\[.*\]:   notice: Current ping state: S_IDLE
+pacemaker-controld\[.*?\]:  notice: Current ping state: S_IDLE
 crmd\[.* notice: do_state_transition: State transition S_IDLE -> S_POLICY_ENGINE
+pacemaker-controld\[.*?\]:  notice: State transition S_IDLE -> S_POLICY_ENGINE
 crmd\[.* notice: do_state_transition: State transition S_TRANSITION_ENGINE -> S_IDLE
+pacemaker-controld\[.*?\]:  notice: State transition S_TRANSITION_ENGINE -> S_IDLE
 crmd\[.* notice: do_te_invoke: Processing graph
 crmd.* notice: Processing graph
+pacemaker-controld\[.*?\]:  notice: Processing graph
 crmd.*:   notice: Result of notify operation for rsc_
 crmd\[.* notice: run_graph: Transition
 crmd.*notice: State transition S_IDLE -> S_POLICY_ENGINE
 crmd.*notice: State transition S_TRANSITION_ENGINE -> S_IDLE
 crmd.* notice: Transition.*Complete$
+pacemaker-controld\[.*\]:  notice: Transition .*?: Complete$
 csync2\[.*?\]: Finished with 0 errors.$
 pengine: \[.*\]: debug:
 pengine:     info: clone_print:
@@ -42,14 +47,15 @@ pengine:     info: LogActions:  Leave
 pengine:     info: RecurringOp: Start recurring monitor
 pengine:     info: short_print:
 pengine\[.*:   notice: Calculated Transition.*.bz2$
-pengine\[.*:   notice: On loss of CCM Quorum: Ignore
+pacemaker-schedulerd\[.*?\]:  notice: Calculated transition .*?.bz2$
 pengine\[.*notice: process_pe_message: Calculated Transition
 pengine\[.*:   notice: Relying on watchdog integration for fencing
-pengine\[.* notice: unpack_config: On loss of CCM Quorum: Ignore
-pengine\[.*\]:   notice: Watchdog will be used via SBD if fencing is required
+notice: Watchdog will be used via SBD if fencing is required
 sbd: \[.*\]: info: Monitoring Pacemaker health
 sbd\[.*?\]:   notice: main: Doing flush \+ writing 'b' to sysrq on timeout
 stonith-ng: \[.*\]: debug:
 stonith-ng\[.*?\]:   notice: On loss of CCM Quorum: Ignore
 stonith-ng\[.*notice: unpack_config: On loss of CCM Quorum: Ignore
-stonith-ng\[.*?\]:   notice: Watchdog will be used via SBD if fencing is required
+pengine\[.*:   notice: On loss of CCM Quorum: Ignore
+pengine\[.* notice: unpack_config: On loss of CCM Quorum: Ignore
+pacemaker-schedulerd\[.*?\]:  notice: On loss of quorum: Ignore
