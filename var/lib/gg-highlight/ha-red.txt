@@ -90,7 +90,7 @@ sbd\[[[:digit:]]{1,}\]: .*?:    emerg: do_exit: Rebooting system: reboot$
 sbd\[[[:digit:]]{1,}\]: .*?:   notice: servant: Received command reset from .*? on disk .*$
 sbd\[[[:digit:]]{1,}\]:  warning: inquisitor_child: .*? requested a reset
 sbd.*?ERROR:.*$
-SBD_STARTMODE=\"clean\"
+SBD_STARTMODE="clean"
 sbd.*?WARN:.*$
 Scheduling Node .*?for shutdown$
 Scheduling Node .*?for STONITH.*$
@@ -108,7 +108,7 @@ stonith-ng\[[[:digit:]]{1,}\]:   notice: Operation reboot of .*?OK$
 stonith-ng\[[[:digit:]]{1,}\]:   notice: Received manual confirmation that .* is fenced$
 stonith-ng\[[[:digit:]]{1,}\]:   notice: stonith_choose_peer: Couldn't find anyone to fence.*$
 stonith-ng\[[[:digit:]]{1,}\]:  warning: log_action: fence_legacy\[.*?\] stderr:.*$
-stonith-ng\[.*\:    error: Operation off of .* by <no-one> for .*: No such device$
+stonith-ng\[.*:    error: Operation off of .* by <no-one> for .*: No such device$
 stonith-ng.*?wants to fence.*$
 systemd[1]: Failed to start.*$
 systemd\[[[:digit:]]{1,}\]: Stopping Pacemaker High Availability Cluster Manager....*$

@@ -61,8 +61,8 @@ OutOfMemoryError.*$
 pm-profiler: Power Button pressed, executing /sbin/shutdown -h now
 Readonly filesystem.*$
 rejecting I/O.*$
-rsyslogd: \[origin software=\"rsyslogd\" swVersion=\".*?\" x-pid=\".*?\" x-info=\"http://www\.rsyslog\.com\"\] exiting on signal 15.*$
-rsyslogd: \[origin software=\"rsyslogd\" swVersion=\".*?\" x-pid=\".*?\" x-info=\"http://www\.rsyslog\.com\"\] start.*$
+rsyslogd: \[origin software="rsyslogd" swVersion=".*?" x-pid=".*?" x-info="http://www\.rsyslog\.com"\] exiting on signal 15.*$
+rsyslogd: \[origin software="rsyslogd" swVersion=".*?" x-pid=".*?" x-info="http://www\.rsyslog\.com"\] start.*$
 segfault.*$
 shutdown\[[[:digit:]]{1,}\]: shutting down for system halt
 shutting down for system reboot.*$

@@ -30,6 +30,6 @@ state is now lost.*$
 stonith-ng\[[[:digit:]]{1,}\]:  warning: fence_azure_arm\[[[:digit:]]{1,}\]: stderr: \[ Timed out waiting to power ON \]
 crm-fence-peer\.9\.sh\[[[:digit:]]{1,}\]: INFO peers are reachable, my disk is UpToDate: placed constraint .*?$
 crm-fence-peer\.9\.sh\[[[:digit:]]{1,}\]: INFO suitable constraint already placed:
-name=\"maintenance-mode\" value=\"true\"
-name=\"stonith-enabled\" value=\"false\"
+name="maintenance-mode" value="true"
+name="stonith-enabled" value="false"
 Waiting for all cluster members. Current votes: . expected_votes: .$|$

@@ -6,8 +6,8 @@ lpa_[[:alpha:]]{3}_lpt=10
 maintenance=([false|off|on|true]+)
 maintenance-mode=true
 maintenance-mode="true"
-name=\"maintenance\" value=\"true\"
-name=\"standby\" value=\"on\"
+name="maintenance" value="true"
+name="standby" value="on"
 on-fail=([ignore|block|stop|restart|fence|standby]+)
 standby=on
 startup-fencing=false
