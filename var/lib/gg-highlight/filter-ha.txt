@@ -59,3 +59,4 @@ stonith-ng\[.*notice: unpack_config: On loss of CCM Quorum: Ignore
 pengine\[.*:   notice: On loss of CCM Quorum: Ignore
 pengine\[.* notice: unpack_config: On loss of CCM Quorum: Ignore
 pacemaker-schedulerd\[.*?\]:  notice: On loss of quorum: Ignore
+hawk-apiserver\[.*?\]: level=info msg="\[CIB\]: 0:

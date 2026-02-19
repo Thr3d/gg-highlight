@@ -4,34 +4,34 @@ SAPHana\(.*? INFO: ACT: Starting SAPHANA Instance.*?
 SAPHana\(.*? INFO: ACT: Stopping SAP Instance .*?Stop#012OK$
 SAPHana\(.*? INFO: DEC analyze_hana_sync_statusSRS systemReplicationStatus.py \(to site .*?\)-> 15$
 SAPHana\(.*? INFO: RA ===. begin action monitor_clone \(.*?\).===
-SAPHana\(.*? INFO: RA ===. begin action promote_clone \(.*?\) ===
-SAPHana\(.*? INFO: RA ===. begin action start_clone \(.*?\) ===
-SAPHana\(.*? INFO: RA ===. begin action stop_clone \(.*?\) ===
-SAPHana\(.*? INFO: RA ===. end action demote_clone with rc=0 \(.*?\)===
-SAPHana\(.*? INFO: RA ===. end action monitor_clone with rc=0 \(.*?\)===
-SAPHana\(.*? INFO: RA ===. end action monitor with rc=0 \(.*?\)===
-SAPHana\(.*? INFO: RA ===. end action monitor_clone with rc=8 \(.*?\)===
-SAPHana\(.*? INFO: RA ===. end action monitor with rc=8 \(.*?\)===
-SAPHana\(.*? INFO: RA ===. end action promote_clone with rc=0 \(.*?\)===
-SAPHana\(.*? INFO: RA ===. end action start_clone with rc=0 \(.*?\)===
-SAPHana\(.*? INFO: RA ===. end action stop_clone with rc=0 \(.*?\)===
-SAPHanaController\(.*? INFO: RA ==== begin action monitor_clone \(.*?\) ====
-SAPHanaController\(.*? INFO: RA ==== begin action promote_clone \(.*?\) ====
-SAPHanaController\(.*? INFO: RA ==== begin action start_clone \(.*?\) ====
-SAPHanaController\(.*? INFO: RA ==== begin action stop_clone \(.*?\) ====
-SAPHanaController\(.*? INFO: RA ==== end action demote_clone with rc=0 \(.*?\)====
-SAPHanaController\(.*? INFO: RA ==== end action monitor_clone with rc=0 \(.*?\)====
-SAPHanaController\(.*? INFO: RA ==== end action monitor with rc=0 \(.*?\)====
-SAPHanaController\(.*? INFO: RA ==== end action monitor_clone with rc=8 \(.*?\)====
-SAPHanaController\(.*? INFO: RA ==== end action monitor with rc=8 \(.*?\)====
-SAPHanaController\(.*? INFO: RA ==== end action promote_clone with rc=0 \(.*?\)====
-SAPHanaController\(.*? INFO: RA ==== end action start_clone with rc=0 \(.*?\)====
-SAPHanaController\(.*? INFO: RA ==== end action stop_clone with rc=0 \(.*?\)====
+SAPHana\(.*? INFO: RA ===. begin action promote_clone \(.*?\).===
+SAPHana\(.*? INFO: RA ===. begin action start_clone \(.*?\).===
+SAPHana\(.*? INFO: RA ===. begin action stop_clone \(.*?\).===
+SAPHana\(.*? INFO: RA ===. end action demote_clone with rc=0 \(.*?\).===
+SAPHana\(.*? INFO: RA ===. end action monitor_clone with rc=0 \(.*?\).===
+SAPHana\(.*? INFO: RA ===. end action monitor with rc=0 \(.*?\).===
+SAPHana\(.*? INFO: RA ===. end action monitor_clone with rc=8 \(.*?\).===
+SAPHana\(.*? INFO: RA ===. end action monitor with rc=8 \(.*?\).===
+SAPHana\(.*? INFO: RA ===. end action promote_clone with rc=0 \(.*?\).===
+SAPHana\(.*? INFO: RA ===. end action start_clone with rc=0 \(.*?\).===
+SAPHana\(.*? INFO: RA ===. end action stop_clone with rc=0 \(.*?\).===
+SAPHanaController\(.*? INFO: RA ==== begin action monitor_clone \(.*?\).===
+SAPHanaController\(.*? INFO: RA ==== begin action promote_clone \(.*?\).===
+SAPHanaController\(.*? INFO: RA ==== begin action start_clone \(.*?\).===
+SAPHanaController\(.*? INFO: RA ==== begin action stop_clone \(.*?\).===
+SAPHanaController\(.*? INFO: RA ==== end action demote_clone with rc=0 \(.*?\).===
+SAPHanaController\(.*? INFO: RA ==== end action monitor_clone with rc=0 \(.*?\).===
+SAPHanaController\(.*? INFO: RA ==== end action monitor with rc=0 \(.*?\).===
+SAPHanaController\(.*? INFO: RA ==== end action monitor_clone with rc=8 \(.*?\).===
+SAPHanaController\(.*? INFO: RA ==== end action monitor with rc=8 \(.*?\).===
+SAPHanaController\(.*? INFO: RA ==== end action promote_clone with rc=0 \(.*?\).===
+SAPHanaController\(.*? INFO: RA ==== end action start_clone with rc=0 \(.*?\).===
+SAPHanaController\(.*? INFO: RA ==== end action stop_clone with rc=0 \(.*?\).===
 SAPHanaTopology\(.*? INFO: RA ===. begin action monitor_clone \(.*?\).===
-SAPHanaTopology\(.*? INFO: RA ==== begin action monitor \(.*?\) ====
-SAPHanaTopology\(.*? INFO: RA ===. begin action start_clone \(.*?\) ===
-SAPHanaTopology\(.*? INFO: RA ===. begin action stop_clone \(.*?\) ===
-SAPHanaTopology\(.*? INFO: RA ===. end action monitor_clone with rc=0 \(.*?\)===
-SAPHanaTopology\(.*? INFO: RA ===. end action monitor with rc=0 \(.*?\)===
-SAPHanaTopology\(.*? INFO: RA ===. end action start_clone with rc=0 \(.*?\)===
-SAPHanaTopology\(.*? INFO: RA ===. end action stop_clone with rc=0 \(.*?\)===|$
+SAPHanaTopology\(.*? INFO: RA ==== begin action monitor \(.*?\).===
+SAPHanaTopology\(.*? INFO: RA ===. begin action start_clone \(.*?\).===
+SAPHanaTopology\(.*? INFO: RA ===. begin action stop_clone \(.*?\).===
+SAPHanaTopology\(.*? INFO: RA ===. end action monitor_clone with rc=0 \(.*?\).===
+SAPHanaTopology\(.*? INFO: RA ===. end action monitor with rc=0 \(.*?\).===
+SAPHanaTopology\(.*? INFO: RA ===. end action start_clone with rc=0 \(.*?\).===
+SAPHanaTopology\(.*? INFO: RA ===. end action stop_clone with rc=0 \(.*?\).===|$

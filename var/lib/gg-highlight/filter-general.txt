@@ -16,7 +16,7 @@ CRON.* pam_unix\(crond:session\): session closed for user
 cron.* pam_unix\(crond:session\): session opened for user
 CRON.* pam_unix\(crond:session\): session opened for user
 cron\[.*\]: \(root\) CMD \(/usr/bin/salt-daemon-watcher --with-init\)
-cron.*: \(root\) CMD \(\[ -x /usr/lib64/sa/sa1 \] \&\& exec /usr/lib64/sa/sa1 -S ALL 1 1\)
+cron.*: \(root\) CMD \(\[ -x /usr/lib64/sa/sa1 \] && exec /usr/lib64/sa/sa1 -S ALL 1 1\)
 CRON.* \(root\) CMD \(\[ -x /usr/lib64/sa/sa1 \] && exec /usr/lib64/sa/sa1 -S ALL 1 1\)
 crontab\[.*\]:
 cryptctl\[.*: 
@@ -114,7 +114,7 @@ su: pam_unix.* session closed for user
 su: pam_unix.* session opened for user
 SuSEfirewall2: SuSEfirewall2 not active
 su: \(to
-syslog-ng\[.*\]: Connection failed\; error=.Connection refused.
+syslog-ng\[.*\]: Connection failed; error=.Connection refused.
 syslog-ng\[.*\]: I/O error occurred while writing; fd='16', error='Connection refused \(111\)|syslog-ng\[.*\]: Connection broken; time_reopen='60'
 syslog-ng.*Log statistics
 SYSTEMCHECK: 

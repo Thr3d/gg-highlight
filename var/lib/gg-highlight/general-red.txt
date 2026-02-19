@@ -79,6 +79,7 @@ systemd\[[[:digit:]]{1,}\]: Out of memory.$
 systemd-logind\[[[:digit:]]{1,}\]: Powering Off\.\.\.$
 systemd-logind\[[[:digit:]]{1,}\]: Power key pressed\..*$
 systemd-logind\[[[:digit:]]{1,}\]: System is powering down.*$
+systemd-logind\[[[:digit:]]{1,}\]: The system will power off now!
 tainting kernel.*$
 taints kernel.*$
 winbindd\[[[:digit:]]{1,}\]:   Could not write result

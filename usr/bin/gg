@@ -23,14 +23,14 @@ PURPLE='mt=01;1;35'
 grepsearch='grep -E --text --color=always --line-buffered'
 grepfilter='grep --text --line-buffered -Ev'
 # Lists/Arrays
-redpatterns=("general-red" "ha-red" "sap-red" "hacib-red" "drbd-red")
+redpatterns=("general-red" "ha-red" "sap-red" "hacib-red" "drbd-red" "trento-red")
 yellowpatterns=("general-yellow" "ha-yellow" "sap-yellow" "supportconfig-yellow" "hacib-yellow" "drbd-yellow")
 greenpatterns=("general-green" "ha-green" "hacib-green" "corosynclog-green" "sap-green" "drbd-green")
 whitepatterns=("rpm-white")
 purplepatterns=("ha-status-purple")
-filters=("filter-general" "filter-ha" "filter-sap" "filter-soc")
+filters=("filter-general" "filter-ha" "filter-sap")
 experimental=("filter-test" "filter-disk" "filter-systemd")
-products=("ha" "sap" "soc")
+products=("ha" "sap" "trento")
 # Default Booleans
 FILTER=false
 EXPERIMENTAL=false

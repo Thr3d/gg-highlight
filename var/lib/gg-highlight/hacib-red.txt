@@ -6,4 +6,5 @@ no-quorum-policy=ignore
 \*\*\* Resource management is DISABLED \*\*\*
 stonith-enabled=false
 stonith-enabled="false"
-to_syslog:.*no
+to_syslog:.*?no
+debug:.*?on
