@@ -135,8 +135,14 @@ fi
 
 # Check for arguments
 if [ $# -eq 0 ]; then
-    echo "No arguments provided"
-    exit 1
+    if [ ! -t 0 ]; then
+        cat >.tmp
+        tmp=".tmp"
+        set -- "$tmp" "${@:2}"
+    else
+        echo "No arguments provided"
+        exit 1
+    fi
 fi
 
 # Check if last argument is file
